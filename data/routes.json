@@ -1,0 +1,1352 @@
+[
+  {
+    "id": "morskie-oko",
+    "name": "Morskie Oko + круг вокруг озера",
+    "short": "Самая знаменитая классика. Много людей, мало технической сложности.",
+    "start": "Palenica Białczańska",
+    "startKey": "palenica",
+    "km": 18,
+    "hours": 5.3,
+    "ascent": 520,
+    "maxAlt": 1395,
+    "diff": 1,
+    "chains": false,
+    "beginner": true,
+    "crowd": "high",
+    "beauty": 9.3,
+    "solitude": 2.2,
+    "logistics": 8.4,
+    "risk": 2,
+    "exposure": "low",
+    "best": "май–октябрь",
+    "stay": "Bukowina Tatrzańska / Jurgów — удобно для раннего старта без центра Zakopane.",
+    "why": "Большое озеро под стенами Mięguszowieckie Szczyty и очень понятная логистика. Хороший первый день в Татрах или вариант, когда хочется красоты без технического хайка.",
+    "risks": [
+      "Толпы и пробки на дороге к Palenica",
+      "Летом солнце и перегрев на открытой дороге",
+      "Зимой/в межсезонье условия меняют характер маршрута"
+    ],
+    "gear": [
+      "1–1.5 л воды",
+      "дождевик",
+      "SPF + кепка",
+      "удобная обувь; треккинговые ботинки не обязательны в сухой летний день"
+    ],
+    "tags": [
+      "iconic",
+      "lake",
+      "easy"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/route/3rttp",
+    "mode": "out_back",
+    "routingPoints": [
+      [
+        20.1024,
+        49.2549
+      ],
+      [
+        20.0866,
+        49.2339
+      ],
+      [
+        20.07,
+        49.2014
+      ]
+    ],
+    "end": "Morskie Oko",
+    "transport": "Автобусы и маршрутки из Zakopane ходят в сторону Palenica Białczańska; летом лучше выезжать рано.",
+    "parking": "Паркинг Palenica Białczańska обычно требует предварительного планирования/бронирования в высокий сезон.",
+    "officialAliases": [
+      "Morskie Oko",
+      "Palenica Białczańska",
+      "Wodogrzmoty Mickiewicza"
+    ],
+    "theme": "lake",
+    "startLat": 49.2549,
+    "startLon": 20.1024,
+    "summitLat": 49.2014,
+    "summitLon": 20.07,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "hike",
+    "objective": {
+      "name": "Morskie Oko",
+      "altitude": 1395,
+      "type": "озеро / цель"
+    },
+    "finish": "Palenica Białczańska",
+    "returnToZakopane": {
+      "score": 4,
+      "label": "Легко, но далеко",
+      "typicalTime": "35–50 мин",
+      "note": "Регулярные линии идут между Palenica Białczańska и Zakopane. В высокий сезон время сильно зависит от трафика и очереди на посадку.",
+      "sourceUrl": "https://tpn.gov.pl/transport-zakopane-palenica-bialczanska"
+    },
+    "stayZone": "bukowina-jurgow",
+    "goal": "Morskie Oko"
+  },
+  {
+    "id": "five-lakes",
+    "name": "Dolina Pięciu Stawów → Świstówka → Morskie Oko",
+    "short": "Один из лучших “полных” дней: водопад, пять озёр, панорама Morskie Oko.",
+    "start": "Palenica Białczańska",
+    "startKey": "palenica",
+    "km": 20,
+    "hours": 8,
+    "ascent": 1080,
+    "maxAlt": 1855,
+    "diff": 3,
+    "chains": false,
+    "beginner": false,
+    "crowd": "med",
+    "beauty": 10,
+    "solitude": 5,
+    "logistics": 8,
+    "risk": 4,
+    "exposure": "med",
+    "best": "июнь–октябрь",
+    "stay": "Bukowina Tatrzańska — идеальная база под ранний автобус/паркинг Palenica.",
+    "why": "Маршрут ощущается как настоящий горный день, но без цепей: Siklawa, Dolina Pięciu Stawów, высокий траверс Świstówka и финал у Morskie Oko.",
+    "risks": [
+      "Мокрый камень у Siklawa очень скользкий",
+      "Świstówka закрывается сезонно зимой/весной",
+      "Длинный день — стартовать рано"
+    ],
+    "gear": [
+      "2 л воды",
+      "ветровка + дождевик",
+      "еда на 8–9 часов",
+      "треккинговая обувь",
+      "налобник как резерв"
+    ],
+    "tags": [
+      "best views",
+      "full day",
+      "no chains"
+    ],
+    "mapUrl": "https://tpn.gov.pl/trasy-turystyczne",
+    "mode": "point_to_point",
+    "routingPoints": [
+      [
+        20.1024,
+        49.2549
+      ],
+      [
+        20.0866,
+        49.2339
+      ],
+      [
+        20.056,
+        49.217
+      ],
+      [
+        20.0476,
+        49.2077
+      ],
+      [
+        20.07,
+        49.2014
+      ],
+      [
+        20.1024,
+        49.2549
+      ]
+    ],
+    "end": "Palenica Białczańska",
+    "transport": "Старт и финиш в Palenica: удобно без машины, если приехать ранним автобусом/маршруткой.",
+    "parking": "Если едешь на машине — планируй официальный паркинг заранее.",
+    "officialAliases": [
+      "Dolina Pięciu Stawów",
+      "Świstówka",
+      "Morskie Oko",
+      "Siklawa",
+      "Palenica Białczańska"
+    ],
+    "theme": "lakes",
+    "startLat": 49.2549,
+    "startLon": 20.1024,
+    "summitLat": 49.2077,
+    "summitLon": 20.0476,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "height",
+    "objective": {
+      "name": "Świstówka Roztocka",
+      "altitude": 1855,
+      "type": "высокий траверс"
+    },
+    "finish": "Palenica Białczańska",
+    "returnToZakopane": {
+      "score": 4,
+      "label": "Легко, но далеко",
+      "typicalTime": "35–50 мин",
+      "note": "Регулярные линии идут между Palenica Białczańska и Zakopane. В высокий сезон время сильно зависит от трафика и очереди на посадку.",
+      "sourceUrl": "https://tpn.gov.pl/transport-zakopane-palenica-bialczanska"
+    },
+    "stayZone": "bukowina-jurgow",
+    "goal": "Palenica Białczańska"
+  },
+  {
+    "id": "czarny-staw",
+    "name": "Hala Gąsienicowa + Czarny Staw",
+    "short": "Очень высокий визуальный return-on-effort. Татры уже “большие”, но ещё без рук на скале.",
+    "start": "Kuźnice",
+    "startKey": "kuznice",
+    "km": 12.5,
+    "hours": 5,
+    "ascent": 760,
+    "maxAlt": 1628,
+    "diff": 2,
+    "chains": false,
+    "beginner": true,
+    "crowd": "med",
+    "beauty": 9.4,
+    "solitude": 5.2,
+    "logistics": 9.2,
+    "risk": 2.8,
+    "exposure": "low",
+    "best": "май–октябрь",
+    "stay": "Kuźnice / Bystre — выходишь почти сразу на тропу.",
+    "why": "Классический переход через Boczań или Jaworzynka к Murowaniec, затем ещё 35 минут до чёрного горного озера под Kościelec.",
+    "risks": [
+      "Камни становятся скользкими после дождя",
+      "В межсезонье возможен снег/лёд",
+      "На обратном пути легко переоценить оставшееся время"
+    ],
+    "gear": [
+      "1.5 л воды",
+      "слой от ветра",
+      "дождевик",
+      "ботинки или цепкие trail shoes"
+    ],
+    "tags": [
+      "lake",
+      "beginner+",
+      "views"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/route/rf6",
+    "mode": "out_back",
+    "routingPoints": [
+      [
+        19.9815,
+        49.2704
+      ],
+      [
+        20.0067,
+        49.2437
+      ],
+      [
+        20.0146,
+        49.2317
+      ]
+    ],
+    "end": "Czarny Staw Gąsienicowy",
+    "transport": "Kuźnice закрыты для обычного автомобильного трафика: проще автобус/такси из центра Zakopane.",
+    "parking": "Машину оставляют ниже Kuźnice и поднимаются общественным транспортом/пешком.",
+    "officialAliases": [
+      "Hala Gąsienicowa",
+      "Czarny Staw Gąsienicowy",
+      "Murowaniec",
+      "Kuźnice"
+    ],
+    "theme": "lake",
+    "startLat": 49.2704,
+    "startLon": 19.9815,
+    "summitLat": 49.2317,
+    "summitLon": 20.0146,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "hike",
+    "objective": {
+      "name": "Czarny Staw Gąsienicowy",
+      "altitude": 1628,
+      "type": "горное озеро"
+    },
+    "finish": "Kuźnice",
+    "returnToZakopane": {
+      "score": 5,
+      "label": "Очень легко",
+      "typicalTime": "10–20 мин",
+      "note": "Kuźnice связаны с центром Zakopane городской линией №10 и другими маршрутами. После длинного дня это один из самых предсказуемых финишей.",
+      "sourceUrl": "https://www.zakopane.pl/komunikacjamiejska/rozklady-jazdy"
+    },
+    "stayZone": "bystre-kuznice",
+    "goal": "Czarny Staw Gąsienicowy"
+  },
+  {
+    "id": "kasprowy",
+    "name": "Kasprowy Wierch пешком из Kuźnice",
+    "short": "Почти 1000 м набора по очень понятной линии. Можно спуститься канаткой.",
+    "start": "Kuźnice",
+    "startKey": "kuznice",
+    "km": 12.8,
+    "hours": 5.5,
+    "ascent": 980,
+    "maxAlt": 1987,
+    "diff": 3,
+    "chains": false,
+    "beginner": false,
+    "crowd": "high",
+    "beauty": 8.8,
+    "solitude": 3.5,
+    "logistics": 9.7,
+    "risk": 3.4,
+    "exposure": "med",
+    "best": "июнь–октябрь",
+    "stay": "Kuźnice / Bystre — лучший вариант, если хочется стартовать без транспорта.",
+    "why": "Простой по навигации, физически честный подъём на почти 2000 м. Отлично показывает, как быстро в Татрах меняется погода между лесом и гребнем.",
+    "risks": [
+      "Сильный ветер на верхней части",
+      "Резкая смена температуры",
+      "Толпы возле станции канатки"
+    ],
+    "gear": [
+      "1.5–2 л воды",
+      "ветрозащита",
+      "тёплый слой даже летом",
+      "очки/SPF"
+    ],
+    "tags": [
+      "1000m+",
+      "ridge",
+      "cable option"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/route/ef7k",
+    "mode": "out_back",
+    "routingPoints": [
+      [
+        19.9815,
+        49.2704
+      ],
+      [
+        19.9884,
+        49.2505
+      ],
+      [
+        19.9818,
+        49.2317
+      ]
+    ],
+    "end": "Kasprowy Wierch",
+    "transport": "Kuźnice доступны автобусом/такси; канатная дорога может быть запасным вариантом спуска.",
+    "parking": "Не рассчитывай припарковаться непосредственно у нижней станции.",
+    "officialAliases": [
+      "Kasprowy Wierch",
+      "Kuźnice",
+      "Myślenickie Turnie"
+    ],
+    "theme": "ridge",
+    "startLat": 49.2704,
+    "startLon": 19.9815,
+    "summitLat": 49.2317,
+    "summitLon": 19.9818,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "height",
+    "objective": {
+      "name": "Kasprowy Wierch",
+      "altitude": 1987,
+      "type": "вершина"
+    },
+    "finish": "Kuźnice",
+    "returnToZakopane": {
+      "score": 5,
+      "label": "Очень легко",
+      "typicalTime": "10–20 мин",
+      "note": "Kuźnice связаны с центром Zakopane городской линией №10 и другими маршрутами. После длинного дня это один из самых предсказуемых финишей.",
+      "sourceUrl": "https://www.zakopane.pl/komunikacjamiejska/rozklady-jazdy"
+    },
+    "stayZone": "bystre-kuznice",
+    "goal": "Kasprowy Wierch"
+  },
+  {
+    "id": "giewont",
+    "name": "Giewont через Hala Kondratowa",
+    "short": "Классика с цепями в финале. Короткий технический участок + очень много людей.",
+    "start": "Kuźnice",
+    "startKey": "kuznice",
+    "km": 12.2,
+    "hours": 6.2,
+    "ascent": 920,
+    "maxAlt": 1894,
+    "diff": 4,
+    "chains": true,
+    "beginner": false,
+    "crowd": "high",
+    "beauty": 8.7,
+    "solitude": 1.8,
+    "logistics": 9,
+    "risk": 6.8,
+    "exposure": "high",
+    "best": "июнь–сентябрь",
+    "stay": "Kuźnice / Bystre. На Giewont важнее ранний старт, чем “красивый” отель.",
+    "why": "Иконический силуэт над Zakopane и очень характерный финальный подъём. Но если это первый хайк в горах, лучше сначала Czarny Staw или Kasprowy.",
+    "risks": [
+      "Цепи и экспозиция на финале",
+      "Серьёзная опасность во время грозы",
+      "Очереди создают пробки на одностороннем участке"
+    ],
+    "gear": [
+      "перчатки для цепей по желанию",
+      "2 л воды",
+      "ветровка/дождевик",
+      "обувь с хорошим сцеплением"
+    ],
+    "tags": [
+      "chains",
+      "iconic",
+      "exposed"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/trail/niebieski-szlak-turystyczny-kuznice-giewont-b5",
+    "mode": "out_back",
+    "routingPoints": [
+      [
+        19.9815,
+        49.2704
+      ],
+      [
+        19.9667,
+        49.2607
+      ],
+      [
+        19.9524,
+        49.2519
+      ],
+      [
+        19.9299,
+        49.2428
+      ],
+      [
+        19.9341,
+        49.2504
+      ]
+    ],
+    "end": "Giewont",
+    "transport": "Самый удобный старт — Kuźnice на автобусе/такси из Zakopane.",
+    "parking": "Парковка непосредственно в Kuźnice недоступна обычным автомобилям.",
+    "officialAliases": [
+      "Giewont",
+      "Hala Kondratowa",
+      "Kondracka Przełęcz",
+      "Kuźnice"
+    ],
+    "theme": "chains",
+    "startLat": 49.2704,
+    "startLon": 19.9815,
+    "summitLat": 49.2504,
+    "summitLon": 19.9341,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "height",
+    "objective": {
+      "name": "Giewont",
+      "altitude": 1894,
+      "type": "вершина"
+    },
+    "finish": "Kuźnice",
+    "returnToZakopane": {
+      "score": 5,
+      "label": "Очень легко",
+      "typicalTime": "10–20 мин",
+      "note": "Kuźnice связаны с центром Zakopane городской линией №10 и другими маршрутами. После длинного дня это один из самых предсказуемых финишей.",
+      "sourceUrl": "https://www.zakopane.pl/komunikacjamiejska/rozklady-jazdy"
+    },
+    "stayZone": "bystre-kuznice",
+    "goal": "Giewont"
+  },
+  {
+    "id": "czerwone",
+    "name": "Czerwone Wierchy: Kiry → Kuźnice",
+    "short": "Длинный открытый гребень. Не технически страшно, но ветер/туман меняют всё.",
+    "start": "Kiry",
+    "startKey": "kiry",
+    "km": 17.5,
+    "hours": 8.5,
+    "ascent": 1500,
+    "maxAlt": 2122,
+    "diff": 4,
+    "chains": false,
+    "beginner": false,
+    "crowd": "med",
+    "beauty": 9.8,
+    "solitude": 6.4,
+    "logistics": 7.2,
+    "risk": 5.8,
+    "exposure": "high",
+    "best": "июль–октябрь",
+    "stay": "Kościelisko — утром ты уже у Kiry, вечером легко вернуться из Kuźnice.",
+    "why": "Один из самых красивых гребневых дней в польских Татрах: несколько двухтысячников подряд и почти непрерывная панорама.",
+    "risks": [
+      "Очень длинный открытый участок без укрытия",
+      "Туман усложняет ориентацию",
+      "Ветер на гребне может быть намного сильнее, чем в долине"
+    ],
+    "gear": [
+      "2–2.5 л воды",
+      "ветрозащита",
+      "еда на целый день",
+      "налобник",
+      "офлайн-карта"
+    ],
+    "tags": [
+      "ridge",
+      "2000m",
+      "full day"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/trail/zielony-szlak-turystyczny-kiry-ciemniak-sg",
+    "mode": "point_to_point",
+    "routingPoints": [
+      [
+        19.8689,
+        49.2755
+      ],
+      [
+        19.8945,
+        49.2194
+      ],
+      [
+        19.9075,
+        49.2193
+      ],
+      [
+        19.9149,
+        49.2286
+      ],
+      [
+        19.9265,
+        49.2355
+      ],
+      [
+        19.9524,
+        49.2519
+      ],
+      [
+        19.9815,
+        49.2704
+      ]
+    ],
+    "end": "Kuźnice",
+    "transport": "Логичная схема без машины: доехать до Kiry, закончить в Kuźnice и вернуться городским транспортом.",
+    "parking": "Для point-to-point маршрута машина менее удобна: придётся возвращаться к Kiry.",
+    "officialAliases": [
+      "Czerwone Wierchy",
+      "Ciemniak",
+      "Krzesanica",
+      "Małołączniak",
+      "Kopa Kondracka",
+      "Kiry",
+      "Kuźnice"
+    ],
+    "theme": "ridge",
+    "startLat": 49.2755,
+    "startLon": 19.8689,
+    "summitLat": 49.2358,
+    "summitLon": 19.9,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "height",
+    "objective": {
+      "name": "Krzesanica / Czerwone Wierchy",
+      "altitude": 2122,
+      "type": "высокий хребет"
+    },
+    "finish": "Kuźnice",
+    "returnToZakopane": {
+      "score": 5,
+      "label": "Очень легко",
+      "typicalTime": "10–20 мин",
+      "note": "Kuźnice связаны с центром Zakopane городской линией №10 и другими маршрутами. После длинного дня это один из самых предсказуемых финишей.",
+      "sourceUrl": "https://www.zakopane.pl/komunikacjamiejska/rozklady-jazdy"
+    },
+    "stayZone": "koscielisko-kiry",
+    "goal": "Kuźnice"
+  },
+  {
+    "id": "sarnia",
+    "name": "Sarnia Skała: Strążyska → Dolina Białego",
+    "short": "Короткая петля с очень хорошим видом на Giewont. Идеальный half-day.",
+    "start": "Dolina Strążyska",
+    "startKey": "strazyska",
+    "km": 6.8,
+    "hours": 2.9,
+    "ascent": 480,
+    "maxAlt": 1377,
+    "diff": 2,
+    "chains": false,
+    "beginner": true,
+    "crowd": "med",
+    "beauty": 8.6,
+    "solitude": 5.5,
+    "logistics": 9.2,
+    "risk": 2.4,
+    "exposure": "low",
+    "best": "апрель–ноябрь",
+    "stay": "Центр Zakopane / Strążyska — можно дойти к старту пешком или коротко доехать.",
+    "why": "Когда нет целого дня, это почти идеальный компромисс: лес, долина, водопад Siklawica (небольшой крюк) и панорамная вершина.",
+    "risks": [
+      "Корни и камни скользкие после дождя",
+      "На вершине тесно в пик сезона",
+      "Зимой/весной возможен лёд"
+    ],
+    "gear": [
+      "1 л воды",
+      "лёгкий дождевик",
+      "цепкая обувь"
+    ],
+    "tags": [
+      "half day",
+      "viewpoint",
+      "beginner"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/map/widget/route/h1l0p1/mgb8.html",
+    "mode": "point_to_point",
+    "routingPoints": [
+      [
+        19.9362,
+        49.2786
+      ],
+      [
+        19.9329,
+        49.2637
+      ],
+      [
+        19.9445,
+        49.2597
+      ],
+      [
+        19.963,
+        49.2777
+      ]
+    ],
+    "end": "Dolina Białego / Zakopane",
+    "transport": "Оба конца маршрута близко к Zakopane; легко сделать без машины.",
+    "parking": "Если приехал к Strążyska на машине, после финиша придётся вернуться к парковке пешком/такси.",
+    "officialAliases": [
+      "Sarnia Skała",
+      "Dolina Strążyska",
+      "Dolina Białego",
+      "Siklawica"
+    ],
+    "theme": "viewpoint",
+    "startLat": 49.2786,
+    "startLon": 19.9362,
+    "summitLat": 49.2597,
+    "summitLon": 19.9445,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "height",
+    "objective": {
+      "name": "Sarnia Skała",
+      "altitude": 1377,
+      "type": "скальная высота / viewpoint"
+    },
+    "finish": "Dolina Białego / Zakopane",
+    "returnToZakopane": {
+      "score": 5,
+      "label": "Очень легко",
+      "typicalTime": "10–20 мин",
+      "note": "Финиш почти в городе. С июля 2026 Dolina Strążyska обслуживается городской линией №18; из Dolina Białego до центра также легко дойти/доехать.",
+      "sourceUrl": "https://www.zakopane.pl/inne/strefa-miejska/aktualnosci/aktualnosci-zwykle/czerwiec-2026/dwie-nowe-linie-komunikacji-miejskiej"
+    },
+    "stayZone": "centrum-dworzec",
+    "goal": "Dolina Białego / Zakopane"
+  },
+  {
+    "id": "koscieliska",
+    "name": "Dolina Kościeliska + Smreczyński Staw",
+    "short": "Очень красивый “долинный” день. Минимум стресса, максимум вариантов свернуть раньше.",
+    "start": "Kiry",
+    "startKey": "kiry",
+    "km": 13.5,
+    "hours": 3.9,
+    "ascent": 500,
+    "maxAlt": 1241,
+    "diff": 1,
+    "chains": false,
+    "beginner": true,
+    "crowd": "high",
+    "beauty": 8.8,
+    "solitude": 3.4,
+    "logistics": 9,
+    "risk": 1.8,
+    "exposure": "low",
+    "best": "апрель–ноябрь",
+    "stay": "Kościelisko — самый логичный base camp для западных долин.",
+    "why": "Широкая долина, Schronisko Ornak и спокойное лесное озеро в конце. Хорошо работает при сомнительной погоде, если нет сильного ветра/ливня.",
+    "risks": [
+      "После сильных дождей мокро и грязно",
+      "Некоторые пещерные ответвления требуют света и отдельной оценки условий",
+      "Толпы днём"
+    ],
+    "gear": [
+      "1–1.5 л воды",
+      "дождевик",
+      "налобник только если идёшь в пещеры"
+    ],
+    "tags": [
+      "valley",
+      "easy",
+      "shelter"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/route/1y1bb",
+    "mode": "out_back",
+    "routingPoints": [
+      [
+        19.8689,
+        49.2755
+      ],
+      [
+        19.8609,
+        49.2295
+      ],
+      [
+        19.8567,
+        49.2188
+      ]
+    ],
+    "end": "Smreczyński Staw",
+    "transport": "Kiry хорошо связаны маршрутками/автобусами с Zakopane.",
+    "parking": "У входа в Dolina Kościeliska есть частные и общественные парковки; в пик приезжай рано.",
+    "officialAliases": [
+      "Dolina Kościeliska",
+      "Smreczyński Staw",
+      "Hala Ornak",
+      "Kiry"
+    ],
+    "theme": "valley",
+    "startLat": 49.2755,
+    "startLon": 19.8689,
+    "summitLat": 49.2225,
+    "summitLon": 19.8644,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "hike",
+    "objective": {
+      "name": "Smreczyński Staw",
+      "altitude": 1241,
+      "type": "озеро / цель"
+    },
+    "finish": "Kiry",
+    "returnToZakopane": {
+      "score": 4,
+      "label": "Легко",
+      "typicalTime": "15–25 мин",
+      "note": "От Kiry есть регулярные частные линии в Zakopane; в сезон выбор хороший, но это не городская сеть и расписание лучше проверить утром.",
+      "sourceUrl": "https://transit.podhale.pl/index.php?page=route&route=146"
+    },
+    "stayZone": "koscielisko-kiry",
+    "goal": "Smreczyński Staw"
+  },
+  {
+    "id": "chocholowska",
+    "name": "Dolina Chochołowska до schronisko",
+    "short": "Длинная прогулка, которую можно превратить в recovery day.",
+    "start": "Siwa Polana",
+    "startKey": "siwa",
+    "km": 15.3,
+    "hours": 4.5,
+    "ascent": 410,
+    "maxAlt": 1148,
+    "diff": 1,
+    "chains": false,
+    "beginner": true,
+    "crowd": "high",
+    "beauty": 8.2,
+    "solitude": 3.2,
+    "logistics": 8.3,
+    "risk": 1.5,
+    "exposure": "low",
+    "best": "круглый год при подходящих условиях",
+    "stay": "Witów / Kościelisko — проще парковка и старт без Zakopane.",
+    "why": "Самая просторная долина, удобное schronisko и почти отсутствие технических сложностей. Весной знаменита крокусами, но тогда же максимально людна.",
+    "risks": [
+      "Длина часто недооценивается",
+      "В дождь день превращается в очень долгую мокрую прогулку",
+      "В пиковые даты большие толпы"
+    ],
+    "gear": [
+      "1–1.5 л воды",
+      "дождевик",
+      "комфортная обувь"
+    ],
+    "tags": [
+      "valley",
+      "recovery",
+      "easy"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/route/3gov",
+    "mode": "out_back",
+    "routingPoints": [
+      [
+        19.791,
+        49.2785
+      ],
+      [
+        19.7882,
+        49.2385
+      ]
+    ],
+    "end": "Schronisko na Polanie Chochołowskiej",
+    "transport": "До Siwa Polana ходят маршрутки из Zakopane; западная база в Witów ещё удобнее.",
+    "parking": "Парковки у Siwa Polana бывают загружены в выходные и сезон крокусов.",
+    "officialAliases": [
+      "Dolina Chochołowska",
+      "Siwa Polana",
+      "Polana Chochołowska"
+    ],
+    "theme": "valley",
+    "startLat": 49.2785,
+    "startLon": 19.791,
+    "summitLat": 49.2385,
+    "summitLon": 19.7882,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "hike",
+    "objective": {
+      "name": "Polana Chochołowska",
+      "altitude": 1148,
+      "type": "долина / schronisko"
+    },
+    "finish": "Siwa Polana",
+    "returnToZakopane": {
+      "score": 4,
+      "label": "Легко",
+      "typicalTime": "20–30 мин",
+      "note": "Siwa Polana имеет прямые рейсы до Zakopane Dworzec. Последние рейсы и сезонные варианты обязательно проверять перед стартом длинного дня.",
+      "sourceUrl": "https://transit.podhale.pl/index.php?page=route&route=135"
+    },
+    "stayZone": "koscielisko-kiry",
+    "goal": "Schronisko na Polanie Chochołowskiej"
+  },
+  {
+    "id": "gesia-szyja",
+    "name": "Rusinowa Polana + Gęsia Szyja",
+    "short": "Суперпанорама Высоких Татр за 3 часа. Лестницы дают ногам понять, что это hike.",
+    "start": "Wierch Poroniec",
+    "startKey": "poroniec",
+    "km": 7.9,
+    "hours": 2.8,
+    "ascent": 450,
+    "maxAlt": 1489,
+    "diff": 2,
+    "chains": false,
+    "beginner": true,
+    "crowd": "med",
+    "beauty": 9.2,
+    "solitude": 5.1,
+    "logistics": 8,
+    "risk": 2.3,
+    "exposure": "low",
+    "best": "май–октябрь",
+    "stay": "Bukowina Tatrzańska / Jaszczurówka — удобно для восточных стартов.",
+    "why": "Rusinowa Polana даёт один из лучших лёгких видов на Tatry Wysokie, а Gęsia Szyja добавляет достаточный набор, чтобы день ощущался настоящим хайком.",
+    "risks": [
+      "Деревянные ступени могут быть скользкими",
+      "После дождя корни/грязь",
+      "Парковки на восточных стартах быстро заполняются"
+    ],
+    "gear": [
+      "1 л воды",
+      "дождевик",
+      "trail shoes/ботинки"
+    ],
+    "tags": [
+      "panorama",
+      "half day",
+      "beginner"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/route/4wwk",
+    "mode": "out_back",
+    "routingPoints": [
+      [
+        20.113,
+        49.2845
+      ],
+      [
+        20.0977,
+        49.2701
+      ],
+      [
+        20.0882,
+        49.2595
+      ]
+    ],
+    "end": "Gęsia Szyja",
+    "transport": "Wierch Poroniec удобен автобусом/маршруткой в сторону Łysa Polana/Bukowina.",
+    "parking": "Небольшие парковки на восточных стартах быстро заполняются.",
+    "officialAliases": [
+      "Gęsia Szyja",
+      "Rusinowa Polana",
+      "Wierch Poroniec"
+    ],
+    "theme": "panorama",
+    "startLat": 49.2845,
+    "startLon": 20.113,
+    "summitLat": 49.2595,
+    "summitLon": 20.0882,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "height",
+    "objective": {
+      "name": "Gęsia Szyja",
+      "altitude": 1489,
+      "type": "вершина / viewpoint"
+    },
+    "finish": "Wierch Poroniec",
+    "returnToZakopane": {
+      "score": 4,
+      "label": "Легко",
+      "typicalTime": "25–40 мин",
+      "note": "Wierch Poroniec лежит на коридоре Zakopane–Palenica; есть проходящие рейсы, но их меньше, чем на главных конечных остановках.",
+      "sourceUrl": "https://transit.podhale.pl/index.php?page=route&route=156"
+    },
+    "stayZone": "cyrhla-east",
+    "goal": "Gęsia Szyja"
+  },
+  {
+    "id": "nosal",
+    "name": "Nosal из Kuźnice",
+    "short": "Самая быстрая “вершина” в списке. Отличный sunset-виб, но учитывай правила TPN по темноте.",
+    "start": "Kuźnice",
+    "startKey": "kuznice",
+    "km": 4.3,
+    "hours": 1.9,
+    "ascent": 500,
+    "maxAlt": 1206,
+    "diff": 2,
+    "chains": false,
+    "beginner": true,
+    "crowd": "med",
+    "beauty": 7.9,
+    "solitude": 4.5,
+    "logistics": 9.8,
+    "risk": 2.6,
+    "exposure": "med",
+    "best": "апрель–ноябрь",
+    "stay": "Kuźnice / Bystre — маршрут буквально у двери.",
+    "why": "Когда есть два часа, но хочется именно вершину, а не прогулку по долине. Скальный финал выглядит драматичнее, чем его абсолютная высота.",
+    "risks": [
+      "Короткие участки над крутым склоном",
+      "Камень скользкий после дождя",
+      "С марта по ноябрь в TPN нельзя ходить по тропам от сумерек до рассвета"
+    ],
+    "gear": [
+      "0.75–1 л воды",
+      "цепкая обувь",
+      "ветровка"
+    ],
+    "tags": [
+      "quick",
+      "summit",
+      "after work"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/route/3r258",
+    "mode": "out_back",
+    "routingPoints": [
+      [
+        19.9815,
+        49.2704
+      ],
+      [
+        20.005,
+        49.2772
+      ]
+    ],
+    "end": "Nosal",
+    "transport": "Kuźnice легко доступны городским транспортом; маршрут короткий и подходит без машины.",
+    "parking": "Парковка ниже Kuźnice; непосредственно к старту на машине не подъехать.",
+    "officialAliases": [
+      "Nosal",
+      "Kuźnice"
+    ],
+    "theme": "quick",
+    "startLat": 49.2704,
+    "startLon": 19.9815,
+    "summitLat": 49.2772,
+    "summitLon": 20.005,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "height",
+    "objective": {
+      "name": "Nosal",
+      "altitude": 1206,
+      "type": "вершина / viewpoint"
+    },
+    "finish": "Kuźnice",
+    "returnToZakopane": {
+      "score": 5,
+      "label": "Очень легко",
+      "typicalTime": "10–20 мин",
+      "note": "Kuźnice связаны с центром Zakopane городской линией №10 и другими маршрутами. После длинного дня это один из самых предсказуемых финишей.",
+      "sourceUrl": "https://www.zakopane.pl/komunikacjamiejska/rozklady-jazdy"
+    },
+    "stayZone": "bystre-kuznice",
+    "goal": "Nosal"
+  },
+  {
+    "id": "kopieniec",
+    "name": "Wielki Kopieniec петлёй из Toporowa Cyrhla",
+    "short": "Тихая маленькая вершина, когда не хочется участвовать в чемпионате по очередям.",
+    "start": "Toporowa Cyrhla",
+    "startKey": "cyrhla",
+    "km": 4.7,
+    "hours": 1.8,
+    "ascent": 340,
+    "maxAlt": 1328,
+    "diff": 2,
+    "chains": false,
+    "beginner": true,
+    "crowd": "low",
+    "beauty": 8,
+    "solitude": 7.8,
+    "logistics": 8.7,
+    "risk": 1.9,
+    "exposure": "low",
+    "best": "апрель–ноябрь",
+    "stay": "Cyrhla / Jaszczurówka — спокойнее центра и ближе к восточным тропам.",
+    "why": "Небольшая петля через поляну и каменистую вершину с видом на большую часть польских Татр. Хороший выбор в “не хочу толпы” день.",
+    "risks": [
+      "Мокрый камень на вершине",
+      "В лесу после дождя грязно",
+      "Зимой лёд резко повышает сложность"
+    ],
+    "gear": [
+      "0.75–1 л воды",
+      "лёгкий слой от дождя",
+      "цепкая обувь"
+    ],
+    "tags": [
+      "quiet",
+      "quick",
+      "summit"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/route/8e1",
+    "mode": "loop",
+    "routingPoints": [
+      [
+        20.0435,
+        49.2925
+      ],
+      [
+        20.0398,
+        49.2834
+      ],
+      [
+        20.031,
+        49.2858
+      ],
+      [
+        20.0435,
+        49.2925
+      ]
+    ],
+    "end": "Toporowa Cyrhla",
+    "transport": "Cyrhla обслуживается автобусами/маршрутками из Zakopane.",
+    "parking": "Ограниченная парковка в районе Cyrhla; общественный транспорт часто проще.",
+    "officialAliases": [
+      "Wielki Kopieniec",
+      "Toporowa Cyrhla",
+      "Polana Kopieniec"
+    ],
+    "theme": "quiet",
+    "startLat": 49.2925,
+    "startLon": 20.0435,
+    "summitLat": 49.2858,
+    "summitLon": 20.031,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "height",
+    "objective": {
+      "name": "Wielki Kopieniec",
+      "altitude": 1328,
+      "type": "вершина / viewpoint"
+    },
+    "finish": "Toporowa Cyrhla",
+    "returnToZakopane": {
+      "score": 5,
+      "label": "Очень легко",
+      "typicalTime": "20–30 мин",
+      "note": "Cyrhla входит в городскую сеть Zakopane (линии 11/12/13), поэтому возвращение не завязано только на туристические маршрутки.",
+      "sourceUrl": "https://www.zakopane.pl/komunikacjamiejska/rozklady-jazdy"
+    },
+    "stayZone": "cyrhla-east",
+    "goal": "Toporowa Cyrhla"
+  },
+  {
+    "id": "wolowiec",
+    "name": "Grześ → Rakoń → Wołowiec",
+    "short": "Длинный западный гребень: красивые линии, много воздуха, серьёзный километраж.",
+    "start": "Siwa Polana",
+    "startKey": "siwa",
+    "km": 23.9,
+    "hours": 9.7,
+    "ascent": 1350,
+    "maxAlt": 2064,
+    "diff": 4,
+    "chains": false,
+    "beginner": false,
+    "crowd": "med",
+    "beauty": 9.5,
+    "solitude": 7,
+    "logistics": 7.3,
+    "risk": 5.3,
+    "exposure": "high",
+    "best": "июнь–октябрь",
+    "stay": "Witów — лучший старт для западной части Татр.",
+    "why": "Очень фотогеничный маршрут по мягким линиям западных Татр. Технически проще, чем Rysy, но требует выносливости и хорошего прогноза на весь день.",
+    "risks": [
+      "Очень длинный день",
+      "Открытый гребень и сильный ветер",
+      "Пограничный маршрут: не сходить случайно на словацкую сторону без понимания страхования"
+    ],
+    "gear": [
+      "2–2.5 л воды",
+      "еда на 10 часов",
+      "ветрозащита + утепление",
+      "налобник",
+      "power bank"
+    ],
+    "tags": [
+      "ridge",
+      "long",
+      "2000m"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/route/w94x",
+    "mode": "out_back",
+    "routingPoints": [
+      [
+        19.791,
+        49.2785
+      ],
+      [
+        19.7882,
+        49.2385
+      ],
+      [
+        19.75,
+        49.2293
+      ],
+      [
+        19.7477,
+        49.2168
+      ],
+      [
+        19.7592,
+        49.207
+      ]
+    ],
+    "end": "Wołowiec",
+    "transport": "Лучший старт — Siwa Polana; из Zakopane есть маршрутки, но для длинного дня проверяй последний обратный рейс.",
+    "parking": "Если на машине, приезжай очень рано: день длинный, а парковки популярны.",
+    "officialAliases": [
+      "Wołowiec",
+      "Rakoń",
+      "Grześ",
+      "Dolina Chochołowska",
+      "Siwa Polana"
+    ],
+    "theme": "ridge",
+    "startLat": 49.2785,
+    "startLon": 19.791,
+    "summitLat": 49.207,
+    "summitLon": 19.7592,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "height",
+    "objective": {
+      "name": "Wołowiec",
+      "altitude": 2064,
+      "type": "вершина"
+    },
+    "finish": "Siwa Polana",
+    "returnToZakopane": {
+      "score": 4,
+      "label": "Легко",
+      "typicalTime": "20–30 мин",
+      "note": "Siwa Polana имеет прямые рейсы до Zakopane Dworzec. Последние рейсы и сезонные варианты обязательно проверять перед стартом длинного дня.",
+      "sourceUrl": "https://transit.podhale.pl/index.php?page=route&route=135"
+    },
+    "stayZone": "koscielisko-kiry",
+    "goal": "Wołowiec"
+  },
+  {
+    "id": "koscielec",
+    "name": "Kościelec через Hala Gąsienicowa",
+    "short": "Без цепей, но это не значит “легко”: скрэмблинг, экспозиция, руки работают.",
+    "start": "Kuźnice",
+    "startKey": "kuznice",
+    "km": 16.9,
+    "hours": 7.8,
+    "ascent": 1420,
+    "maxAlt": 2155,
+    "diff": 4,
+    "chains": false,
+    "beginner": false,
+    "crowd": "med",
+    "beauty": 9.7,
+    "solitude": 5.8,
+    "logistics": 8.9,
+    "risk": 7,
+    "exposure": "high",
+    "best": "июль–сентябрь",
+    "stay": "Kuźnice / Bystre — сокращает утреннюю логистику перед длинным маршрутом.",
+    "why": "Одна из самых характерных вершин над Hala Gąsienicowa. Финал — настоящий скальный маршрут по размеченной тропе без искусственных страховок.",
+    "risks": [
+      "Экспозиция и скрэмблинг без цепей",
+      "Мокрая скала резко повышает риск",
+      "Встречный трафик на узких местах"
+    ],
+    "gear": [
+      "2 л воды",
+      "обувь с отличным сцеплением",
+      "ветрозащита",
+      "налобник",
+      "опыт движения по скале"
+    ],
+    "tags": [
+      "scramble",
+      "exposed",
+      "no chains"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/route/hdu1",
+    "mode": "out_back",
+    "routingPoints": [
+      [
+        19.9815,
+        49.2704
+      ],
+      [
+        20.0067,
+        49.2437
+      ],
+      [
+        20.0146,
+        49.2317
+      ],
+      [
+        20.0007,
+        49.2269
+      ],
+      [
+        20.0058,
+        49.2255
+      ]
+    ],
+    "end": "Kościelec",
+    "transport": "Kuźnice на автобусе/такси — самый чистый вариант для раннего старта.",
+    "parking": "Обычные автомобили не доезжают до Kuźnice.",
+    "officialAliases": [
+      "Kościelec",
+      "Karb",
+      "Czarny Staw Gąsienicowy",
+      "Hala Gąsienicowa",
+      "Murowaniec"
+    ],
+    "theme": "scramble",
+    "startLat": 49.2704,
+    "startLon": 19.9815,
+    "summitLat": 49.2255,
+    "summitLon": 20.0058,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "height",
+    "objective": {
+      "name": "Kościelec",
+      "altitude": 2155,
+      "type": "вершина"
+    },
+    "finish": "Kuźnice",
+    "returnToZakopane": {
+      "score": 5,
+      "label": "Очень легко",
+      "typicalTime": "10–20 мин",
+      "note": "Kuźnice связаны с центром Zakopane городской линией №10 и другими маршрутами. После длинного дня это один из самых предсказуемых финишей.",
+      "sourceUrl": "https://www.zakopane.pl/komunikacjamiejska/rozklady-jazdy"
+    },
+    "stayZone": "bystre-kuznice",
+    "goal": "Kościelec"
+  },
+  {
+    "id": "rysy",
+    "name": "Rysy с польской стороны",
+    "short": "Самая высокая точка Польши. Очень длинно, цепи, экспозиция, камнепады и погода “другого этажа”.",
+    "start": "Palenica Białczańska",
+    "startKey": "palenica",
+    "km": 25.5,
+    "hours": 11.7,
+    "ascent": 1840,
+    "maxAlt": 2499,
+    "diff": 5,
+    "chains": true,
+    "beginner": false,
+    "crowd": "high",
+    "beauty": 10,
+    "solitude": 3.8,
+    "logistics": 6.8,
+    "risk": 9,
+    "exposure": "high",
+    "best": "июль–сентябрь при сухих стабильных условиях",
+    "stay": "Bukowina Tatrzańska или nocleg ближе к Palenica; старт до рассвета ограничен правилами TPN в сезоне, поэтому планируй очень тщательно.",
+    "why": "Большая цель, а не “ещё один маршрут”. Нужны выносливость, уверенность на цепях и сухой устойчивый прогноз. Для первой поездки в Татры — не первый выбор.",
+    "risks": [
+      "Длинные участки цепей и высокая экспозиция",
+      "Камнепады от людей выше",
+      "Снег может лежать даже когда в Zakopane лето",
+      "Очень длинный день и узкие места с очередями"
+    ],
+    "gear": [
+      "2.5–3 л воды",
+      "еда на 12 часов",
+      "перчатки для цепей",
+      "тёплый слой + дождевик",
+      "налобник",
+      "каска разумна на камнеопасных участках"
+    ],
+    "tags": [
+      "chains",
+      "expert",
+      "highest"
+    ],
+    "mapUrl": "https://mapa-turystyczna.pl/route/3lrqx",
+    "mode": "out_back",
+    "routingPoints": [
+      [
+        20.1024,
+        49.2549
+      ],
+      [
+        20.0866,
+        49.2339
+      ],
+      [
+        20.07,
+        49.2014
+      ],
+      [
+        20.0796,
+        49.1904
+      ],
+      [
+        20.0881,
+        49.1798
+      ]
+    ],
+    "end": "Rysy",
+    "transport": "Старт в Palenica Białczańska. Для такого длинного дня особенно важно заранее проверить транспорт и ограничения ночного движения в TPN.",
+    "parking": "Официальный паркинг у Palenica в высокий сезон лучше бронировать заранее.",
+    "officialAliases": [
+      "Rysy",
+      "Morskie Oko",
+      "Czarny Staw pod Rysami",
+      "Palenica Białczańska"
+    ],
+    "theme": "expert",
+    "startLat": 49.2549,
+    "startLon": 20.1024,
+    "summitLat": 49.1798,
+    "summitLon": 20.0881,
+    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "routeKind": "height",
+    "objective": {
+      "name": "Rysy",
+      "altitude": 2499,
+      "type": "вершина"
+    },
+    "finish": "Palenica Białczańska",
+    "returnToZakopane": {
+      "score": 4,
+      "label": "Легко, но далеко",
+      "typicalTime": "35–50 мин",
+      "note": "Регулярные линии идут между Palenica Białczańska и Zakopane. В высокий сезон время сильно зависит от трафика и очереди на посадку.",
+      "sourceUrl": "https://tpn.gov.pl/transport-zakopane-palenica-bialczanska"
+    },
+    "stayZone": "bukowina-jurgow",
+    "goal": "Rysy"
+  }
+]

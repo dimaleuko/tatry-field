@@ -1,0 +1,105 @@
+[
+  {
+    "id": "centrum-dworzec",
+    "name": "Centrum / Dworzec",
+    "short": "Самая универсальная база без машины.",
+    "lat": 49.3013,
+    "lon": 19.9494,
+    "bestFor": "Если вы ещё не выбрали маршруты и хотите быстро садиться на автобусы в разные части Татр.",
+    "why": "Главный автобусный и железнодорожный узел рядом; удобно уезжать к Palenica, Kiry, Siwa Polana и пересаживаться на городские линии к Kuźnice, Cyrhla и Strążyska.",
+    "tradeoff": "До тропы почти всегда нужен транспорт; утром в центре меньше ощущения “мы уже в горах”.",
+    "bookingQuery": "Zakopane Centrum Dworzec Poland",
+    "tag": "BEST WITHOUT A CAR",
+    "routes": [
+      "morskie-oko",
+      "five-lakes",
+      "czarny-staw",
+      "kasprowy",
+      "giewont",
+      "czerwone",
+      "sarnia",
+      "koscieliska",
+      "chocholowska",
+      "gesia-szyja",
+      "nosal",
+      "kopieniec",
+      "wolowiec",
+      "koscielec",
+      "rysy"
+    ]
+  },
+  {
+    "id": "bystre-kuznice",
+    "name": "Bystre / Kuźnice",
+    "short": "Лучший выбор, если тянет к центральным Высоким Татрам.",
+    "lat": 49.2761,
+    "lon": 19.981,
+    "bestFor": "Kuźnice-start: Hala Gąsienicowa, Kasprowy, Giewont, Nosal, Kościelec.",
+    "why": "Близко к Kuźnice и городским автобусам; часть стартов можно начинать почти от двери, а после долгого дня возвращение самое простое.",
+    "tradeoff": "Менее удобно для Palenica/Morskie Oko и западных долин.",
+    "bookingQuery": "Bystre Kuznice Zakopane Poland",
+    "tag": "BEST FOR KUŹNICE",
+    "routes": [
+      "czarny-staw",
+      "kasprowy",
+      "giewont",
+      "czerwone",
+      "nosal",
+      "koscielec"
+    ]
+  },
+  {
+    "id": "koscielisko-kiry",
+    "name": "Kościelisko / Kiry",
+    "short": "Западные Татры, тише и ближе к долинам.",
+    "lat": 49.287,
+    "lon": 19.8786,
+    "bestFor": "Dolina Kościeliska, Czerwone Wierchy, Chochołowska и западные маршруты.",
+    "why": "Утром меньше дороги до Kiry/Siwa Polana, а жильё часто спокойнее и просторнее, чем в центре Zakopane.",
+    "tradeoff": "Для Kuźnice и Palenica потребуется более длинный переезд.",
+    "bookingQuery": "Koscielisko Kiry Poland",
+    "tag": "BEST FOR WEST TATRAS",
+    "routes": [
+      "czerwone",
+      "koscieliska",
+      "chocholowska",
+      "wolowiec"
+    ]
+  },
+  {
+    "id": "cyrhla-east",
+    "name": "Cyrhla / Jaszczurówka",
+    "short": "Восточный край Zakopane и быстрый выезд в сторону Palenica.",
+    "lat": 49.2968,
+    "lon": 20.0185,
+    "bestFor": "Wielki Kopieniec, Gęsia Szyja / Wierch Poroniec и как компромисс для Palenica.",
+    "why": "Cyrhla обслуживается городскими линиями, а по дороге на восток меньше нужно пересекать весь Zakopane.",
+    "tradeoff": "Дальше от вечернего центра и западных долин.",
+    "bookingQuery": "Cyrhla Jaszczurówka Zakopane Poland",
+    "tag": "EAST SIDE",
+    "routes": [
+      "gesia-szyja",
+      "kopieniec",
+      "morskie-oko",
+      "five-lakes",
+      "rysy"
+    ]
+  },
+  {
+    "id": "bukowina-jurgow",
+    "name": "Bukowina / Jurgów",
+    "short": "Не Zakopane, зато сильная база под самые ранние старты на Palenica.",
+    "lat": 49.3338,
+    "lon": 20.1068,
+    "bestFor": "Morskie Oko, Five Lakes, Rysy — когда приоритет именно восточная часть Татр.",
+    "why": "Вы уже по правильную сторону утреннего трафика и ближе к Palenica Białczańska.",
+    "tradeoff": "Хуже для вечернего Zakopane и маршрутов из Kuźnice/Kiry; без машины менее универсально.",
+    "bookingQuery": "Bukowina Tatrzanska Jurgow Poland",
+    "tag": "EARLY PALENICA",
+    "routes": [
+      "morskie-oko",
+      "five-lakes",
+      "rysy"
+    ]
+  }
+]
