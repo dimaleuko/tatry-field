@@ -12,7 +12,7 @@ const LANDMARKS=[
   {name:'PALENICA',lat:49.2549,lon:20.1024,kind:'trailhead'}
 ];
 
-let routes=[],stayZones=[],filters=new Set(),map,markers={},activeOutline=null,activeLine=null,contextLayer=null;
+let routes=[],stayZones=[],filters=new Set(),map,markers={},activeOutline=null,activeLine=null,contextLayer=null,previewSeq=0;
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -59,7 +59,12 @@ function render(){
   $('#count').textContent=`${list.length} / ${routes.length}`;
   $('#routeList').innerHTML=list.length?list.map(routeCard).join(''):'<div class="empty">Ничего не подходит. Сбрось один фильтр — горы не обязаны проходить кастинг.</div>';
   syncMarkers(list);
-  $$('.route-card').forEach(el=>{el.addEventListener('mouseenter',()=>preview(el.dataset.id));el.addEventListener('focus',()=>preview(el.dataset.id))});
+  $$('.route-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>preview(el.dataset.id));
+    el.addEventListener('mouseleave',()=>clearPreview());
+    el.addEventListener('focus',()=>preview(el.dataset.id));
+    el.addEventListener('blur',()=>clearPreview());
+  });
 }
 function syncMarkers(list){
   const ids=new Set(list.map(r=>r.id));
@@ -71,20 +76,44 @@ function syncMarkers(list){
   });
   if(list.length){const bounds=L.latLngBounds(list.map(r=>[r.startLat,r.startLon]));bounds.extend([49.2992,19.9496]);if(bounds.isValid())map.fitBounds(bounds.pad(.15),{animate:false,maxZoom:11})}
 }
+function removePreviewLayers(){
+  if(activeOutline){map.removeLayer(activeOutline);activeOutline=null}
+  if(activeLine){map.removeLayer(activeLine);activeLine=null}
+}
+function fitOverview(){
+  const list=routes.filter(visible);
+  if(!list.length)return;
+  const bounds=L.latLngBounds(list.map(r=>[r.startLat,r.startLon]));
+  bounds.extend([49.2992,19.9496]);
+  if(bounds.isValid())map.fitBounds(bounds.pad(.15),{animate:false,maxZoom:11});
+}
+function clearPreview(){
+  previewSeq++;
+  removePreviewLayers();
+  fitOverview();
+}
 async function preview(id){
   const r=routes.find(x=>x.id===id);if(!r)return;
-  if(activeOutline){map.removeLayer(activeOutline);activeOutline=null}if(activeLine){map.removeLayer(activeLine);activeLine=null}
-  try{const g=await fetch(`/api/geometry/${id}`).then(x=>x.json());activeOutline=L.geoJSON(g.geometry,{style:{color:'#fff8e8',weight:9,opacity:.95,lineCap:'round',lineJoin:'round'}}).addTo(map);activeLine=L.geoJSON(g.geometry,{style:{color:'#ff4f2e',weight:5,opacity:1,lineCap:'round',lineJoin:'round'}}).addTo(map);const b=activeLine.getBounds();b.extend([49.2992,19.9496]);map.fitBounds(b.pad(.13),{maxZoom:12})}catch{}
+  const seq=++previewSeq;
+  removePreviewLayers();
+  try{
+    const g=await fetch(`/api/geometry/${id}`).then(x=>x.json());
+    if(seq!==previewSeq)return;
+    removePreviewLayers();
+    activeOutline=L.geoJSON(g.geometry,{style:{color:'#fff8e8',weight:9,opacity:.95,lineCap:'round',lineJoin:'round'}}).addTo(map);
+    activeLine=L.geoJSON(g.geometry,{style:{color:'#ff4f2e',weight:5,opacity:1,lineCap:'round',lineJoin:'round'}}).addTo(map);
+    const b=activeLine.getBounds();b.extend([49.2992,19.9496]);map.fitBounds(b.pad(.13),{maxZoom:12});
+  }catch{}
 }
 
 function stayCard(z){
   const routeNames=(z.routes||[]).map(id=>routes.find(r=>r.id===id)?.name).filter(Boolean).slice(0,4);
-  return `<article class="stay-card ${z.id==='centrum-dworzec'?'featured':''}">
+  return `<article class="stay-card">
     <div class="stay-tag">${esc(z.tag||'BASE')}</div><h3>${esc(z.name)}</h3><p class="stay-short">${esc(z.short)}</p>
     <div class="stay-copy"><b>Лучше всего:</b> ${esc(z.bestFor)}</div>
     <div class="stay-copy muted"><b>Компромисс:</b> ${esc(z.tradeoff)}</div>
     ${routeNames.length?`<div class="stay-route-list">${routeNames.map(n=>`<span>${esc(n)}</span>`).join('')}</div>`:''}
-    <a class="btn ${z.id==='centrum-dworzec'?'acid':''}" target="_blank" rel="noopener" href="${z.bookingUrl}">Искать жильё ↗</a>
+    <a class="btn" target="_blank" rel="noopener" href="${z.bookingUrl}">Искать жильё ↗</a>
   </article>`;
 }
 function renderStayZones(){if($('#stayZones'))$('#stayZones').innerHTML=stayZones.map(stayCard).join('')}

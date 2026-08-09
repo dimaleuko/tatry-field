@@ -1,4 +1,4 @@
-# TATRY / FIELD — Phase 2.3.1
+# TATRY / FIELD — Phase 2.3.3
 
 Editorial hiking planner for the Polish Tatras, now with a **Live Trail Mode**.
 
@@ -50,3 +50,21 @@ The GPX geometry in this prototype is generated from curated waypoints through O
 
 ## 2.3.1 deployment hotfix
 Leaflet is now installed from npm and served locally by the Node service instead of loading the library from a third-party CDN. This prevents the app from getting stuck on the static loading state when the CDN script is unavailable.
+
+
+## Phase 2.3.2 UI cleanup
+- route preview is exclusive and stale async hover responses are ignored
+- leaving a route card clears its preview and restores overview
+- BASE CAMP / housing moved below the routes workspace
+- no housing zone is visually preselected by default
+
+
+## Phase 2.3.3 route stories
+- every one of the 15 route pages now has a full **ROUTE STORY / ЧЕГО ЖДАТЬ** section
+- **WHY GO**: a concise editorial reason to choose the route + motivation tags
+- **TERRAIN MIX**: curated approximate percentage split of road/forest/open alpine/rock etc. (not a GPS measurement)
+- **WHY START / WHY FINISH**: explains the route logic and the transport logic
+- **VIEWS**: where the visual payoff actually happens instead of implying the whole route is panoramic
+- **TRADE-OFFS**: the less glamorous price of each route — crowds, asphalt, long approach, exposure, long return, etc.
+- **DAY BY ACTS**: a four-part mental model of how the day unfolds
+- narrative remains editorial orientation, not turn-by-turn guidance; official TPN signage and current conditions remain authoritative

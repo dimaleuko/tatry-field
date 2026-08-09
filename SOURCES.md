@@ -41,3 +41,22 @@ The prototype uses `tile.openstreetmap.org`. For a public production release, re
 - W3C Device Orientation and Motion — compass/orientation permission and secure-context model.
 - OpenStreetMap standard tiles — high-zoom detail layer in Trail Mode.
 - OpenTopoMap — optional terrain/topographic layer.
+
+
+## Route narrative references (Phase 2.3.3)
+The richer route descriptions use TPN trail descriptions as a grounding source for the character and sequence of official routes, including:
+- TPN: Palenica Białczańska – Morskie Oko and walk around the lake
+- TPN: Palenica Białczańska – Dolina Pięciu Stawów – Świstówka – Morskie Oko
+- TPN: Hala Gąsienicowa / Czarny Staw route descriptions
+- TPN: Dolina Strążyska – Sarnia Skała – Dolina Białego
+- TPN: Kiry – Dolina Kościeliska – Ornak – Smreczyński Staw
+Descriptions inside the app remain curated editorial summaries rather than official route instructions.
+
+## Phase 2.3.3 route-story notes
+
+Route narratives were cross-checked against the Tatra National Park route catalogue and route descriptions. The **terrain mix percentages are editorial estimates** intended to communicate the feel of a day; they are not survey-grade or GPS-derived measurements.
+
+- TPN route catalogue: https://tpn.gov.pl/trasy-turystyczne
+- TPN Hala Gąsienicowa / Czarny Staw route description: https://tpn.gov.pl/szlaki-turystyczne/dolina-suchej-wody-hala-gasienicowa-czarny-staw-gasienicowy-przelecz-miedzy-kopami-boczan-kuznice
+- TPN Sarnia Skała route description: https://tpn.gov.pl/szlaki-turystyczne/dolina-strazyska-polana-strazyska-siklawica-strazyska-sarnia-skala-dolina-bialego-wielka-krokiew
+- TPN current tourist communication: https://tpn.gov.pl/komunikat-turystyczny
