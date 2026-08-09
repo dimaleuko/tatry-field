@@ -5,6 +5,10 @@ if ! command -v node >/dev/null 2>&1; then
   read -p "Press Enter to close..."
   exit 1
 fi
+if [ ! -f "node_modules/leaflet/dist/leaflet.js" ]; then
+  echo "Installing local map library..."
+  npm install || { echo "npm install failed"; read -p "Press Enter to close..."; exit 1; }
+fi
 node server.js &
 PID=$!
 sleep 1

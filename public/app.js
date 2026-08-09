@@ -12,12 +12,14 @@ const LANDMARKS=[
   {name:'PALENICA',lat:49.2549,lon:20.1024,kind:'trailhead'}
 ];
 
-let routes=[],stayZones=[],filters=new Set(),map,markers={},activeOutline=null,activeLine=null,contextLayer=L.layerGroup();
+let routes=[],stayZones=[],filters=new Set(),map,markers={},activeOutline=null,activeLine=null,contextLayer=null;
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 function landmarkIcon(l){return L.divIcon({className:'landmark-icon-wrap',html:`<div class="landmark-label ${l.kind}"><i></i><span>${esc(l.name)}</span></div>`,iconSize:[145,28],iconAnchor:[8,14]})}
 function initMap(){
+  if(!window.L) throw new Error('Map library failed to load');
+  contextLayer=L.layerGroup();
   map=L.map('map',{zoomControl:false,preferCanvas:true}).setView([49.245,19.98],11);
   L.control.zoom({position:'topright'}).addTo(map);
   L.control.scale({imperial:false,position:'bottomright'}).addTo(map);
@@ -95,4 +97,4 @@ async function boot(){
   await Promise.allSettled([loadOfficial()]);
 }
 $$('[data-filter]').forEach(b=>b.onclick=()=>{const f=b.dataset.filter;if(f==='reset'){filters.clear();$$('.chip').forEach(x=>x.classList.remove('active'))}else{if(f==='hike'&&filters.has('height')){filters.delete('height');$('[data-filter="height"]')?.classList.remove('active')}if(f==='height'&&filters.has('hike')){filters.delete('hike');$('[data-filter="hike"]')?.classList.remove('active')}filters.has(f)?filters.delete(f):filters.add(f);b.classList.toggle('active')}render()});
-boot();
+boot().catch(err=>{console.error(err);const el=document.querySelector('#routeList');if(el)el.innerHTML='<div class="empty"><b>Не удалось запустить карту.</b><br>Обнови страницу. Если ошибка повторяется — map library не загрузилась.</div>';});

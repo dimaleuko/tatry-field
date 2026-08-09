@@ -6,6 +6,7 @@ const { URL } = require('url');
 const PORT = Number(process.env.PORT || 8787);
 const ROOT = __dirname;
 const PUBLIC = path.join(ROOT, 'public');
+const LEAFLET_DIST = path.join(ROOT, 'node_modules', 'leaflet', 'dist');
 const ROUTES = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'routes.json'), 'utf8'));
 const ROUTE_MAP = new Map(ROUTES.map((r) => [r.id, r]));
 const STAY_ZONES = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'stay-zones.json'), 'utf8'));
@@ -348,15 +349,19 @@ async function handleApi(req,res,url) {
 }
 
 const mime={'.html':'text/html; charset=utf-8','.js':'application/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.webmanifest':'application/manifest+json'};
-function serveFile(res,file){
-  if(!file.startsWith(PUBLIC)) return text(res,403,'Forbidden');
-  fs.readFile(file,(err,data)=>{if(err)return text(res,404,'Not found');res.writeHead(200,{'content-type':mime[path.extname(file)]||'application/octet-stream','cache-control':'no-cache'});res.end(data);});
+function serveFromRoot(res,root,file){
+  const normalizedRoot=path.resolve(root);
+  const normalizedFile=path.resolve(file);
+  if(!(normalizedFile===normalizedRoot || normalizedFile.startsWith(normalizedRoot + path.sep))) return text(res,403,'Forbidden');
+  fs.readFile(normalizedFile,(err,data)=>{if(err)return text(res,404,'Not found');res.writeHead(200,{'content-type':mime[path.extname(normalizedFile)]||'application/octet-stream','cache-control':'no-cache'});res.end(data);});
 }
+function serveFile(res,file){ return serveFromRoot(res,PUBLIC,file); }
 
 const server=http.createServer(async(req,res)=>{
   const url=new URL(req.url,`http://${req.headers.host||'localhost'}`);
   try {
     if(url.pathname.startsWith('/api/')) { const handled=await handleApi(req,res,url); if(handled!==false)return; return json(res,404,{error:'Unknown API route'}); }
+    if(url.pathname.startsWith('/vendor/leaflet/')) { const rel=url.pathname.slice('/vendor/leaflet/'.length); return serveFromRoot(res,LEAFLET_DIST,path.join(LEAFLET_DIST,rel)); }
     if(/^\/route\/[a-z0-9-]+\/?$/.test(url.pathname)) return serveFile(res,path.join(PUBLIC,'route.html'));
     let rel=url.pathname==='/'?'/index.html':url.pathname;
     const file=path.normalize(path.join(PUBLIC,rel));

@@ -1,4 +1,4 @@
-# TATRY / FIELD — Phase 2.3
+# TATRY / FIELD — Phase 2.3.1
 
 Editorial hiking planner for the Polish Tatras, now with a **Live Trail Mode**.
 
@@ -46,3 +46,7 @@ node server.js
 Trail Mode is an orientation aid, **not turn-by-turn safety certification**. GPS accuracy can degrade in valleys, forest, weather or near steep terrain. Always follow official marked trails and signage, and check current TPN/TOPR information before departure.
 
 The GPX geometry in this prototype is generated from curated waypoints through OSM foot routing. Before any public release, replace automatically routed tracks with manually verified route geometry.
+
+
+## 2.3.1 deployment hotfix
+Leaflet is now installed from npm and served locally by the Node service instead of loading the library from a third-party CDN. This prevents the app from getting stuck on the static loading state when the CDN script is unavailable.

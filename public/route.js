@@ -17,7 +17,7 @@ const TOPO_ATTR='Map data © OpenStreetMap contributors · Map style © OpenTopo
 const DETAIL_URL='https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const DETAIL_ATTR='© OpenStreetMap contributors';
 const id=location.pathname.split('/').filter(Boolean).pop();
-let route,map,routeOutline,routeLayer,routeBounds,geometryData,routeMarkers=L.layerGroup(),contextLayer=L.layerGroup(),poiLayer=L.layerGroup();
+let route,map,routeOutline,routeLayer,routeBounds,geometryData,routeMarkers=null,contextLayer=null,poiLayer=null;
 let trailPois=[];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -68,6 +68,8 @@ function renderBase(){
 }
 
 function initMap(){
+  if(!window.L) throw new Error('Map library failed to load');
+  routeMarkers=L.layerGroup();contextLayer=L.layerGroup();poiLayer=L.layerGroup();
   map=L.map('detailMap',{zoomControl:false,preferCanvas:true});
   L.control.zoom({position:'topright'}).addTo(map);
   L.control.scale({imperial:false,position:'bottomright'}).addTo(map);
@@ -201,4 +203,4 @@ function demoTrail(){
 }
 
 async function boot(){const data=await fetch('/api/routes').then(r=>r.json());route=data.routes.find(r=>r.id===id);if(!route){document.querySelector('#routeApp').innerHTML='<section class="route-hero"><h1>Маршрут не найден</h1></section>';return}renderBase();await Promise.allSettled([loadOfficial(),loadPois(),loadStays(),loadTrailPois()])}
-boot();
+boot().catch(err=>{console.error(err);document.querySelector('#routeApp').innerHTML='<section class="route-hero"><h1>Не удалось загрузить маршрут</h1><p>Обнови страницу. Если ошибка повторяется — map library не загрузилась.</p></section>';});
