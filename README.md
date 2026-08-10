@@ -1,4 +1,4 @@
-# TATRY / FIELD — Phase 2.5
+# TATRY / FIELD — Phase 2.6
 
 Editorial hiking planner for the Polish Tatras, now with a **Live Trail Mode**.
 
@@ -97,3 +97,11 @@ Leaflet is now installed from npm and served locally by the Node service instead
 - added an ironic editorial section at the bottom of the homepage with six safe photo-pose ideas
 - included an original six-frame moodboard inspired by outdoor-film photography rather than copied Pinterest images
 - kept the joke secondary to trail etiquette: no leaving marked paths, picking flowers or posing near exposed terrain
+
+## Phase 2.6 saved routes and comparison
+
+- save up to three routes from the homepage or an individual route page
+- selections persist in local browser storage between visits
+- a fixed comparison tray keeps the shortlist visible without blocking route browsing
+- compare time, distance, ascent, altitude, difficulty, chains, crowds, start, objective, return logistics, motivation, trade-off and recommended base
+- comparison is keyboard accessible, responsive and available from route pages through the saved-route counter

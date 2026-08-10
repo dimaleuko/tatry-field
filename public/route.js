@@ -20,6 +20,7 @@ const id=location.pathname.split('/').filter(Boolean).pop();
 let route,map,routeOutline,routeLayer,routeBounds,geometryData,routeMarkers=null,contextLayer=null,poiLayer=null;
 let trailPois=[];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const savedStore=window.TatrySavedRoutes;
 
 function poiLink(p){return `https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lon}#map=17/${p.lat}/${p.lon}`}
 function haversineKm(a,b){const R=6371,rad=Math.PI/180,dLat=(b.lat-a.lat)*rad,dLon=(b.lon-a.lon)*rad,lat1=a.lat*rad,lat2=b.lat*rad;const h=Math.sin(dLat/2)**2+Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
@@ -46,10 +47,13 @@ function renderBase(){
   const obj=route.objective||{name:route.goal||route.end,altitude:route.maxAlt,type:'цель'};
   const ret=route.returnToZakopane||{};
   const exp=route.experience||{};
+  const isSaved=savedStore?.has(route.id)||false;
+  const savedCount=savedStore?.get().length||0;
   document.title=`${route.name} — TATRY / FIELD`;
   document.querySelector('#routeApp').innerHTML=`
   <section class="route-hero"><a class="back" href="/">← все маршруты</a><h1>${esc(route.name)}</h1>
     <div class="route-deck"><p>${esc(route.why)}</p><div class="difficulty-box"><small>сложность ${route.diff}/5</small><b>${LEVELS[route.diff]}</b></div></div>
+    <div class="route-save-bar"><button type="button" id="routeSaveButton" class="route-detail-save${isSaved?' saved':''}" aria-pressed="${isSaved}">${isSaved?'СОХРАНЕНО ✓':'СОХРАНИТЬ МАРШРУТ +'}</button><a id="routeCompareLink" class="route-detail-compare${savedCount<2?' disabled':''}" href="/?compare=1#routes">СРАВНИТЬ <span>${savedCount}</span> →</a><span id="routeSaveStatus" aria-live="polite">${savedCount?`Сохранено: ${savedCount} / ${savedStore.max}`:'Можно сохранить до трёх маршрутов'}</span></div>
     <div class="identity-strip"><div><small>Формат</small><b>${kindLabel(route)}</b></div><div><small>Цель</small><b>${esc(obj.name)}</b><span>${obj.altitude} м · ${esc(obj.type)}</span></div><div><small>Обратно в Zakopane</small><b>${ret.score||'—'}/5 · ${esc(ret.label||'')}</b><span>${esc(ret.typicalTime||'')}</span></div></div>
   </section>
   <div class="route-body"><div class="route-main">
@@ -73,7 +77,42 @@ function renderBase(){
     <section class="side-section"><h2>Original sources</h2><div style="display:flex;gap:7px;flex-wrap:wrap"><a class="btn primary" href="https://tpn.gov.pl/komunikat-turystyczny" target="_blank" rel="noopener">TPN conditions ↗</a><a class="btn" href="https://topr.pl/" target="_blank" rel="noopener">TOPR ↗</a><a class="btn" href="${route.mapUrl}" target="_blank" rel="noopener">route reference ↗</a></div></section>
   </div></aside></div>`;
   document.querySelector('#secureNote').textContent=window.isSecureContext?'На HTTPS/localhost браузер сможет запросить GPS и компас.':'Сейчас открыт обычный HTTP по локальной сети. Trail Mode можно посмотреть в DEMO, но настоящий GPS/компас на iPhone потребует HTTPS после публикации.';
-  initMap();bindPoiTabs();bindMapViews();bindTrailLaunch();
+  bindSavedRoute();initMap();bindPoiTabs();bindMapViews();bindTrailLaunch();
+}
+
+function syncSavedRoute(message=''){
+  if(!route||!savedStore)return;
+  const ids=savedStore.get();
+  const isSaved=ids.includes(route.id);
+  const button=document.querySelector('#routeSaveButton');
+  const compare=document.querySelector('#routeCompareLink');
+  const status=document.querySelector('#routeSaveStatus');
+  if(button){
+    button.classList.toggle('saved',isSaved);
+    button.setAttribute('aria-pressed',String(isSaved));
+    button.setAttribute('aria-label',`${isSaved?'Убрать из сохранённых':'Сохранить для сравнения'}: ${route.name}`);
+    button.textContent=isSaved?'СОХРАНЕНО ✓':'СОХРАНИТЬ МАРШРУТ +';
+  }
+  if(compare){
+    compare.classList.toggle('disabled',ids.length<2);
+    compare.setAttribute('aria-disabled',String(ids.length<2));
+    compare.innerHTML=`СРАВНИТЬ <span>${ids.length}</span> →`;
+  }
+  if(status)status.textContent=message||(ids.length?`Сохранено: ${ids.length} / ${savedStore.max}`:'Можно сохранить до трёх маршрутов');
+}
+function bindSavedRoute(){
+  const button=document.querySelector('#routeSaveButton');
+  const compare=document.querySelector('#routeCompareLink');
+  button?.addEventListener('click',()=>{
+    const result=savedStore.toggle(route.id);
+    syncSavedRoute(result.ok?(savedStore.has(route.id)?'Маршрут добавлен в сравнение.':'Маршрут удалён из сохранённых.'):'Уже сохранено три маршрута. Убери один перед добавлением.');
+  });
+  compare?.addEventListener('click',event=>{
+    if(savedStore.get().length>=2)return;
+    event.preventDefault();
+    syncSavedRoute('Для сравнения нужны хотя бы два маршрута.');
+  });
+  syncSavedRoute();
 }
 
 function initMap(){
@@ -212,4 +251,5 @@ function demoTrail(){
 }
 
 async function boot(){const data=await fetch('/api/routes').then(r=>r.json());route=data.routes.find(r=>r.id===id);if(!route){document.querySelector('#routeApp').innerHTML='<section class="route-hero"><h1>Маршрут не найден</h1></section>';return}renderBase();await Promise.allSettled([loadOfficial(),loadPois(),loadStays(),loadTrailPois()])}
+window.addEventListener('tatry:saved-routes',()=>syncSavedRoute());
 boot().catch(err=>{console.error(err);document.querySelector('#routeApp').innerHTML='<section class="route-hero"><h1>Не удалось загрузить маршрут</h1><p>Обнови страницу. Если ошибка повторяется — map library не загрузилась.</p></section>';});
