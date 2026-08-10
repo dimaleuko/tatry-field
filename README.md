@@ -1,4 +1,4 @@
-# TATRY / FIELD — Phase 2.7
+# TATRY / FIELD — Phase 2.8
 
 Editorial hiking planner for the Polish Tatras, now with a **Live Trail Mode**.
 
@@ -114,3 +114,12 @@ Leaflet is now installed from npm and served locally by the Node service instead
 - uses distinct line treatments for forest, valley, open terrain and the chain section
 - every stage is keyboard/touch accessible and opens a concise description of what changes there
 - keeps the original topo map and GPX as the navigation layer; Field Map is explicitly presented as an approximate planning narrative
+
+## Phase 2.8 annotated topographic Field Map
+
+- replaced the abstract Giewont canvas with a second lightweight Leaflet map using the existing OpenTopoMap layer
+- keeps surrounding terrain, contour lines, named passes and neighbouring trails visible
+- expands the route story to eight track-linked stages from Kuźnice to the summit
+- calls out the Kalatówki and Hala Kondratowa choices, the beginning of the steep Piekiełko climb, the Kondracka and Wyżnia Kondracka junctions, chains and the summit descent flow
+- adds four more licensed Wikimedia Commons photographs and opens them from their relevant route stage in an accessible lightbox
+- preserves the full reference track under a colour-coded ascent overlay and makes the new explanation responsive on mobile
