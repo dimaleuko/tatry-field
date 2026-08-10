@@ -1,4 +1,4 @@
-# TATRY / FIELD — Phase 2.6
+# TATRY / FIELD — Phase 2.7
 
 Editorial hiking planner for the Polish Tatras, now with a **Live Trail Mode**.
 
@@ -105,3 +105,12 @@ Leaflet is now installed from npm and served locally by the Node service instead
 - a fixed comparison tray keeps the shortlist visible without blocking route browsing
 - compare time, distance, ascent, altitude, difficulty, chains, crowds, start, objective, return logistics, motivation, trade-off and recommended base
 - comparison is keyboard accessible, responsive and available from route pages through the saved-route counter
+
+## Phase 2.7 editorial Field Map prototype
+
+- added a `TOPO MAP / FIELD MAP` switch to the Giewont route page
+- builds a lightweight editorial map from the existing verified route geometry without another tile source or mapping library
+- marks six curated stages: Kuźnice, forest approach, Hala Kondratowa, Kondracka Pass, final queue and chains/summit
+- uses distinct line treatments for forest, valley, open terrain and the chain section
+- every stage is keyboard/touch accessible and opens a concise description of what changes there
+- keeps the original topo map and GPX as the navigation layer; Field Map is explicitly presented as an approximate planning narrative

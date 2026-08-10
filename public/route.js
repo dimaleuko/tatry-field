@@ -21,6 +21,30 @@ let route,map,routeOutline,routeLayer,routeBounds,geometryData,routeMarkers=null
 let trailPois=[];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const savedStore=window.TatrySavedRoutes;
+const FIELD_MAPS={
+  giewont:{
+    issue:'FIELD MAP 01 / PROTOTYPE',
+    title:'Шесть смен характера за один подъём.',
+    intro:'Не ещё одна навигационная карта, а быстрый сценарий дня: где лес заканчивается, когда появляется ветер и почему последние 500 метров определяют весь маршрут.',
+    stops:[
+      {ratio:0,side:'right',shiftY:-18,kicker:'00 / START',name:'Kuźnice',tag:'BUS → TRAIL',meta:'≈ 1010 м · 0 км',body:'Удобный городской старт и последняя простая логистика. После входа на тропу маршрут быстро становится тише и стабильнее набирает высоту.'},
+      {ratio:.16,side:'left',shiftY:-6,kicker:'01 / FOREST',name:'Лесной подход',tag:'STEADY CLIMB',meta:'≈ 1180 м · 1.8 км',body:'Широкая лесная тропа без технических сюрпризов. Хорошее место поймать ритм, пока вид ещё закрыт деревьями.'},
+      {ratio:.29,side:'right',shiftY:-20,kicker:'02 / SHELTER',name:'Hala Kondratowa',tag:'PAUSE / WATER CHECK',meta:'≈ 1333 м · 3.3 км',body:'Приют и естественная пауза перед открытым подъёмом. Воду и работу кухни всё равно лучше проверить заранее.'},
+      {ratio:.40,side:'left',shiftY:-28,kicker:'03 / OPEN',name:'Kondracka Przełęcz',tag:'WIND STARTS HERE',meta:'≈ 1725 м · 4.6 км',body:'Лес остаётся внизу. Ветер, солнце и облака ощущаются сильнее, а погода становится важнее темпа.'},
+      {ratio:.465,side:'right',shiftY:-34,kicker:'04 / QUEUE',name:'Финальный подход',tag:'ROCK / ONE-WAY FLOW',meta:'≈ 1765 м · 5.2 км',body:'Поток людей сужается, появляются камни и ожидание. Очередь может заметно растянуть короткий финальный участок.'},
+      {ratio:.50,side:'left',shiftY:54,kicker:'05 / CHAINS',name:'Giewont · 1894 м',tag:'EXPOSED / NO STORM',meta:'≈ 1894 м · 5.8 км',body:'Короткий участок с цепями, руками и экспозицией. На вершине металлический крест: при риске грозы сюда не поднимаются.'}
+    ],
+    terrain:[
+      {from:0,to:.24,kind:'forest',label:'лес / широкая тропа'},
+      {from:.24,to:.37,kind:'meadow',label:'долина / приют'},
+      {from:.37,to:.45,kind:'open',label:'открытый подъём'},
+      {from:.45,to:.55,kind:'chains',label:'камни / цепи'},
+      {from:.55,to:.63,kind:'open',label:'открытый спуск'},
+      {from:.63,to:.76,kind:'meadow',label:'долина / приют'},
+      {from:.76,to:1,kind:'forest',label:'лес / возвращение'}
+    ]
+  }
+};
 
 function poiLink(p){return `https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lon}#map=17/${p.lat}/${p.lon}`}
 function haversineKm(a,b){const R=6371,rad=Math.PI/180,dLat=(b.lat-a.lat)*rad,dLon=(b.lon-a.lon)*rad,lat1=a.lat*rad,lat2=b.lat*rad;const h=Math.sin(dLat/2)**2+Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
@@ -40,6 +64,114 @@ function renderStoryTags(tags=[]){return tags.map(t=>`<span>${esc(t)}</span>`).j
 function renderRouteHighlights(photos=[]){
   if(!photos.length)return '';
   return `<section class="route-section route-highlights-section"><div class="route-highlights-head"><div class="eyebrow">ROUTE HIGHLIGHTS / КАК ЭТО ВЫГЛЯДИТ</div><h2>Две сцены, ради которых идти.</h2><p>Не абстрактные Татры, а узнаваемые точки именно этого маршрута.</p></div><div class="route-highlights-grid">${photos.slice(0,2).map((photo,i)=>`<figure class="route-highlight"><div class="route-highlight-image"><img loading="eager" decoding="async" referrerpolicy="no-referrer" src="${esc(photo.src)}" alt="${esc(photo.alt)}"><span>${String(i+1).padStart(2,'0')}</span></div><figcaption><h3>${esc(photo.title)}</h3><p>${esc(photo.caption)}</p><div class="photo-credit">Фото: <a target="_blank" rel="noopener noreferrer" href="${esc(photo.sourceUrl)}">${esc(photo.author)} ↗</a> · <a target="_blank" rel="noopener noreferrer" href="${esc(photo.licenseUrl)}">${esc(photo.license)}</a></div></figcaption></figure>`).join('')}</div><div class="source-note">Фотографии показывают характерные точки маршрута, но сезон, погода и состояние тропы могут сильно отличаться. Источник, автор и лицензия указаны под каждым кадром.</div></section>`;
+}
+function renderFieldMapShell(){
+  const config=FIELD_MAPS[route.id];
+  if(!config)return '';
+  const first=config.stops[0];
+  return `<section class="field-map" id="fieldMap" role="tabpanel" hidden aria-labelledby="fieldMapTitle">
+    <header class="field-map-header"><div><span>${esc(config.issue)}</span><h3 id="fieldMapTitle">${esc(config.title)}</h3></div><p>${esc(config.intro)}</p></header>
+    <div class="field-map-canvas" id="fieldMapCanvas"><span class="field-map-loading">Рисую сценарий по реальному треку…</span></div>
+    <div class="field-map-readout" id="fieldMapReadout" aria-live="polite"><div><small>${esc(first.kicker)} · ${esc(first.tag)}</small><h4>${esc(first.name)}</h4><span>${esc(first.meta)}</span></div><p>${esc(first.body)}</p><div class="field-map-stepper"><button type="button" data-field-step="-1" aria-label="Предыдущий этап">←</button><b>01 / ${String(config.stops.length).padStart(2,'0')}</b><button type="button" data-field-step="1" aria-label="Следующий этап">→</button></div></div>
+    <footer class="field-map-footer"><div class="field-map-key"><span class="forest">лес</span><span class="meadow">долина</span><span class="open">открыто</span><span class="chains">цепи</span></div><p>Схема показывает характер этапов и использует реальную форму трека. Подписи и границы покрытия приблизительны; для движения используй topo-карту, маркировку и GPX.</p></footer>
+  </section>`;
+}
+function fieldMapProjection(coords){
+  const valid=(coords||[]).filter(point=>Array.isArray(point)&&Number.isFinite(point[0])&&Number.isFinite(point[1]));
+  if(valid.length<2)return null;
+  const step=Math.max(1,Math.ceil(valid.length/230));
+  const sampled=valid.filter((_,index)=>index%step===0||index===valid.length-1);
+  const midLat=sampled.reduce((sum,point)=>sum+point[1],0)/sampled.length;
+  const lonFactor=Math.cos(midLat*Math.PI/180);
+  const raw=sampled.map(([lon,lat])=>({x:lon*lonFactor,y:-lat}));
+  const minX=Math.min(...raw.map(point=>point.x)),maxX=Math.max(...raw.map(point=>point.x));
+  const minY=Math.min(...raw.map(point=>point.y)),maxY=Math.max(...raw.map(point=>point.y));
+  const width=Math.max(.00001,maxX-minX),height=Math.max(.00001,maxY-minY);
+  const scale=Math.min(500/width,500/height);
+  const centerX=(minX+maxX)/2,centerY=(minY+maxY)/2;
+  const points=raw.map(point=>({x:500+(point.x-centerX)*scale,y:350+(point.y-centerY)*scale}));
+  const lengths=[0];
+  for(let i=1;i<points.length;i++)lengths.push(lengths[i-1]+Math.hypot(points[i].x-points[i-1].x,points[i].y-points[i-1].y));
+  return {points,lengths,total:lengths.at(-1)||1};
+}
+function fieldPointAt(model,ratio){
+  const target=Math.max(0,Math.min(1,ratio))*model.total;
+  let index=model.lengths.findIndex(length=>length>=target);
+  if(index<=0)return model.points[0];
+  if(index<0)return model.points.at(-1);
+  const before=model.lengths[index-1],after=model.lengths[index];
+  const mix=(target-before)/Math.max(.0001,after-before);
+  const a=model.points[index-1],b=model.points[index];
+  return {x:a.x+(b.x-a.x)*mix,y:a.y+(b.y-a.y)*mix};
+}
+function fieldPathSegment(model,from,to){
+  const start=fieldPointAt(model,from),end=fieldPointAt(model,to);
+  const min=from*model.total,max=to*model.total;
+  const middle=model.points.filter((_,index)=>model.lengths[index]>min&&model.lengths[index]<max);
+  return [start,...middle,end].map((point,index)=>`${index?'L':'M'}${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(' ');
+}
+function fieldContourPath(cx,cy,rx,ry,phase){
+  const points=[];
+  for(let i=0;i<32;i++){
+    const angle=(i/32)*Math.PI*2;
+    const wobble=1+.055*Math.sin(angle*3+phase)+.025*Math.cos(angle*5-phase);
+    points.push([cx+Math.cos(angle)*rx*wobble,cy+Math.sin(angle)*ry*wobble]);
+  }
+  return points.map((point,index)=>`${index?'L':'M'}${point[0].toFixed(1)} ${point[1].toFixed(1)}`).join(' ')+' Z';
+}
+function fieldMapContours(model){
+  const groups=[
+    {point:fieldPointAt(model,.49),rx:54,ry:36,phase:.4},
+    {point:fieldPointAt(model,.31),rx:68,ry:44,phase:1.3},
+    {point:fieldPointAt(model,.13),rx:62,ry:42,phase:2.1}
+  ];
+  return groups.flatMap((group,groupIndex)=>[1,1.38,1.78,2.2].map((level,index)=>`<path class="field-contour contour-${groupIndex}" d="${fieldContourPath(group.point.x,group.point.y,group.rx*level,group.ry*level,group.phase+index*.4)}"/>`)).join('');
+}
+function fieldMapReadout(index){
+  const config=FIELD_MAPS[route.id],stop=config?.stops[index];
+  const readout=document.querySelector('#fieldMapReadout');
+  if(!stop||!readout)return;
+  readout.dataset.active=String(index);
+  readout.innerHTML=`<div><small>${esc(stop.kicker)} · ${esc(stop.tag)}</small><h4>${esc(stop.name)}</h4><span>${esc(stop.meta)}</span></div><p>${esc(stop.body)}</p><div class="field-map-stepper"><button type="button" data-field-step="-1" aria-label="Предыдущий этап">←</button><b>${String(index+1).padStart(2,'0')} / ${String(config.stops.length).padStart(2,'0')}</b><button type="button" data-field-step="1" aria-label="Следующий этап">→</button></div>`;
+  document.querySelectorAll('[data-field-stop]').forEach(button=>{const active=Number(button.dataset.fieldStop)===index;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active))});
+}
+function renderFieldMap(coords){
+  const config=FIELD_MAPS[route.id],canvas=document.querySelector('#fieldMapCanvas'),model=fieldMapProjection(coords);
+  if(!config||!canvas||!model)return;
+  const fullPath=fieldPathSegment(model,0,1);
+  const stops=config.stops.map((stop,index)=>{
+    const point=fieldPointAt(model,stop.ratio);
+    const y=Math.max(54,Math.min(646,point.y+(stop.shiftY||0)));
+    const lineX=stop.side==='left'?238:762;
+    return {...stop,index,point,y,lineX};
+  });
+  const connectors=stops.map(stop=>`<path class="field-callout-line" d="M${stop.point.x.toFixed(1)} ${stop.point.y.toFixed(1)} L${stop.lineX} ${stop.y.toFixed(1)}"/><circle class="field-stop-dot" cx="${stop.point.x.toFixed(1)}" cy="${stop.point.y.toFixed(1)}" r="12"/><text class="field-stop-number" x="${stop.point.x.toFixed(1)}" y="${(stop.point.y+3).toFixed(1)}">${String(stop.index+1).padStart(2,'0')}</text>`).join('');
+  const terrain=config.terrain.map(segment=>`<path class="field-route-segment ${segment.kind}" d="${fieldPathSegment(model,segment.from,segment.to)}"/>`).join('');
+  const labels=stops.map(stop=>`<button type="button" class="field-stop-callout${stop.index===0?' active':''} ${stop.side}" data-field-stop="${stop.index}" data-field-label="${String(stop.index+1).padStart(2,'0')}" aria-pressed="${stop.index===0}" style="--field-y:${(stop.y/7).toFixed(2)}%"><span>${esc(stop.kicker)}</span><strong>${esc(stop.name)}</strong><small>${esc(stop.tag)}</small></button>`).join('');
+  canvas.innerHTML=`<svg class="field-map-svg" viewBox="0 0 1000 700" role="img" aria-label="Упрощённая редакционная схема маршрута Giewont через Hala Kondratowa"><defs><filter id="fieldPaper"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="8" result="noise"/><feColorMatrix in="noise" type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .075"/></feComponentTransfer></filter></defs><rect width="1000" height="700" class="field-map-paper"/><g class="field-contours">${fieldMapContours(model)}</g><path class="field-route-shadow" d="${fullPath}"/>${terrain}${connectors}<path class="field-north" d="M940 88 L940 35 M940 35 L930 53 M940 35 L950 53"/><text class="field-north-label" x="940" y="25">N</text><rect width="1000" height="700" filter="url(#fieldPaper)" opacity=".6"/></svg>${labels}`;
+  fieldMapReadout(0);
+}
+function setMapMode(mode){
+  const field=mode==='field'&&Boolean(FIELD_MAPS[route.id]);
+  document.querySelector('#topoMapPanel')?.toggleAttribute('hidden',field);
+  document.querySelector('#fieldMap')?.toggleAttribute('hidden',!field);
+  document.querySelector('.map-view-toggle')?.toggleAttribute('hidden',field);
+  document.querySelectorAll('[data-map-mode]').forEach(button=>{const active=button.dataset.mapMode===(field?'field':'topo');button.classList.toggle('active',active);button.setAttribute('aria-selected',String(active))});
+  const note=document.querySelector('#mapSourceNote');
+  if(note)note.textContent=field?'Field Map показывает характер дня по реальному треку. Этапы и покрытие размечены приблизительно и не заменяют навигацию, маркировку, GPX или сообщения TPN/TOPR.':'Планировочная карта показывает контекст. Линия взята из маршрутного источника и проверена по длине, границам региона и разрывам. Это всё равно не официальный GPX TPN: на местности следуй маркировке и актуальным сообщениям TPN/TOPR.';
+  if(!field)setTimeout(()=>{map?.invalidateSize();document.querySelector('[data-map-view].active')?.dataset.mapView==='context'?fitContext():fitRoute()},0);
+}
+function bindFieldMap(){
+  document.querySelectorAll('[data-map-mode]').forEach(button=>button.addEventListener('click',()=>setMapMode(button.dataset.mapMode)));
+  const field=document.querySelector('#fieldMap');
+  field?.addEventListener('click',event=>{
+    const stop=event.target.closest('[data-field-stop]');
+    if(stop){fieldMapReadout(Number(stop.dataset.fieldStop));return}
+    const step=event.target.closest('[data-field-step]');
+    if(!step)return;
+    const count=FIELD_MAPS[route.id].stops.length,current=Number(document.querySelector('#fieldMapReadout')?.dataset.active||0);
+    fieldMapReadout((current+Number(step.dataset.fieldStep)+count)%count);
+  });
 }
 
 function renderBase(){
@@ -61,7 +193,7 @@ function renderBase(){
     ${renderRouteHighlights(route.photos)}
     <section class="route-section route-story-section"><div class="story-head"><div class="eyebrow">ROUTE STORY / ЧЕГО ЖДАТЬ</div><h2>Как ощущается этот маршрут.</h2><p>${esc(exp.routeStory||exp.intro||route.why)}</p></div><div class="story-top-grid"><div class="why-go-panel"><small>WHY GO</small><div class="why-go-tags">${renderStoryTags(exp.whyGo?.tags||[])}</div><p>${esc(exp.whyGo?.text||route.why)}</p></div><div class="terrain-panel"><div class="terrain-title"><small>TERRAIN MIX</small><span>примерная доля маршрута</span></div>${renderTerrainMix(exp.terrainMix||[])}</div></div><div class="story-grid"><div class="story-card"><small>Город / подход</small><p>${esc(exp.city||'')}</p></div><div class="story-card"><small>Что под ногами</small><p>${esc(exp.terrain||'')}</p></div><div class="story-card story-card-wide"><small>Ради каких видов идти</small><p>${esc(exp.views||'')}</p></div></div><div class="route-logic"><div><small>Почему старт здесь</small><p>${esc(exp.whyStart||'')}</p></div><div><small>Почему финиш здесь</small><p>${esc(exp.whyFinish||'')}</p></div></div><div class="tradeoff-block"><div class="tradeoff-title"><small>TRADE-OFFS</small><b>За что платишь ради этого маршрута.</b></div><div class="tradeoff-list">${(exp.tradeOffs||[]).map((x,i)=>`<div><span>${String(i+1).padStart(2,'0')}</span><p>${esc(x)}</p></div>`).join('')}</div></div><div class="day-flow"><div class="day-flow-label">ДЕНЬ ПО АКТАМ</div>${(exp.flow||[]).map((x,i)=>`<div class="day-flow-step"><span>${String(i+1).padStart(2,'0')}</span><b>${esc(x)}</b></div>`).join('')}</div><div class="source-note">Terrain mix — кураторская приблизительная доля маршрута по характеру покрытия/ландшафта, а не GPS-измерение. Route Story помогает представить день, но не заменяет маркировку на местности и актуальные сообщения TPN.</div></section>
     <section class="route-section trail-launch-section"><div class="trail-launch-copy"><div class="eyebrow">LIVE TRAIL MODE</div><h2>В дороге — уже не обзорная карта.</h2><p>Показывает твою позицию на треке, GPS accuracy, прогресс, расстояние до цели и ближайших POI, а также предупреждает, если ты ушёл от линии маршрута.</p></div><button class="trail-launch" id="openTrailMode"><span>START</span><b>TRAIL MODE</b><i>→</i></button><div class="source-note secure-note" id="secureNote"></div></section>
-    <section class="route-section"><h2>Маршрут / GPX</h2><div class="map-toolbar map-toolbar-rich"><div><span id="routeGeometryMeta" class="loading">Загружаю эталонный трек…</span><span class="context-distance">Старт ≈ ${straight.toFixed(1)} км по прямой от центра Zakopane</span></div><div class="map-toolbar-actions"><div class="map-view-toggle"><button class="active" data-map-view="route">Маршрут</button><button data-map-view="context">Где это?</button></div><a class="btn acid" href="/api/gpx/${route.id}">Скачать GPX</a></div></div><div class="map-frame"><div id="detailMap" class="detail-map"></div><div class="map-legend"><span><i class="legend-start"></i>старт / финиш</span><span><i class="legend-goal"></i>цель / ключевая точка</span><span><i class="legend-route"></i>маршрут</span></div></div><div class="source-note">Планировочная карта показывает контекст. Линия взята из маршрутного источника и проверена по длине, границам региона и разрывам. Это всё равно не официальный GPX TPN: на местности следуй маркировке и актуальным сообщениям TPN/TOPR.</div></section>
+    <section class="route-section"><h2>Маршрут / GPX</h2><div class="map-toolbar map-toolbar-rich"><div><span id="routeGeometryMeta" class="loading">Загружаю эталонный трек…</span><span class="context-distance">Старт ≈ ${straight.toFixed(1)} км по прямой от центра Zakopane</span></div><div class="map-toolbar-actions">${FIELD_MAPS[route.id]?'<div class="map-mode-toggle" role="tablist" aria-label="Вид карты"><button class="active" type="button" role="tab" aria-controls="topoMapPanel" data-map-mode="topo" aria-selected="true">TOPO MAP</button><button type="button" role="tab" aria-controls="fieldMap" data-map-mode="field" aria-selected="false">FIELD MAP <span>PROTOTYPE</span></button></div>':''}<div class="map-view-toggle"><button class="active" data-map-view="route">Маршрут</button><button data-map-view="context">Где это?</button></div><a class="btn acid" href="/api/gpx/${route.id}">Скачать GPX</a></div></div><div class="map-frame"><div id="topoMapPanel" class="topo-map-panel" role="tabpanel"><div id="detailMap" class="detail-map"></div><div class="map-legend"><span><i class="legend-start"></i>старт / финиш</span><span><i class="legend-goal"></i>цель / ключевая точка</span><span><i class="legend-route"></i>маршрут</span></div></div>${renderFieldMapShell()}</div><div class="source-note" id="mapSourceNote">Планировочная карта показывает контекст. Линия взята из маршрутного источника и проверена по длине, границам региона и разрывам. Это всё равно не официальный GPX TPN: на местности следуй маркировке и актуальным сообщениям TPN/TOPR.</div></section>
     <section class="route-section"><h2>Профиль высот</h2><div class="elevation" id="elevation"><span class="loading">Считаю профиль…</span></div><div class="profile-meta" id="profileMeta"></div></section>
     <section class="route-section"><h2>Планирование заранее</h2><div class="planning-box"><div><small>Лучший период</small><b>${esc(route.best||'зависит от условий')}</b></div><p>Мы убрали «сегодня / завтра»: если поездка через неделю или две, ранний прогноз создаёт ложную уверенность. Проверяй погоду и TPN/TOPR ближе к дате, а затем ещё раз утром перед стартом.</p></div></section>
     <section class="route-section"><h2>Что может пойти не так</h2><div class="split"><ul class="bullet-list">${route.risks.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><ul class="bullet-list">${route.gear.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></section>
@@ -77,7 +209,7 @@ function renderBase(){
     <section class="side-section"><h2>Original sources</h2><div style="display:flex;gap:7px;flex-wrap:wrap"><a class="btn primary" href="https://tpn.gov.pl/komunikat-turystyczny" target="_blank" rel="noopener">TPN conditions ↗</a><a class="btn" href="https://topr.pl/" target="_blank" rel="noopener">TOPR ↗</a><a class="btn" href="${route.mapUrl}" target="_blank" rel="noopener">route reference ↗</a></div></section>
   </div></aside></div>`;
   document.querySelector('#secureNote').textContent=window.isSecureContext?'На HTTPS/localhost браузер сможет запросить GPS и компас.':'Сейчас открыт обычный HTTP по локальной сети. Trail Mode можно посмотреть в DEMO, но настоящий GPS/компас на iPhone потребует HTTPS после публикации.';
-  bindSavedRoute();initMap();bindPoiTabs();bindMapViews();bindTrailLaunch();
+  bindSavedRoute();bindFieldMap();initMap();bindPoiTabs();bindMapViews();bindTrailLaunch();
 }
 
 function syncSavedRoute(message=''){
@@ -132,7 +264,7 @@ function addRouteMarkers(g){
   if(!returnsToStart)L.marker(endLL,{icon:routePin('finish','ФИНИШ'),zIndexOffset:1050}).addTo(routeMarkers).bindPopup(`<b>Финиш</b><br>${esc(route.finish||route.end)}`);
 }
 async function loadGeometry(){
-  try{const g=await fetch(`/api/geometry/${route.id}`).then(r=>r.json());geometryData=g;routeOutline=L.geoJSON(g.geometry,{style:{color:'#fff8e8',weight:11,opacity:.95,lineJoin:'round',lineCap:'round'}}).addTo(map);routeLayer=L.geoJSON(g.geometry,{style:{color:'#ff4f2e',weight:6,opacity:1,lineJoin:'round',lineCap:'round'}}).addTo(map);routeBounds=routeLayer.getBounds();addRouteMarkers(g);fitRoute();const quality=g.verified?'reference track':g.approximate?'approx.':'validated hiking route';document.querySelector('#routeGeometryMeta').textContent=`${quality} · ${g.distanceKm} км · ${g.source}`;loadElevation()}catch(e){document.querySelector('#routeGeometryMeta').textContent='Линия маршрута сейчас недоступна.'}
+  try{const g=await fetch(`/api/geometry/${route.id}`).then(r=>r.json());geometryData=g;routeOutline=L.geoJSON(g.geometry,{style:{color:'#fff8e8',weight:11,opacity:.95,lineJoin:'round',lineCap:'round'}}).addTo(map);routeLayer=L.geoJSON(g.geometry,{style:{color:'#ff4f2e',weight:6,opacity:1,lineJoin:'round',lineCap:'round'}}).addTo(map);routeBounds=routeLayer.getBounds();addRouteMarkers(g);renderFieldMap(g.geometry?.coordinates||[]);fitRoute();const quality=g.verified?'reference track':g.approximate?'approx.':'validated hiking route';document.querySelector('#routeGeometryMeta').textContent=`${quality} · ${g.distanceKm} км · ${g.source}`;loadElevation()}catch(e){document.querySelector('#routeGeometryMeta').textContent='Линия маршрута сейчас недоступна.'}
 }
 async function loadElevation(){
   try{const d=await fetch(`/api/elevation/${route.id}`).then(r=>r.json());const pts=(d.profile||[]).filter(p=>Number.isFinite(p.elevation)&&Number.isFinite(p.km));if(!pts.length)throw new Error('No elevation');const w=900,h=220,pad=18;const min=Math.min(...pts.map(p=>p.elevation)),max=Math.max(...pts.map(p=>p.elevation));const end=Math.max(...pts.map(p=>p.km))||1;const xy=pts.map(p=>[pad+(p.km/end)*(w-pad*2),h-pad-((p.elevation-min)/(Math.max(1,max-min)))*(h-pad*2)]);const line=xy.map(p=>p.join(',')).join(' ');const area=`${pad},${h-pad} ${line} ${w-pad},${h-pad}`;document.querySelector('#elevation').innerHTML=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><polygon points="${area}" fill="rgba(255,79,46,.10)"/><polyline points="${line}" fill="none" stroke="#ff4f2e" stroke-width="3" vector-effect="non-scaling-stroke"/><text x="${pad}" y="18" font-size="11">${Math.round(max)} m</text><text x="${pad}" y="${h-5}" font-size="11">${Math.round(min)} m</text><text x="${w-90}" y="${h-5}" font-size="11">${end.toFixed(1)} km</text></svg>`;document.querySelector('#profileMeta').innerHTML=`<span>track/elevation distance: <b>${d.distanceKm} км</b></span><span>sampled ascent: <b>+${d.ascentM} м</b></span>${d.approximate?'<span>fallback / approximate</span>':''}`}catch{document.querySelector('#elevation').innerHTML='<span class="loading">Профиль высот сейчас недоступен.</span>'}
