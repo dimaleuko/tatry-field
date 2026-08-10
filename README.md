@@ -1,4 +1,4 @@
-# TATRY / FIELD — Phase 2.4
+# TATRY / FIELD — Phase 2.5
 
 Editorial hiking planner for the Polish Tatras, now with a **Live Trail Mode**.
 
@@ -91,3 +91,9 @@ Leaflet is now installed from npm and served locally by the Node service instead
 - every route page includes a larger **ROUTE HIGHLIGHTS / КАК ЭТО ВЫГЛЯДИТ** section
 - all 30 photographs come from Wikimedia Commons and retain visible author, source and license attribution
 - photo metadata is kept separately in `data/route-photos.json`; the server adds responsive Wikimedia image URLs to the routes API
+
+## Phase 2.5 niche hiker photo code
+
+- added an ironic editorial section at the bottom of the homepage with six safe photo-pose ideas
+- included an original six-frame moodboard inspired by outdoor-film photography rather than copied Pinterest images
+- kept the joke secondary to trail etiquette: no leaving marked paths, picking flowers or posing near exposed terrain

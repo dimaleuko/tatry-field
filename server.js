@@ -20,7 +20,7 @@ const VERIFIED_TRACKS = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(ROO
 const ROUTE_MAP = new Map(ROUTES.map((r) => [r.id, r]));
 const STAY_ZONES = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'stay-zones.json'), 'utf8'));
 const STAY_ZONE_MAP = new Map(STAY_ZONES.map((z) => [z.id, z]));
-const USER_AGENT = 'TatryFieldPhase2/0.2.8 (+source-backed route tracks; safety-first hiking guide)';
+const USER_AGENT = 'TatryFieldPhase2/0.2.9 (+source-backed route tracks; safety-first hiking guide)';
 
 const cache = new Map();
 function getCache(key) {
@@ -403,7 +403,7 @@ async function handleApi(req,res,url) {
   return false;
 }
 
-const mime={'.html':'text/html; charset=utf-8','.js':'application/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.webmanifest':'application/manifest+json'};
+const mime={'.html':'text/html; charset=utf-8','.js':'application/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.webp':'image/webp','.webmanifest':'application/manifest+json'};
 function serveFromRoot(res,root,file){
   const normalizedRoot=path.resolve(root);
   const normalizedFile=path.resolve(file);
@@ -424,4 +424,4 @@ const server=http.createServer(async(req,res)=>{
   } catch(error) { console.error(error); if(!res.headersSent) json(res,500,{error:error.message}); else res.end(); }
 });
 
-server.listen(PORT,()=>console.log(`TATRY FIELD Phase 2.4 → http://localhost:${PORT}`));
+server.listen(PORT,()=>console.log(`TATRY FIELD Phase 2.5 → http://localhost:${PORT}`));
