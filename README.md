@@ -1,4 +1,4 @@
-# TATRY / FIELD — Phase 2.3.3
+# TATRY / FIELD — Phase 2.4
 
 Editorial hiking planner for the Polish Tatras, now with a **Live Trail Mode**.
 
@@ -84,3 +84,10 @@ Leaflet is now installed from npm and served locally by the Node service instead
 - added distance, geographic-bounds and maximum-gap validation before a line can be published
 - aligned route definitions, start/finish labels and GPX downloads with the displayed geometry
 - kept a validated BRouter `hiking-mountain` fallback for future or missing tracks
+
+## Phase 2.4 route photo highlights
+
+- every route card now previews two characteristic scenes from that route
+- every route page includes a larger **ROUTE HIGHLIGHTS / КАК ЭТО ВЫГЛЯДИТ** section
+- all 30 photographs come from Wikimedia Commons and retain visible author, source and license attribution
+- photo metadata is kept separately in `data/route-photos.json`; the server adds responsive Wikimedia image URLs to the routes API

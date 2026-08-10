@@ -44,11 +44,17 @@ function visible(r){
 function fmtCrowd(v){return v==='low'?'низко':v==='med'?'средне':'много'}
 function returnClass(score){return score>=5?'excellent':score>=4?'good':'caution'}
 function kindLabel(r){return r.routeKind==='height'?'ЦЕЛЬ: ВЫСОТА':'ПРОСТО ХАЙК'}
+function routePhotoPair(photos=[]){
+  const pair=photos.slice(0,2);
+  if(!pair.length)return '';
+  return `<div class="route-photo-pair" aria-label="Фотографии маршрута">${pair.map((photo,i)=>`<div class="route-card-photo ${i===0?'primary':'secondary'}"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${esc(photo.src)}" alt="${esc(photo.alt)}"><span>${esc(photo.title)}</span></div>`).join('')}</div>`;
+}
 function routeCard(r,i){
   const objective=r.objective||{name:r.goal||r.end,altitude:r.maxAlt};
   const ret=r.returnToZakopane||{};
   return `<a class="route-card" href="/route/${r.id}" data-id="${r.id}">
     <div class="route-head"><div><div class="route-number">${String(i+1).padStart(2,'0')} / ${String(routes.length).padStart(2,'0')}</div><h2 class="route-title">${esc(r.name)}</h2><div class="route-short">${esc(r.short)}</div></div><div class="trail-ready-pill">TRAIL MODE →</div></div>
+    ${routePhotoPair(r.photos)}
     <div class="route-flags"><span class="route-kind ${r.routeKind}">${kindLabel(r)}</span><span class="objective-chip">${esc(objective.name)} · ${objective.altitude} м</span><span class="return-chip ${returnClass(ret.score)}">↩ Zakopane ${ret.score||'—'}/5</span></div>
     <div class="metrics"><div class="metric"><small>Время</small><b>${r.hours} ч</b></div><div class="metric"><small>Дистанция</small><b>${r.km} км</b></div><div class="metric"><small>Набор</small><b>+${r.ascent} м</b></div><div class="metric"><small>Уровень</small><b>${r.diff}/5</b></div><div class="metric"><small>Цепи</small><b>${r.chains?'да':'нет'}</b></div><div class="metric"><small>Толпы</small><b>${fmtCrowd(r.crowd)}</b></div></div>
     <div class="tags"><span class="tag">${LEVELS[r.diff]}</span>${r.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>

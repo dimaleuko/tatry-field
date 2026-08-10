@@ -8,12 +8,19 @@ const PORT = Number(process.env.PORT || 8787);
 const ROOT = __dirname;
 const PUBLIC = path.join(ROOT, 'public');
 const LEAFLET_DIST = path.join(ROOT, 'node_modules', 'leaflet', 'dist');
-const ROUTES = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'routes.json'), 'utf8'));
+const ROUTE_PHOTOS = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'route-photos.json'), 'utf8'));
+const ROUTES = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'routes.json'), 'utf8')).map((route) => ({
+  ...route,
+  photos: (ROUTE_PHOTOS[route.id] || []).map((photo) => ({
+    ...photo,
+    src: `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(photo.file)}?width=1600`
+  }))
+}));
 const VERIFIED_TRACKS = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(ROOT, 'data', 'verified-tracks.json.gz'))).toString('utf8'));
 const ROUTE_MAP = new Map(ROUTES.map((r) => [r.id, r]));
 const STAY_ZONES = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'stay-zones.json'), 'utf8'));
 const STAY_ZONE_MAP = new Map(STAY_ZONES.map((z) => [z.id, z]));
-const USER_AGENT = 'TatryFieldPhase2/0.2.7 (+source-backed route tracks; safety-first hiking guide)';
+const USER_AGENT = 'TatryFieldPhase2/0.2.8 (+source-backed route tracks; safety-first hiking guide)';
 
 const cache = new Map();
 function getCache(key) {
@@ -417,4 +424,4 @@ const server=http.createServer(async(req,res)=>{
   } catch(error) { console.error(error); if(!res.headersSent) json(res,500,{error:error.message}); else res.end(); }
 });
 
-server.listen(PORT,()=>console.log(`TATRY FIELD Phase 2.3.4 → http://localhost:${PORT}`));
+server.listen(PORT,()=>console.log(`TATRY FIELD Phase 2.4 → http://localhost:${PORT}`));
