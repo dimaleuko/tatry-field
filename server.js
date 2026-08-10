@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const zlib = require('zlib');
 const { URL } = require('url');
 
 const PORT = Number(process.env.PORT || 8787);
@@ -8,10 +9,11 @@ const ROOT = __dirname;
 const PUBLIC = path.join(ROOT, 'public');
 const LEAFLET_DIST = path.join(ROOT, 'node_modules', 'leaflet', 'dist');
 const ROUTES = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'routes.json'), 'utf8'));
+const VERIFIED_TRACKS = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(ROOT, 'data', 'verified-tracks.json.gz'))).toString('utf8'));
 const ROUTE_MAP = new Map(ROUTES.map((r) => [r.id, r]));
 const STAY_ZONES = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'stay-zones.json'), 'utf8'));
 const STAY_ZONE_MAP = new Map(STAY_ZONES.map((z) => [z.id, z]));
-const USER_AGENT = 'TatryFieldPhase2/0.2.3 (+local prototype; safety-first hiking guide)';
+const USER_AGENT = 'TatryFieldPhase2/0.2.7 (+source-backed route tracks; safety-first hiking guide)';
 
 const cache = new Map();
 function getCache(key) {
@@ -52,38 +54,84 @@ async function fetchText(url, opts = {}) {
 
 function fallbackGeometry(route) {
   let coords = route.routingPoints.map(([lon, lat]) => [lon, lat]);
-  if (route.mode === 'out_back') coords = coords.concat(coords.slice(0, -1).reverse());
+  const endpointsApart = coords.length > 1 && haversineKm(coords[0], coords.at(-1)) > 0.2;
+  if (route.mode === 'out_back' || (route.mode === 'loop' && endpointsApart)) coords = coords.concat(coords.slice(0, -1).reverse());
   return { type: 'LineString', coordinates: coords };
+}
+
+function lineDistanceKm(coords) {
+  return coords.slice(1).reduce((sum, point, i) => sum + haversineKm(coords[i], point), 0);
+}
+
+function validateGeometry(route, coords) {
+  if (!Array.isArray(coords) || coords.length < 2) throw new Error('Route geometry has fewer than two points');
+  let maxGapKm = 0;
+  for (let i = 0; i < coords.length; i++) {
+    const [lon, lat] = coords[i] || [];
+    if (!Number.isFinite(lon) || !Number.isFinite(lat)) throw new Error(`Invalid coordinate at point ${i}`);
+    if (lon < 19.68 || lon > 20.22 || lat < 49.15 || lat > 49.34) throw new Error(`Geometry leaves the Polish Tatra region at point ${i}`);
+    if (i) maxGapKm = Math.max(maxGapKm, haversineKm(coords[i - 1], coords[i]));
+  }
+  const distanceKm = lineDistanceKm(coords);
+  const ratio = distanceKm / route.km;
+  if (ratio < 0.7 || ratio > 1.4) throw new Error(`Geometry distance ${distanceKm.toFixed(2)} km does not match route metric ${route.km} km`);
+  if (maxGapKm > 0.75) throw new Error(`Geometry contains a suspicious ${maxGapKm.toFixed(2)} km jump`);
+  return { distanceKm, maxGapKm };
+}
+
+function verifiedGeometry(route) {
+  const track = VERIFIED_TRACKS.routes?.[route.id];
+  if (!track?.geometry?.coordinates) return null;
+  const checked = validateGeometry(route, track.geometry.coordinates);
+  return {
+    geometry: track.geometry,
+    distanceKm: Math.round(checked.distanceKm * 100) / 100,
+    source: 'Reference hiking track · mapa-turystyczna.pl / OpenStreetMap',
+    sourceUrls: track.sourceUrls || [],
+    approximate: false,
+    verified: true,
+    generatedAt: VERIFIED_TRACKS.generatedAt
+  };
+}
+
+async function brouterGeometry(route) {
+  const lonlats = route.routingPoints.map(([lon, lat]) => `${lon},${lat}`).join('|');
+  const endpoint = `https://brouter.de/brouter?lonlats=${encodeURIComponent(lonlats)}&profile=hiking-mountain&alternativeidx=0&format=geojson`;
+  const data = await fetchJson(endpoint, { headers: { referer: 'https://tatry-field.onrender.com/' } });
+  const feature = data.type === 'FeatureCollection' ? data.features?.[0] : data;
+  let coordinates = feature?.geometry?.coordinates;
+  if (!Array.isArray(coordinates)) throw new Error('BRouter returned no route geometry');
+  const endpointsApart = haversineKm(coordinates[0], coordinates.at(-1)) > 0.2;
+  if (route.mode === 'out_back' || (route.mode === 'loop' && endpointsApart)) coordinates = coordinates.concat(coordinates.slice(0, -1).reverse());
+  const checked = validateGeometry(route, coordinates);
+  return {
+    geometry: { type: 'LineString', coordinates },
+    distanceKm: Math.round(checked.distanceKm * 100) / 100,
+    source: 'Validated BRouter hiking-mountain fallback · OpenStreetMap',
+    approximate: false,
+    verified: false,
+    generatedAt: new Date().toISOString()
+  };
 }
 
 async function routeGeometry(route) {
   const key = `geometry:${route.id}`;
   const hit = getCache(key); if (hit) return hit;
-  const coords = route.routingPoints.map(([lon, lat]) => `${lon},${lat}`).join(';');
-  const endpoint = `https://routing.openstreetmap.de/routed-foot/route/v1/foot/${coords}?overview=full&geometries=geojson&steps=false`;
   try {
-    const data = await fetchJson(endpoint, { headers: { 'referer': 'https://localhost/tatry-field' } });
-    if (!data.routes?.[0]?.geometry) throw new Error('No route geometry');
-    let geometry = data.routes[0].geometry;
-    let distanceM = data.routes[0].distance || 0;
-    if (route.mode === 'out_back') {
-      const forward = geometry.coordinates;
-      geometry = { type: 'LineString', coordinates: forward.concat(forward.slice(0, -1).reverse()) };
-      distanceM *= 2;
-    }
-    return setCache(key, {
-      geometry,
-      distanceKm: Math.round(distanceM / 10) / 100,
-      source: 'OpenStreetMap + routing.openstreetmap.de (foot profile)',
-      approximate: false,
-      generatedAt: new Date().toISOString()
-    }, 24 * 60 * 60 * 1000);
+    const track = verifiedGeometry(route);
+    if (track) return setCache(key, track, 24 * 60 * 60 * 1000);
+  } catch (error) {
+    console.error(`Rejected bundled geometry for ${route.id}: ${error.message}`);
+  }
+  try {
+    return setCache(key, await brouterGeometry(route), 24 * 60 * 60 * 1000);
   } catch (error) {
     return {
       geometry: fallbackGeometry(route),
       distanceKm: route.km,
-      source: 'Curated waypoints fallback (routing service unavailable)',
+      source: 'Curated waypoints fallback (reference track and router unavailable)',
       approximate: true,
+      verified: false,
       error: error.message,
       generatedAt: new Date().toISOString()
     };
@@ -324,7 +372,7 @@ async function gpxForRoute(route) {
   const routed=await routeGeometry(route);
   const points=routed.geometry.coordinates;
   const trkpts=points.map(([lon,lat])=>`      <trkpt lat=\"${lat}\" lon=\"${lon}\"></trkpt>`).join('\n');
-  return `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx version=\"1.1\" creator=\"TATRY FIELD Phase 2\" xmlns=\"http://www.topografix.com/GPX/1/1\">\n  <metadata><name>${xmlEscape(route.name)}</name><desc>OSM-routed prototype track. Verify against official TPN trail information before use.</desc></metadata>\n  <trk><name>${xmlEscape(route.name)}</name><trkseg>\n${trkpts}\n  </trkseg></trk>\n</gpx>`;
+  return `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx version=\"1.1\" creator=\"TATRY FIELD Phase 2\" xmlns=\"http://www.topografix.com/GPX/1/1\">\n  <metadata><name>${xmlEscape(route.name)}</name><desc>Source-backed reference track checked for distance and geometry. Follow official TPN trail markings and current safety information.</desc></metadata>\n  <trk><name>${xmlEscape(route.name)}</name><trkseg>\n${trkpts}\n  </trkseg></trk>\n</gpx>`;
 }
 
 async function handleApi(req,res,url) {
@@ -369,4 +417,4 @@ const server=http.createServer(async(req,res)=>{
   } catch(error) { console.error(error); if(!res.headersSent) json(res,500,{error:error.message}); else res.end(); }
 });
 
-server.listen(PORT,()=>console.log(`TATRY FIELD Phase 2.3.3 → http://localhost:${PORT}`));
+server.listen(PORT,()=>console.log(`TATRY FIELD Phase 2.3.4 → http://localhost:${PORT}`));

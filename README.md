@@ -45,7 +45,16 @@ node server.js
 
 Trail Mode is an orientation aid, **not turn-by-turn safety certification**. GPS accuracy can degrade in valleys, forest, weather or near steep terrain. Always follow official marked trails and signage, and check current TPN/TOPR information before departure.
 
-The GPX geometry in this prototype is generated from curated waypoints through OSM foot routing. Before any public release, replace automatically routed tracks with manually verified route geometry.
+Route pages, Trail Mode and downloadable GPX now use the same bundled reference tracks. Every track is checked at build time and again by the server for plausible distance, Tatra-region bounds and suspicious gaps. The tracks remain orientation aids rather than official TPN navigation: always follow marked trails and current TPN/TOPR information.
+
+To rebuild the bundled tracks from the route references and run the geometry audit:
+
+```bash
+npm run build:tracks
+npm test
+```
+
+If a bundled track is missing, the server can request BRouter's `hiking-mountain` profile, but accepts the result only if it passes the same geometry checks. A coarse curated-waypoint line is the final explicit fallback.
 
 
 ## 2.3.1 deployment hotfix
@@ -68,3 +77,10 @@ Leaflet is now installed from npm and served locally by the Node service instead
 - **TRADE-OFFS**: the less glamorous price of each route — crowds, asphalt, long approach, exposure, long return, etc.
 - **DAY BY ACTS**: a four-part mental model of how the day unfolds
 - narrative remains editorial orientation, not turn-by-turn guidance; official TPN signage and current conditions remain authoritative
+
+## Phase 2.3.4 geometry integrity
+
+- replaced unchecked live OSRM responses with bundled source-backed reference tracks for all 15 routes
+- added distance, geographic-bounds and maximum-gap validation before a line can be published
+- aligned route definitions, start/finish labels and GPX downloads with the displayed geometry
+- kept a validated BRouter `hiking-mountain` fallback for future or missing tracks

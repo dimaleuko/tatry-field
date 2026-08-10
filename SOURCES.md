@@ -16,11 +16,13 @@ The product treats these as the authoritative check for closures / current mount
 
 ## Route geometry / map data
 
-- OpenStreetMap data
-- FOSSGIS `routing.openstreetmap.de` foot profile
-- OSRM route API docs: `https://project-osrm.org/docs/`
+- Route references and GPX exports: `https://mapa-turystyczna.pl/`
+- Underlying map/trail data: OpenStreetMap contributors
+- Validated emergency router: BRouter `hiking-mountain` profile — `https://brouter.de/`
 
-`server.js` uses full GeoJSON route overview and caches a route for 24h. Public FOSSGIS usage policy asks for attribution, a valid user agent, max 1 request/sec and no heavy use. This prototype loads geometry only on demand and caches it.
+`data/verified-tracks.json.gz` is generated ahead of deployment from the route references listed by `scripts/build-verified-tracks.js`. The build rejects disconnected segments; runtime validation rejects tracks that leave the Tatra bounding region, contain large jumps or differ implausibly from the editorial distance. Route maps, Trail Mode, elevation sampling and GPX downloads all consume this one geometry.
+
+The reference tracks are not official TPN GPX files. Official trail markings, closures and TPN/TOPR communications remain authoritative.
 
 ## Nearby POIs
 

@@ -66,7 +66,7 @@
     "startLon": 20.1024,
     "summitLat": 49.2014,
     "summitLon": 20.07,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "hike",
     "objective": {
       "name": "Morskie Oko",
@@ -166,7 +166,7 @@
       "no chains"
     ],
     "mapUrl": "https://tpn.gov.pl/trasy-turystyczne",
-    "mode": "point_to_point",
+    "mode": "loop",
     "routingPoints": [
       [
         20.1024,
@@ -208,7 +208,7 @@
     "startLon": 20.1024,
     "summitLat": 49.2077,
     "summitLon": 20.0476,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "height",
     "objective": {
       "name": "Świstówka Roztocka",
@@ -340,7 +340,7 @@
     "startLon": 19.9815,
     "summitLat": 49.2317,
     "summitLon": 20.0146,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "hike",
     "objective": {
       "name": "Czarny Staw Gąsienicowy",
@@ -467,7 +467,7 @@
     "startLon": 19.9815,
     "summitLat": 49.2317,
     "summitLon": 19.9818,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "height",
     "objective": {
       "name": "Kasprowy Wierch",
@@ -533,9 +533,9 @@
     "short": "Классика с цепями в финале. Короткий технический участок + очень много людей.",
     "start": "Kuźnice",
     "startKey": "kuznice",
-    "km": 12.2,
-    "hours": 6.2,
-    "ascent": 920,
+    "km": 11.8,
+    "hours": 6,
+    "ascent": 912,
     "maxAlt": 1894,
     "diff": 4,
     "chains": true,
@@ -565,7 +565,7 @@
       "iconic",
       "exposed"
     ],
-    "mapUrl": "https://mapa-turystyczna.pl/trail/niebieski-szlak-turystyczny-kuznice-giewont-b5",
+    "mapUrl": "https://mapa-turystyczna.pl/route/3lycf",
     "mode": "out_back",
     "routingPoints": [
       [
@@ -601,9 +601,9 @@
     "theme": "chains",
     "startLat": 49.2704,
     "startLon": 19.9815,
-    "summitLat": 49.2504,
-    "summitLon": 19.9341,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "summitLat": 49.250954,
+    "summitLon": 19.934102,
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "height",
     "objective": {
       "name": "Giewont",
@@ -669,9 +669,9 @@
     "short": "Длинный открытый гребень. Не технически страшно, но ветер/туман меняют всё.",
     "start": "Kiry",
     "startKey": "kiry",
-    "km": 17.5,
-    "hours": 8.5,
-    "ascent": 1500,
+    "km": 15.8,
+    "hours": 8.7,
+    "ascent": 1467,
     "maxAlt": 2122,
     "diff": 4,
     "chains": false,
@@ -702,7 +702,7 @@
       "2000m",
       "full day"
     ],
-    "mapUrl": "https://mapa-turystyczna.pl/trail/zielony-szlak-turystyczny-kiry-ciemniak-sg",
+    "mapUrl": "https://mapa-turystyczna.pl/route/3u87u",
     "mode": "point_to_point",
     "routingPoints": [
       [
@@ -751,7 +751,7 @@
     "startLon": 19.8689,
     "summitLat": 49.2358,
     "summitLon": 19.9,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "height",
     "objective": {
       "name": "Krzesanica / Czerwone Wierchy",
@@ -882,7 +882,7 @@
     "startLon": 19.9362,
     "summitLat": 49.2597,
     "summitLon": 19.9445,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "height",
     "objective": {
       "name": "Sarnia Skała",
@@ -1013,7 +1013,7 @@
     "startLon": 19.8689,
     "summitLat": 49.2225,
     "summitLon": 19.8644,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "hike",
     "objective": {
       "name": "Smreczyński Staw",
@@ -1081,7 +1081,7 @@
     "id": "chocholowska",
     "name": "Dolina Chochołowska до schronisko",
     "short": "Длинная прогулка, которую можно превратить в recovery day.",
-    "start": "Siwa Polana",
+    "start": "Parking Dolina Chochołowska / Witów",
     "startKey": "siwa",
     "km": 15.3,
     "hours": 4.5,
@@ -1118,8 +1118,8 @@
     "mode": "out_back",
     "routingPoints": [
       [
-        19.791,
-        49.2785
+        19.841692,
+        49.282661
       ],
       [
         19.7882,
@@ -1127,26 +1127,26 @@
       ]
     ],
     "end": "Schronisko na Polanie Chochołowskiej",
-    "transport": "До Siwa Polana ходят маршрутки из Zakopane; западная база в Witów ещё удобнее.",
-    "parking": "Парковки у Siwa Polana бывают загружены в выходные и сезон крокусов.",
+    "transport": "К парковкам у входа в Dolina Chochołowska ходят маршрутки из Zakopane; западная база в Witów ещё удобнее.",
+    "parking": "Парковки у входа в долину бывают загружены в выходные и сезон крокусов.",
     "officialAliases": [
       "Dolina Chochołowska",
       "Siwa Polana",
       "Polana Chochołowska"
     ],
     "theme": "valley",
-    "startLat": 49.2785,
-    "startLon": 19.791,
+    "startLat": 49.282661,
+    "startLon": 19.841692,
     "summitLat": 49.2385,
     "summitLon": 19.7882,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "hike",
     "objective": {
       "name": "Polana Chochołowska",
       "altitude": 1148,
       "type": "долина / schronisko"
     },
-    "finish": "Siwa Polana",
+    "finish": "Parking Dolina Chochołowska / Witów",
     "returnToZakopane": {
       "score": 4,
       "label": "Легко",
@@ -1161,8 +1161,8 @@
       "city": "Города нет; первые километры скорее напоминают широкую парковую дорогу, чем узкую горную тропу.",
       "terrain": "Широкая долинная дорога → лес/поляны → очень плавный набор → Polana Chochołowska и schronisko.",
       "views": "Не «вау-обрыв», а спокойное раскрытие западных Татр. Самая характерная сцена — широкая Polana Chochołowska с горами в конце долины.",
-      "whyStart": "Siwa Polana — естественный транспортный и парковочный вход в долину.",
-      "whyFinish": "Возврат туда же максимально прост: маршрут линейный, а Siwa Polana — место, где снова появляются транспорт и сервисы.",
+      "whyStart": "Парковочный узел у въезда в долину даёт понятный доступ к Siwa Polana и не обрывает линию маршрута раньше фактического старта.",
+      "whyFinish": "Возврат к тому же парковочному узлу максимально прост: маршрут линейный, а у дороги снова появляются транспорт и сервисы.",
       "flow": [
         "Длинный разогрев",
         "Лес и поляны",
@@ -1237,7 +1237,7 @@
       "beginner"
     ],
     "mapUrl": "https://mapa-turystyczna.pl/route/4wwk",
-    "mode": "out_back",
+    "mode": "point_to_point",
     "routingPoints": [
       [
         20.113,
@@ -1248,36 +1248,41 @@
         49.2701
       ],
       [
-        20.0882,
-        49.2595
+        20.076541,
+        49.259054
+      ],
+      [
+        20.102976,
+        49.254544
       ]
     ],
-    "end": "Gęsia Szyja",
-    "transport": "Wierch Poroniec удобен автобусом/маршруткой в сторону Łysa Polana/Bukowina.",
-    "parking": "Небольшие парковки на восточных стартах быстро заполняются.",
+    "end": "Palenica Białczańska",
+    "transport": "Стартуй у Wierch Poroniec и заканчивай в Palenica Białczańska: обе точки лежат на автобусном коридоре из Zakopane.",
+    "parking": "Это point-to-point маршрут; общественный транспорт удобнее машины, которую пришлось бы забирать у старта.",
     "officialAliases": [
       "Gęsia Szyja",
       "Rusinowa Polana",
-      "Wierch Poroniec"
+      "Wierch Poroniec",
+      "Palenica Białczańska"
     ],
     "theme": "panorama",
     "startLat": 49.2845,
     "startLon": 20.113,
-    "summitLat": 49.2595,
-    "summitLon": 20.0882,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "summitLat": 49.259054,
+    "summitLon": 20.076541,
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "height",
     "objective": {
       "name": "Gęsia Szyja",
       "altitude": 1489,
       "type": "вершина / viewpoint"
     },
-    "finish": "Wierch Poroniec",
+    "finish": "Palenica Białczańska",
     "returnToZakopane": {
       "score": 4,
       "label": "Легко",
-      "typicalTime": "25–40 мин",
-      "note": "Wierch Poroniec лежит на коридоре Zakopane–Palenica; есть проходящие рейсы, но их меньше, чем на главных конечных остановках.",
+      "typicalTime": "35–50 мин",
+      "note": "Palenica Białczańska — крупная конечная туристических линий до Zakopane; в высокий сезон время зависит от очереди и трафика.",
       "sourceUrl": "https://transit.podhale.pl/index.php?page=route&route=156"
     },
     "stayZone": "cyrhla-east",
@@ -1288,12 +1293,12 @@
       "terrain": "Лёгкий лесной подход → открытая поляна → деревянные ступени/крутой подъём → каменистая вершина.",
       "views": "Rusinowa Polana уже даёт огромную панораму Высоких Татр; Gęsia Szyja поднимает точку обзора ещё выше и делает маршрут более спортивным.",
       "whyStart": "Wierch Poroniec даёт самый короткий и логичный доступ к Rusinowa Polana без лишнего набора из нижних долин.",
-      "whyFinish": "Возвращение к тому же trailhead удобнее всего для автобуса/машины и сохраняет маршрут коротким.",
+      "whyFinish": "Спуск через Rusinowa Polana к Palenica убирает повтор длинного подхода и выводит к крупной остановке обратных рейсов.",
       "flow": [
         "Лёгкий подход",
         "Rusinowa Polana — первая панорама",
         "Крутые ступени",
-        "Gęsia Szyja → обратно"
+        "Gęsia Szyja → Palenica"
       ],
       "terrainMix": [
         [
@@ -1335,9 +1340,9 @@
     "short": "Самая быстрая “вершина” в списке. Отличный sunset-виб, но учитывай правила TPN по темноте.",
     "start": "Kuźnice",
     "startKey": "kuznice",
-    "km": 4.3,
-    "hours": 1.9,
-    "ascent": 500,
+    "km": 2.5,
+    "hours": 1,
+    "ascent": 208,
     "maxAlt": 1206,
     "diff": 2,
     "chains": false,
@@ -1366,43 +1371,47 @@
       "summit",
       "after work"
     ],
-    "mapUrl": "https://mapa-turystyczna.pl/route/3r258",
-    "mode": "out_back",
+    "mapUrl": "https://mapa-turystyczna.pl/route/31sey",
+    "mode": "point_to_point",
     "routingPoints": [
       [
-        19.9815,
-        49.2704
+        19.980521,
+        49.269497
       ],
       [
-        20.005,
-        49.2772
+        19.989609,
+        49.276484
+      ],
+      [
+        19.981764,
+        49.278723
       ]
     ],
-    "end": "Nosal",
-    "transport": "Kuźnice легко доступны городским транспортом; маршрут короткий и подходит без машины.",
-    "parking": "Парковка ниже Kuźnice; непосредственно к старту на машине не подъехать.",
+    "end": "Szlak na Nosal / Kuźnicka Polana",
+    "transport": "Kuźnice легко доступны городским транспортом, а финиш у нижнего входа на Nosal находится ближе к Bystre и городу.",
+    "parking": "Point-to-point схема удобнее без машины: к старту в Kuźnice — автобусом, от финиша — пешком или городским транспортом.",
     "officialAliases": [
       "Nosal",
       "Kuźnice"
     ],
     "theme": "quick",
-    "startLat": 49.2704,
-    "startLon": 19.9815,
-    "summitLat": 49.2772,
-    "summitLon": 20.005,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "startLat": 49.269497,
+    "startLon": 19.980521,
+    "summitLat": 49.276484,
+    "summitLon": 19.989609,
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "height",
     "objective": {
       "name": "Nosal",
       "altitude": 1206,
       "type": "вершина / viewpoint"
     },
-    "finish": "Kuźnice",
+    "finish": "Szlak na Nosal / Kuźnicka Polana",
     "returnToZakopane": {
       "score": 5,
       "label": "Очень легко",
       "typicalTime": "10–20 мин",
-      "note": "Kuźnice связаны с центром Zakopane городской линией №10 и другими маршрутами. После длинного дня это один из самых предсказуемых финишей.",
+      "note": "Финиш у нижнего входа на Nosal расположен у городской застройки Bystre: до центра можно дойти или воспользоваться ближайшим транспортом.",
       "sourceUrl": "https://www.zakopane.pl/komunikacjamiejska/rozklady-jazdy"
     },
     "stayZone": "bystre-kuznice",
@@ -1413,12 +1422,12 @@
       "terrain": "Короткий лесной набор → каменистые/корневые участки → небольшой открытый summit area.",
       "views": "Сверху хорошо читается Zakopane, Giewont и центральная часть Татр. Это большой visual return за очень небольшой временной бюджет.",
       "whyStart": "Kuźnice удобны транспортно и позволяют встроить Nosal даже в короткое свободное окно.",
-      "whyFinish": "Возврат в Kuźnice сохраняет максимально простую логику и удобный транспорт обратно.",
+      "whyFinish": "Сквозной проход через вершину заканчивается у нижнего входа на Nosal и не заставляет второй раз набирать тот же перевал.",
       "flow": [
         "Сразу вверх",
         "Лес и камень",
         "Nosal — короткий summit payoff",
-        "Быстрый возврат"
+        "Спуск к Bystre"
       ],
       "terrainMix": [
         [
@@ -1487,24 +1496,20 @@
       "quick",
       "summit"
     ],
-    "mapUrl": "https://mapa-turystyczna.pl/route/8e1",
+    "mapUrl": "https://mapa-turystyczna.pl/route/31b5e",
     "mode": "loop",
     "routingPoints": [
       [
-        20.0435,
-        49.2925
+        20.011681,
+        49.287555
       ],
       [
-        20.0398,
-        49.2834
+        20.016299,
+        49.271693
       ],
       [
-        20.031,
-        49.2858
-      ],
-      [
-        20.0435,
-        49.2925
+        20.011681,
+        49.287555
       ]
     ],
     "end": "Toporowa Cyrhla",
@@ -1516,11 +1521,11 @@
       "Polana Kopieniec"
     ],
     "theme": "quiet",
-    "startLat": 49.2925,
-    "startLon": 20.0435,
-    "summitLat": 49.2858,
-    "summitLon": 20.031,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "startLat": 49.287555,
+    "startLon": 20.011681,
+    "summitLat": 49.271693,
+    "summitLon": 20.016299,
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "height",
     "objective": {
       "name": "Wielki Kopieniec",
@@ -1620,11 +1625,11 @@
       "2000m"
     ],
     "mapUrl": "https://mapa-turystyczna.pl/route/w94x",
-    "mode": "out_back",
+    "mode": "loop",
     "routingPoints": [
       [
-        19.791,
-        49.2785
+        19.831387,
+        49.276658
       ],
       [
         19.7882,
@@ -1654,11 +1659,11 @@
       "Siwa Polana"
     ],
     "theme": "ridge",
-    "startLat": 49.2785,
-    "startLon": 19.791,
+    "startLat": 49.276658,
+    "startLon": 19.831387,
     "summitLat": 49.207,
     "summitLon": 19.7592,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "height",
     "objective": {
       "name": "Wołowiec",
@@ -1800,7 +1805,7 @@
     "startLon": 19.9815,
     "summitLat": 49.2255,
     "summitLon": 20.0058,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "height",
     "objective": {
       "name": "Kościelec",
@@ -1943,7 +1948,7 @@
     "startLon": 20.1024,
     "summitLat": 49.1798,
     "summitLon": 20.0881,
-    "metricNote": "Время/набор — кураторская оценка; GPX-линия строится по OSM и может дать немного другие цифры.",
+    "metricNote": "Время/набор — кураторская оценка; длина эталонного трека может немного отличаться от округлённой метрики.",
     "routeKind": "height",
     "objective": {
       "name": "Rysy",
