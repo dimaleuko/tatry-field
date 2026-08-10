@@ -22,29 +22,7 @@ let fieldMapLeaflet=null,fieldRouteGroup=null,fieldMapBounds=null,fieldStopMarke
 let trailPois=[];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const savedStore=window.TatrySavedRoutes;
-const FIELD_MAPS={
-  giewont:{
-    issue:'FIELD MAP 01 / GIEWONT BETA',
-    title:'Топокарта, которая объясняет маршрут.',
-    intro:'Рельеф и соседние тропы остаются на месте. Поверх них — восемь точек, где меняется нагрузка, нужно принять решение или особенно внимательно свериться с маркировкой.',
-    stops:[
-      {ratio:0,kicker:'00 / START',name:'Kuźnice',tag:'СТАРТ',meta:'≈ 1025 м · 0.0 км',level:'info',decision:'Держись синей маркировки в сторону Kalatówki и Hala Kondratowa.',body:'Каменная дорога начинается почти сразу. Это последний удобный момент проверить воду, офлайн-карту и прогноз до ухода в лес.'},
-      {ratio:.14,kicker:'01 / JUNCTION',name:'Kalatówki',tag:'СЛЕДИ ЗА СИНИМ',meta:'≈ 1200 м · 1.6 км',level:'nav',decision:'У развилок и построек не иди за самым большим потоком автоматически: сверяй синюю маркировку на Hala Kondratowa.',body:'На широкой дороге легко расслабиться, но здесь появляются боковые варианты. После дождя камни и короткий скальный порог могут быть скользкими.'},
-      {ratio:.291,kicker:'02 / SHELTER',name:'Hala Kondratowa',tag:'РЕШЕНИЕ + ПАУЗА',meta:'1335 м · 3.4 км',level:'nav',decision:'Зелёный уходит к Przełęcz pod Kopą Kondracką. На Giewont продолжай по синему к Kondracka Przełęcz.',body:'Приют — хорошая контрольная точка перед более серьёзным набором. Проверь погоду и силы: дальше быстро становится круче.',photoIndex:2},
-      {ratio:.335,kicker:'03 / EFFORT',name:'Piekiełko',tag:'ЗДЕСЬ НАЧИНАЕТСЯ КРУТО',meta:'≈ 1500 м · 3.9 км',level:'effort',decision:'Маршрут по-прежнему синий; в тумане не срезай широкие петли подъёма.',body:'После халы начинается устойчивый крутой набор по открытому склону. Темп падает, ветер ощущается сильнее, а назад до укрытия уже не две минуты.',photoIndex:0},
-      {ratio:.443,kicker:'04 / PASS',name:'Kondracka Przełęcz',tag:'КЛЮЧЕВАЯ РАЗВИЛКА',meta:'1725 м · 5.1 км',level:'nav',decision:'Жёлтый ведёт к Kopa Kondracka. На Giewont поверни вправо и оставайся на синем.',body:'Самая важная навигационная точка подъёма: в облаке нужное направление не всегда читается по рельефу. Здесь особенно полезна офлайн-карта.',photoIndex:3},
-      {ratio:.469,kicker:'05 / PASS',name:'Wyżnia Kondracka Przełęcz',tag:'ПОСЛЕДНЕЕ РЕШЕНИЕ',meta:'1765 м · 5.4 км',level:'nav',decision:'Красный уходит в Dolina Strążyska. К вершине продолжай по синему; выше начинается односторонняя петля.',body:'До вершины недалеко, но характер маршрута резко меняется. Если погода портится, это разумная точка не входить в скальный финал.'},
-      {ratio:.482,kicker:'06 / TECHNICAL',name:'Цепи и скальные ступени',tag:'РУКИ НА СКАЛУ',meta:'≈ 1840 м · 5.6 км',level:'danger',decision:'Следуй одностороннему потоку и разметке. Не разворачивайся против движения на цепях.',body:'Полированный известняк, цепи и скобы требуют свободных рук и спокойного темпа. В грозу этот участок и металлические элементы особенно опасны.',photoIndex:4},
-      {ratio:.497,kicker:'07 / SUMMIT',name:'Giewont',tag:'1894 М / КРЕСТ',meta:'1894 м · 5.75 км',level:'summit',decision:'Спуск начинается по другой стороне односторонней петли, затем возвращается к Wyżnia Kondracka Przełęcz.',body:'На вершине мало пространства и много людей. Не задерживай поток ради фото и не оставайся у металлического креста при риске грозы.',photoIndex:5}
-    ],
-    terrain:[
-      {from:0,to:.291,kind:'approach',label:'подход'},
-      {from:.291,to:.443,kind:'effort',label:'крутой набор'},
-      {from:.443,to:.469,kind:'navigation',label:'развилки'},
-      {from:.469,to:.50,kind:'technical',label:'скалы / цепи'}
-    ]
-  }
-};
+const FIELD_MAPS=window.TATRY_FIELD_MAPS||{};
 
 function poiLink(p){return `https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lon}#map=17/${p.lat}/${p.lon}`}
 function haversineKm(a,b){const R=6371,rad=Math.PI/180,dLat=(b.lat-a.lat)*rad,dLon=(b.lon-a.lon)*rad,lat1=a.lat*rad,lat2=b.lat*rad;const h=Math.sin(dLat/2)**2+Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
@@ -65,13 +43,17 @@ function renderRouteHighlights(photos=[]){
   if(!photos.length)return '';
   return `<section class="route-section route-highlights-section"><div class="route-highlights-head"><div class="eyebrow">ROUTE HIGHLIGHTS / КАК ЭТО ВЫГЛЯДИТ</div><h2>Две сцены, ради которых идти.</h2><p>Не абстрактные Татры, а узнаваемые точки именно этого маршрута.</p></div><div class="route-highlights-grid">${photos.slice(0,2).map((photo,i)=>`<figure class="route-highlight"><div class="route-highlight-image"><img loading="eager" decoding="async" referrerpolicy="no-referrer" src="${esc(photo.src)}" alt="${esc(photo.alt)}"><span>${String(i+1).padStart(2,'0')}</span></div><figcaption><h3>${esc(photo.title)}</h3><p>${esc(photo.caption)}</p><div class="photo-credit">Фото: <a target="_blank" rel="noopener noreferrer" href="${esc(photo.sourceUrl)}">${esc(photo.author)} ↗</a> · <a target="_blank" rel="noopener noreferrer" href="${esc(photo.licenseUrl)}">${esc(photo.license)}</a></div></figcaption></figure>`).join('')}</div><div class="source-note">Фотографии показывают характерные точки маршрута, но сезон, погода и состояние тропы могут сильно отличаться. Источник, автор и лицензия указаны под каждым кадром.</div></section>`;
 }
+function fieldSourceLinks(config){
+  const sources=[...(config.sources||[]),['трек маршрута',route.mapUrl]].filter((source,index,all)=>source?.[1]&&all.findIndex(item=>item?.[1]===source[1])===index);
+  return sources.map(([label,url])=>`<a target="_blank" rel="noopener noreferrer" href="${esc(url)}">${esc(label)}</a>`).join(' · ');
+}
 function renderFieldMapShell(){
   const config=FIELD_MAPS[route.id];
   if(!config)return '';
   return `<section class="field-map" id="fieldMap" role="tabpanel" hidden aria-labelledby="fieldMapTitle">
     <header class="field-map-header"><div><span>${esc(config.issue)}</span><h3 id="fieldMapTitle">${esc(config.title)}</h3></div><p>${esc(config.intro)}</p></header>
-    <div class="field-map-layout"><div class="field-terrain-map" id="fieldTerrainMap" aria-label="Топографическая карта маршрута на Giewont с интерактивными этапами"></div><aside class="field-map-readout" id="fieldMapReadout" aria-live="polite"></aside></div>
-    <footer class="field-map-footer"><div class="field-map-key"><span class="approach">подход</span><span class="effort">крутой набор</span><span class="navigation">точки решения</span><span class="technical">скалы / цепи</span></div><p>Цветная линия показывает подъём; тонкая линия — полный трек туда и обратно. Точки привязаны к треку приблизительно и не заменяют маркировку, офлайн-карту или актуальные сообщения TPN/TOPR. Проверено по описаниям <a target="_blank" rel="noopener noreferrer" href="https://tpn.gov.pl/szlaki-turystyczne/kuznice-polana-kalatowki-polana-kondratowa">TPN</a> и <a target="_blank" rel="noopener noreferrer" href="https://www.zakopane.pl/strefa-turystyczna/turystyka/wycieczki-gorskie-latem/szlaki-lato/hala-kondratowa-giewont-dolina-strazyska">Zakopane.pl</a>.</p></footer>
+    <div class="field-map-layout"><div class="field-terrain-map" id="fieldTerrainMap" aria-label="Топографическая карта маршрута ${esc(route.name)} с интерактивными этапами"></div><aside class="field-map-readout" id="fieldMapReadout" aria-live="polite"></aside></div>
+    <footer class="field-map-footer"><div class="field-map-key"><span class="approach">подход</span><span class="effort">набор / нагрузка</span><span class="navigation">точки решения</span><span class="technical">сложное покрытие</span></div><p>Цветом выделены ключевые участки; тонкая линия сохраняет полный трек. Точки привязаны приблизительно и не заменяют маркировку, офлайн-карту или актуальные сообщения TPN/TOPR. Источники: ${fieldSourceLinks(config)}.</p></footer>
     <div class="field-photo-overlay" id="fieldPhotoOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="fieldPhotoTitle"><button type="button" class="field-photo-close" data-field-photo-close aria-label="Закрыть фотографию">×</button><div class="field-photo-dialog"><img id="fieldPhotoImage" alt=""><div><span>ROUTE PHOTO / МЕСТО НА ТРЕКЕ</span><h4 id="fieldPhotoTitle"></h4><p id="fieldPhotoCaption"></p><div id="fieldPhotoCredit" class="photo-credit"></div></div></div></div>
   </section>`;
 }
@@ -112,7 +94,7 @@ function fieldMapReadout(index,{focusMap=true}={}){
   if(!stop||!readout)return;
   readout.dataset.active=String(index);
   const photo=Number.isInteger(stop.photoIndex)?route.photos?.[stop.photoIndex]:null;
-  readout.innerHTML=`<div class="field-readout-head"><span class="field-level ${esc(stop.level)}">${esc(stop.tag)}</span><small>${esc(stop.kicker)}</small><h4>${esc(stop.name)}</h4><b>${esc(stop.meta)}</b></div><div class="field-decision"><small>${stop.level==='danger'?'ТЕХНИЧЕСКИЙ УЧАСТОК':'СМОТРИ НА МАРКИРОВКУ'}</small><strong>${esc(stop.decision)}</strong></div><p class="field-readout-body">${esc(stop.body)}</p>${fieldPhotoMarkup(photo,stop.photoIndex)}<div class="field-map-stepper"><button type="button" data-field-step="-1" aria-label="Предыдущий этап">←</button><b>${String(index+1).padStart(2,'0')} / ${String(config.stops.length).padStart(2,'0')}</b><button type="button" data-field-step="1" aria-label="Следующий этап">→</button></div>`;
+  readout.innerHTML=`<div class="field-readout-head"><span class="field-level ${esc(stop.level)}">${esc(stop.tag)}</span><small>${esc(stop.kicker)}</small><h4>${esc(stop.name)}</h4><b>${esc(stop.meta)}</b></div><div class="field-decision"><small>${esc(stop.prompt||(stop.level==='danger'?'ТЕХНИЧЕСКИЙ УЧАСТОК':'СМОТРИ НА МАРКИРОВКУ'))}</small><strong>${esc(stop.decision)}</strong></div><p class="field-readout-body">${esc(stop.body)}</p>${fieldPhotoMarkup(photo,stop.photoIndex)}<div class="field-map-stepper"><button type="button" data-field-step="-1" aria-label="Предыдущий этап">←</button><b>${String(index+1).padStart(2,'0')} / ${String(config.stops.length).padStart(2,'0')}</b><button type="button" data-field-step="1" aria-label="Следующий этап">→</button></div>`;
   fieldStopMarkers.forEach((marker,markerIndex)=>marker.getElement()?.querySelector('[data-field-marker]')?.classList.toggle('active',markerIndex===index));
   const marker=fieldStopMarkers[index];
   if(focusMap&&marker&&fieldMapLeaflet&&!document.querySelector('#fieldMap')?.hidden)fieldMapLeaflet.panTo(marker.getLatLng(),{animate:true,duration:.35});

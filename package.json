@@ -1,12 +1,12 @@
 {
   "name": "tatry-field-phase2",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "private": true,
   "description": "Safety-first editorial hiking guide MVP for the Polish Tatras — route stories, live trail mode, stay, altitude and return logistics",
   "scripts": {
     "start": "node server.js",
     "build:tracks": "node scripts/build-verified-tracks.js",
-    "test": "node scripts/check-tracks.js"
+    "test": "node scripts/check-tracks.js && node scripts/check-field-maps.js"
   },
   "engines": {
     "node": ">=20"

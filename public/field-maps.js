@@ -1,0 +1,224 @@
+window.TATRY_FIELD_MAPS={
+  'morskie-oko':{
+    issue:'FIELD MAP 01 / MORSKIE OKO',title:'Не просто дорога к озеру.',
+    intro:'Где не пропустить нужную ветку, когда заканчивается лёгкий подход и чем круг вокруг озера отличается от асфальта.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Palenica Białczańska',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'ЛОГИСТИКА',decision:'Сверь красную маркировку на Morskie Oko и не рассчитывай на свободный паркинг без проверки заранее.',body:'Большая часть людей идёт в ту же сторону, но именно здесь полезно скачать офлайн-карту и проверить актуальные ограничения TPN.'},
+      {ratio:.145,kicker:'01 / JUNCTION',name:'Wodogrzmoty Mickiewicza',tag:'ОСТАВАЙСЯ НА КРАСНОМ',meta:'≈ 2.8 км',level:'nav',prompt:'КЛЮЧЕВАЯ РАЗВИЛКА',decision:'На Morskie Oko продолжай по широкой дороге с красной маркировкой. Зелёный уходит в Dolina Roztoki.',body:'Самая заметная развилка дня. Поворот в Dolina Roztoki нужен для маршрута к Пяти Ставам, но не для классического подхода к озеру.'},
+      {ratio:.30,kicker:'02 / APPROACH',name:'Włosienica',tag:'ОТКРЫТЫЙ ФИНАЛ',meta:'≈ 5.7 км',level:'effort',prompt:'ЧТО МЕНЯЕТСЯ',decision:'Продолжай по красной маркировке; впереди последний устойчивый подъём к озеру.',body:'Лес расходится, виды становятся шире, а уклон заметнее. Это хороший момент оценить силы до дополнительного круга вокруг озера.'},
+      {ratio:.40,kicker:'03 / LAKE',name:'Schronisko Morskie Oko',tag:'ОЗЕРО + ПРИЮТ',meta:'≈ 7.6 км',level:'info',prompt:'КОНТРОЛЬНАЯ ТОЧКА',decision:'Для короткого варианта можно развернуться. Для полного маршрута продолжай по красной тропе вокруг озера.',body:'Здесь заканчивается дорожный подход и начинается более неровная прибрежная тропа.',photoIndex:1},
+      {ratio:.49,kicker:'04 / SHORE',name:'Дальний берег',tag:'КАМНИ У ВОДЫ',meta:'≈ 9.3 км',level:'danger',prompt:'ПОКРЫТИЕ',decision:'Держись размеченной прибрежной тропы и не срезай по мокрым плитам у самой воды.',body:'Круг вокруг озера заметно грубее асфальта: камни, корни и мокрые участки меняют темп, особенно после дождя.'},
+      {ratio:.592,kicker:'05 / LOOP',name:'Morskie Oko',tag:'КРУГ ЗАМКНУТ',meta:'≈ 11.3 км',level:'summit',prompt:'ПЛАН ВОЗВРАЩЕНИЯ',decision:'Вернись к Palenica по той же красной дороге; цветная часть карты здесь заканчивается.',body:'На обратный путь остаётся длинный, пусть и технически простой, спуск. Оставь время и силы на дорогу до автобуса.',photoIndex:0}
+    ],
+    terrain:[{from:0,to:.30,kind:'approach'},{from:.30,to:.40,kind:'effort'},{from:.40,to:.592,kind:'navigation'}],
+    sources:[['TPN','https://tpn.gov.pl/szlaki-turystyczne/palenica-bialczanska-morskie-oko-i-spacer-wokol-morskiego-oka']]
+  },
+  'five-lakes':{
+    issue:'FIELD MAP 02 / FIVE LAKES',title:'Петля с двумя разными днями внутри.',
+    intro:'Долинный подъём, мокрые плиты у Siklawa, высокий траверс Świstówka и понятный возврат от Morskie Oko.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Palenica Białczańska',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'ПЛАН ДНЯ',decision:'Начинай по красной дороге на Morskie Oko, но готовься покинуть её у Wodogrzmoty.',body:'Это длинная петля: ранний старт важнее скорости на первых километрах.'},
+      {ratio:.15,kicker:'01 / JUNCTION',name:'Wodogrzmoty Mickiewicza',tag:'ПОВОРОТ В DOLINA ROZTOKI',meta:'≈ 3.0 км',level:'nav',prompt:'КЛЮЧЕВАЯ РАЗВИЛКА',decision:'Сверни с красной дороги на зелёную маркировку в Dolina Roztoki.',body:'Если продолжить по асфальту, попадёшь к Morskie Oko и пропустишь основную часть петли.'},
+      {ratio:.30,kicker:'02 / VALLEY',name:'Dolina Roztoki',tag:'ДЛИННЫЙ НАБОР',meta:'≈ 6.0 км',level:'effort',prompt:'ТЕМП',decision:'Оставайся на зелёной маркировке и не расходуй силы до финального подъёма к водопаду.',body:'Лесной участок кажется спокойным, но набирает высоту почти без паузы.'},
+      {ratio:.39,kicker:'03 / WATERFALL',name:'Siklawa',tag:'МОКРЫЕ ПЛИТЫ',meta:'≈ 7.8 км',level:'danger',prompt:'СКОЛЬЗКИЙ УЧАСТОК',decision:'Следуй разметке по каменным ступеням; не приближайся к краю водопада ради фото.',body:'После дождя и при остаточном снеге плиты могут быть скользкими. Здесь маршрут впервые требует внимательной работы ног.'},
+      {ratio:.45,kicker:'04 / LAKES',name:'Wielki Staw',tag:'ПЯТЬ СТАВОВ',meta:'≈ 9.0 км',level:'info',prompt:'ФОТОТОЧКА',decision:'На развилках у долины держи направление на Świstówka и Morskie Oko.',body:'Открывается широкая высокогорная долина. При ухудшении погоды оцени, входить ли в высокий траверс.',photoIndex:1},
+      {ratio:.50,kicker:'05 / TRAVERSE',name:'Świstówka Roztocka',tag:'ВЫСОКИЙ ТРАВЕРС',meta:'≈ 10.0 км',level:'danger',prompt:'ПОГОДА + СЕЗОН',decision:'Проверь, что тропа открыта и видимость достаточная; не уходи на боковые следы в траве.',body:'Открытый склон даёт сильный ветер и мало укрытий. Снег может держаться здесь дольше, чем в долине.',photoIndex:0},
+      {ratio:.612,kicker:'06 / LAKE',name:'Morskie Oko',tag:'ВЫХОД К ОЗЕРУ',meta:'≈ 12.2 км',level:'nav',prompt:'СМЕНА ЛОГИКИ',decision:'У озера выйди на красную дорогу и возвращайся по ней к Palenica.',body:'Сложная часть позади, но до финиша ещё длинный дорожный спуск.'},
+      {ratio:1,kicker:'07 / FINISH',name:'Palenica Białczańska',tag:'ФИНИШ',meta:'≈ 20.0 км',level:'summit',prompt:'ТРАНСПОРТ',decision:'Сверь остановку и последний рейс до Zakopane.',body:'Петля замыкается у того же trailhead; закладывай запас на очереди и транспорт.'}
+    ],
+    terrain:[{from:0,to:.15,kind:'approach'},{from:.15,to:.39,kind:'effort'},{from:.39,to:.50,kind:'technical'},{from:.50,to:.612,kind:'navigation'},{from:.612,to:1,kind:'approach'}],
+    sources:[['TPN','https://tpn.gov.pl/szlaki-turystyczne/palenica-bialczanska-wodogrzmoty-mickiewicza-dolina-roztoki-dolina-pieciu-stawow-polskich-swistowka-roztocka-morskie-oko']]
+  },
+  'czarny-staw':{
+    issue:'FIELD MAP 03 / CZARNY STAW',title:'Где городская тропа становится альпийской.',
+    intro:'Развилки над Kuźnice, открытый Skupniów Upłaz, контрольная пауза у Murowaniec и короткий финал к холодному озеру.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Kuźnice',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'МАРКИРОВКА',decision:'Ищи синюю маркировку к Boczań и Przełęcz między Kopami.',body:'Несколько популярных маршрутов начинаются рядом, поэтому не выбирай направление только по потоку людей.'},
+      {ratio:.04,kicker:'01 / JUNCTION',name:'Развилка над Kuźnice',tag:'НЕ НА NOSAL',meta:'≈ 0.5 км',level:'nav',prompt:'РАННЯЯ РАЗВИЛКА',decision:'Оставайся на синем пути к Hala Gąsienicowa; зелёный ведёт к Nosal.',body:'Ошибка здесь не опасна сама по себе, но быстро уводит в совсем другой маршрут.'},
+      {ratio:.24,kicker:'02 / RIDGE',name:'Skupniów Upłaz',tag:'ОТКРЫТЫЙ СКЛОН',meta:'≈ 3.0 км',level:'effort',prompt:'ЧТО МЕНЯЕТСЯ',decision:'Продолжай по синей маркировке и следи за погодой: укрытий становится меньше.',body:'Лес отступает, набор ощущается сильнее, а виды впервые показывают масштаб Hala Gąsienicowa.'},
+      {ratio:.32,kicker:'03 / PASS',name:'Przełęcz między Kopami',tag:'ТРОПЫ СХОДЯТСЯ',meta:'≈ 4.0 км',level:'nav',prompt:'КОНТРОЛЬНАЯ ТОЧКА',decision:'Продолжай в сторону Hala Gąsienicowa и Murowaniec.',body:'Здесь варианты подхода сходятся. В тумане проверяй маркировку, а не визуальную линию рельефа.'},
+      {ratio:.37,kicker:'04 / SHELTER',name:'Hala Gąsienicowa',tag:'MUROWANIEC',meta:'≈ 4.6 км',level:'info',prompt:'ПАУЗА + РЕШЕНИЕ',decision:'От приюта продолжай по синей маркировке к Czarny Staw.',body:'Последняя удобная пауза перед более каменистым финалом. Здесь хорошо решить, хватает ли времени на озеро.',photoIndex:0},
+      {ratio:.50,kicker:'05 / LAKE',name:'Czarny Staw Gąsienicowy',tag:'ЦЕЛЬ',meta:'≈ 6.2 км',level:'summit',prompt:'ПЛАН ВОЗВРАЩЕНИЯ',decision:'Для этого маршрута развернись у озера и вернись через Hala Gąsienicowa.',body:'Дальнейшие тропы ведут к более серьёзным целям; не продолжай автоматически за другими группами.',photoIndex:1}
+    ],
+    terrain:[{from:0,to:.24,kind:'approach'},{from:.24,to:.37,kind:'effort'},{from:.37,to:.50,kind:'navigation'}],
+    sources:[['TPN','https://tpn.gov.pl/szlaki-turystyczne/dolina-suchej-wody-hala-gasienicowa-czarny-staw-gasienicowy-przelecz-miedzy-kopami-boczan-kuznice']]
+  },
+  kasprowy:{
+    issue:'FIELD MAP 04 / KASPROWY',title:'Подъём пешком, а не очередь на канатку.',
+    intro:'Где отделиться от соседних маршрутов, когда заканчивается лес и почему верхняя станция ещё не означает конец усилия.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Kuźnice',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'ВЫБОР ТРОПЫ',decision:'Найди зелёную маркировку на Kasprowy Wierch и не уходи по синему к Hala Gąsienicowa.',body:'У старта сходится много маршрутов и инфраструктуры канатной дороги; цвет маркировки важнее толпы.'},
+      {ratio:.12,kicker:'01 / JUNCTION',name:'Лесная развилка',tag:'ДЕРЖИСЬ ЗЕЛЁНОГО',meta:'≈ 1.5 км',level:'nav',prompt:'НАВИГАЦИЯ',decision:'На боковых тропах к Kalatówki и Giewont оставайся на зелёной маркировке Kasprowy.',body:'После Kuźnice направление легко принять за продолжение соседнего маршрута.'},
+      {ratio:.25,kicker:'02 / FOREST',name:'Myślenickie Turnie',tag:'СЕРЕДИНА НАБОРА',meta:'≈ 3.2 км',level:'effort',prompt:'ТЕМП',decision:'Продолжай устойчивый подъём и оцени запас воды до выхода на открытый склон.',body:'Лесной участок длиннее, чем кажется по карте; канатка над головой не сокращает пеший маршрут.'},
+      {ratio:.36,kicker:'03 / OPEN',name:'Верхний склон',tag:'ВЕТЕР + СОЛНЦЕ',meta:'≈ 4.6 км',level:'danger',prompt:'ПОГОДА',decision:'Если облака закрывают гребень или ветер мешает устойчиво идти, разворот здесь проще, чем выше.',body:'Укрытий почти нет, покрытие становится каменистым, а погода на хребте меняется быстро.',photoIndex:0},
+      {ratio:.46,kicker:'04 / STATION',name:'Верхняя станция',tag:'ЛЮДИ + РАЗВИЛКИ',meta:'≈ 5.8 км',level:'nav',prompt:'НЕ ФИНИШ',decision:'Сверь зелёную маркировку к вершине и не уходи вдоль хребта случайно.',body:'Инфраструктура и поток с канатки маскируют обычную логику тропы.'},
+      {ratio:.50,kicker:'05 / SUMMIT',name:'Kasprowy Wierch',tag:'1987 М',meta:'≈ 6.3 км',level:'summit',prompt:'ПЛАН СПУСКА',decision:'Для пешего out-and-back вернись тем же зелёным маршрутом в Kuźnice.',body:'На вершине открытый международный хребет: не продолжай по нему без отдельного плана.',photoIndex:1}
+    ],
+    terrain:[{from:0,to:.25,kind:'approach'},{from:.25,to:.46,kind:'effort'},{from:.46,to:.50,kind:'navigation'}],
+    sources:[['Zakopane.pl','https://www.zakopane.pl/strefa-turystyczna/turystyka/wycieczki-gorskie-latem/szlaki-lato']]
+  },
+  giewont:{
+    issue:'FIELD MAP 05 / GIEWONT',title:'Топокарта, которая объясняет маршрут.',
+    intro:'Рельеф и соседние тропы остаются на месте. Поверх них — восемь точек, где меняется нагрузка, нужно принять решение или особенно внимательно свериться с маркировкой.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Kuźnice',tag:'СТАРТ',meta:'≈ 1025 м · 0.0 км',level:'info',prompt:'МАРКИРОВКА',decision:'Держись синей маркировки в сторону Kalatówki и Hala Kondratowa.',body:'Каменная дорога начинается почти сразу. Это последний удобный момент проверить воду, офлайн-карту и прогноз до ухода в лес.'},
+      {ratio:.14,kicker:'01 / JUNCTION',name:'Kalatówki',tag:'СЛЕДИ ЗА СИНИМ',meta:'≈ 1200 м · 1.6 км',level:'nav',prompt:'БОКОВЫЕ ВАРИАНТЫ',decision:'У развилок и построек не иди за самым большим потоком автоматически: сверяй синюю маркировку на Hala Kondratowa.',body:'На широкой дороге легко расслабиться, но здесь появляются боковые варианты. После дождя камни и короткий скальный порог могут быть скользкими.'},
+      {ratio:.291,kicker:'02 / SHELTER',name:'Hala Kondratowa',tag:'РЕШЕНИЕ + ПАУЗА',meta:'1335 м · 3.4 км',level:'nav',prompt:'КЛЮЧЕВАЯ РАЗВИЛКА',decision:'Зелёный уходит к Przełęcz pod Kopą Kondracką. На Giewont продолжай по синему к Kondracka Przełęcz.',body:'Приют — хорошая контрольная точка перед более серьёзным набором. Проверь погоду и силы: дальше быстро становится круче.',photoIndex:2},
+      {ratio:.335,kicker:'03 / EFFORT',name:'Piekiełko',tag:'ЗДЕСЬ НАЧИНАЕТСЯ КРУТО',meta:'≈ 1500 м · 3.9 км',level:'effort',prompt:'СЛОЖНОСТЬ',decision:'Маршрут по-прежнему синий; в тумане не срезай широкие петли подъёма.',body:'После халы начинается устойчивый крутой набор по открытому склону. Темп падает, ветер ощущается сильнее, а назад до укрытия уже не две минуты.',photoIndex:0},
+      {ratio:.443,kicker:'04 / PASS',name:'Kondracka Przełęcz',tag:'КЛЮЧЕВАЯ РАЗВИЛКА',meta:'1725 м · 5.1 км',level:'nav',prompt:'НАВИГАЦИЯ',decision:'Жёлтый ведёт к Kopa Kondracka. На Giewont поверни вправо и оставайся на синем.',body:'Самая важная навигационная точка подъёма: в облаке нужное направление не всегда читается по рельефу. Здесь особенно полезна офлайн-карта.',photoIndex:3},
+      {ratio:.469,kicker:'05 / PASS',name:'Wyżnia Kondracka Przełęcz',tag:'ПОСЛЕДНЕЕ РЕШЕНИЕ',meta:'1765 м · 5.4 км',level:'nav',prompt:'КРИТЕРИЙ РАЗВОРОТА',decision:'Красный уходит в Dolina Strążyska. К вершине продолжай по синему; выше начинается односторонняя петля.',body:'До вершины недалеко, но характер маршрута резко меняется. Если погода портится, это разумная точка не входить в скальный финал.'},
+      {ratio:.482,kicker:'06 / TECHNICAL',name:'Цепи и скальные ступени',tag:'РУКИ НА СКАЛУ',meta:'≈ 1840 м · 5.6 км',level:'danger',prompt:'ТЕХНИЧЕСКИЙ УЧАСТОК',decision:'Следуй одностороннему потоку и разметке. Не разворачивайся против движения на цепях.',body:'Полированный известняк, цепи и скобы требуют свободных рук и спокойного темпа. В грозу этот участок и металлические элементы особенно опасны.',photoIndex:4},
+      {ratio:.497,kicker:'07 / SUMMIT',name:'Giewont',tag:'1894 М / КРЕСТ',meta:'1894 м · 5.75 км',level:'summit',prompt:'СПУСК',decision:'Спуск начинается по другой стороне односторонней петли, затем возвращается к Wyżnia Kondracka Przełęcz.',body:'На вершине мало пространства и много людей. Не задерживай поток ради фото и не оставайся у металлического креста при риске грозы.',photoIndex:5}
+    ],
+    terrain:[{from:0,to:.291,kind:'approach'},{from:.291,to:.443,kind:'effort'},{from:.443,to:.469,kind:'navigation'},{from:.469,to:.50,kind:'technical'}],
+    sources:[['TPN','https://tpn.gov.pl/szlaki-turystyczne/kuznice-polana-kalatowki-polana-kondratowa'],['Zakopane.pl','https://www.zakopane.pl/strefa-turystyczna/turystyka/wycieczki-gorskie-latem/szlaki-lato/hala-kondratowa-giewont-dolina-strazyska']]
+  },
+  czerwone:{
+    issue:'FIELD MAP 06 / CZERWONE WIERCHY',title:'Четыре вершины, один длинный выход.',
+    intro:'Где покинуть Dolina Kościeliska, как читать широкий хребет в тумане и на какой вершине начинается логистика спуска к Kuźnice.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Kiry',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'ПЛАН A → B',decision:'Иди по зелёной маркировке в Dolina Kościeliska и заранее держи в голове финиш в Kuźnice.',body:'Это маршрут между двумя trailhead: автомобиль у старта не решает возвращение с финиша.'},
+      {ratio:.20,kicker:'01 / JUNCTION',name:'Adamica',tag:'УХОД ИЗ ДОЛИНЫ',meta:'≈ 3.1 км',level:'nav',prompt:'КЛЮЧЕВАЯ РАЗВИЛКА',decision:'Покинь основную долину по красной маркировке в сторону Ciemniak.',body:'Если продолжить по зелёному дну долины, попадёшь к Ornak, а не на Czerwone Wierchy.'},
+      {ratio:.36,kicker:'02 / RIDGE',name:'Ciemniak',tag:'ВЫХОД НА ХРЕБЕТ',meta:'≈ 5.5 км',level:'effort',prompt:'ПОГОДА',decision:'Дальше держись красной маркировки по открытому хребту.',body:'Лес остаётся внизу. Ветер, облако и отсутствие укрытий теперь важнее технической сложности.'},
+      {ratio:.45,kicker:'03 / SUMMIT',name:'Krzesanica',tag:'2122 М',meta:'≈ 6.9 км',level:'summit',prompt:'ФОТОТОЧКА',decision:'Продолжай по красному к Małołączniak; не спускайся с широкого гребня по неразмеченным следам.',body:'Самая высокая точка польской части массива и длинная панорама хребта.',photoIndex:0},
+      {ratio:.54,kicker:'04 / RIDGE',name:'Małołączniak',tag:'ТУМАН = КАРТА',meta:'≈ 8.3 км',level:'nav',prompt:'ОРИЕНТИРОВАНИЕ',decision:'На широком плато регулярно сверяй красные метки и направление к Kopa Kondracka.',body:'В хорошую погоду линия очевидна; в облаке округлый рельеф делает боковые спуски обманчивыми.',photoIndex:1},
+      {ratio:.65,kicker:'05 / TURN',name:'Kopa Kondracka',tag:'НАЧАЛО СПУСКА',meta:'≈ 10.0 км',level:'nav',prompt:'ВЫБОР ДОЛИНЫ',decision:'Сверни на зелёную маркировку к Przełęcz pod Kopą Kondracką и Hala Kondratowa.',body:'Красный гребень продолжается дальше; для финиша в Kuźnice нужен явный уход с хребта.'},
+      {ratio:.78,kicker:'06 / SHELTER',name:'Hala Kondratowa',tag:'ПОСЛЕДНИЙ ЭТАП',meta:'≈ 12.0 км',level:'info',prompt:'КОНТРОЛЬ ВРЕМЕНИ',decision:'От халы следуй синему через Kalatówki в Kuźnice.',body:'Технически проще, но ноги уже уставшие, а каменная дорога на спуске длиннее, чем кажется.'},
+      {ratio:1,kicker:'07 / FINISH',name:'Kuźnice',tag:'ФИНИШ',meta:'≈ 15.4 км',level:'summit',prompt:'ТРАНСПОРТ',decision:'Маршрут заканчивается в другом месте: используй городской транспорт до базы.',body:'Проверяй транспорт заранее, особенно при позднем возвращении.'}
+    ],
+    terrain:[{from:0,to:.20,kind:'approach'},{from:.20,to:.36,kind:'effort'},{from:.36,to:.65,kind:'navigation'},{from:.65,to:1,kind:'approach'}],
+    sources:[['Zakopane.pl','https://www.zakopane.pl/strefa-turystyczna/turystyka/wycieczki-gorskie-latem/szlaki-lato']]
+  },
+  sarnia:{
+    issue:'FIELD MAP 07 / SARNIA SKAŁA',title:'Короткий маршрут с настоящими решениями.',
+    intro:'Боковой заход к Siklawica, крутой подъём на Czerwona Przełęcz, тесная скальная вершина и выход через другую долину.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Dolina Strążyska',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'НАПРАВЛЕНИЕ',decision:'Следуй красной маркировке в глубину Dolina Strążyska.',body:'Первые километры спокойные, но маршрут не остаётся прогулкой по дну долины.'},
+      {ratio:.30,kicker:'01 / MEADOW',name:'Polana Strążyska',tag:'ВОДОПАД — БОКОВОЙ ЗАХОД',meta:'≈ 2.0 км',level:'nav',prompt:'ВЫБОР',decision:'К Siklawica ведёт короткая жёлтая ветка; после фото вернись на поляну для продолжения к Sarnia Skała.',body:'Не продолжай вверх от водопада по случайным следам. Основной маршрут на перевал начинается с поляны.',photoIndex:1},
+      {ratio:.42,kicker:'02 / CLIMB',name:'Czerwona Przełęcz',tag:'КРУТОЙ ПОДЪЁМ',meta:'≈ 2.8 км',level:'effort',prompt:'СЛОЖНОСТЬ',decision:'На перевале сверь чёрную маркировку к Sarnia Skała.',body:'Короткий маршрут сжимает набор высоты в один плотный участок; мокрые корни и камни требуют внимания.'},
+      {ratio:.58,kicker:'03 / SUMMIT',name:'Sarnia Skała',tag:'СКАЛЬНЫЙ ФИНАЛ',meta:'≈ 3.9 км',level:'summit',prompt:'ТЕСНАЯ ВЕРШИНА',decision:'Вернись по той же ветке к Czerwona Przełęcz, не спускайся с вершины напрямую.',body:'Финальные камни несложные в сухую погоду, но тесны и скользки при большом потоке.',photoIndex:0},
+      {ratio:.70,kicker:'04 / RETURN',name:'Czerwona Przełęcz',tag:'ПОВОРОТ К БЕЛОЙ ДОЛИНЕ',meta:'≈ 4.7 км',level:'nav',prompt:'ДРУГОЙ ФИНИШ',decision:'Выбирай чёрную маркировку в сторону Dolina Białego, а не назад в Strążyska.',body:'Здесь маршрут превращается в point-to-point. Ошибка вернёт тебя к старту вместо нужного финиша.'},
+      {ratio:1,kicker:'05 / FINISH',name:'Dolina Białego',tag:'ФИНИШ',meta:'≈ 6.7 км',level:'info',prompt:'ВОЗВРАЩЕНИЕ',decision:'Выйди к городской части Zakopane и строй навигацию от фактического выхода.',body:'Финиш не совпадает со стартом, зато находится ближе к городской инфраструктуре.'}
+    ],
+    terrain:[{from:0,to:.30,kind:'approach'},{from:.30,to:.42,kind:'effort'},{from:.42,to:.70,kind:'technical'},{from:.70,to:1,kind:'navigation'}],
+    sources:[['TPN','https://tpn.gov.pl/szlaki-turystyczne/dolina-strazyska-polana-strazyska-siklawica-strazyska-sarnia-skala-dolina-bialego-wielka-krokiew']]
+  },
+  koscieliska:{
+    issue:'FIELD MAP 08 / KOŚCIELISKA',title:'Спокойная долина с боковыми соблазнами.',
+    intro:'Основная зелёная ось, ответвления к ущелью и пещерам, поворот у Ornak и тихий лесной финал к Smreczyński Staw.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Kiry',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'ОСНОВНАЯ ЛИНИЯ',decision:'Держись зелёной маркировки вдоль Dolina Kościeliska.',body:'Маршрут выглядит простым, но боковые достопримечательности легко превращают его в более длинный день.'},
+      {ratio:.18,kicker:'01 / GATE',name:'Brama Kantaka',tag:'УЗКАЯ ДОЛИНА',meta:'≈ 2.4 км',level:'info',prompt:'ПОКРЫТИЕ',decision:'Оставайся на широкой зелёной тропе вдоль потока.',body:'Скальные ворота сужают долину; после осадков покрытие может быть мокрым и холоднее, чем у старта.'},
+      {ratio:.30,kicker:'02 / MEADOW',name:'Polana Pisana',tag:'БОКОВЫЕ МАРШРУТЫ',meta:'≈ 4.0 км',level:'nav',prompt:'НЕ СМЕШИВАЙ ПЛАНЫ',decision:'Для Smreczyński Staw продолжай по зелёному. Wąwóz Kraków — отдельный боковой вариант с возвратом.',body:'Если добавить ущелье или пещеры, пересчитай время и снаряжение, а не считай их «по пути».',photoIndex:0},
+      {ratio:.40,kicker:'03 / CAVES',name:'Пещерные ответвления',tag:'ОТДЕЛЬНЫЙ ПЛАН',meta:'≈ 5.4 км',level:'danger',prompt:'СНАРЯЖЕНИЕ',decision:'Не входи в пещерные маршруты без отдельной проверки открытия, света и подходящей экипировки.',body:'Маркированная долина остаётся простой; боковые пещеры — это уже другая задача.'},
+      {ratio:.426,kicker:'04 / SHELTER',name:'Schronisko Ornak',tag:'ПОВОРОТ К ОЗЕРУ',meta:'≈ 5.7 км',level:'nav',prompt:'КЛЮЧЕВАЯ РАЗВИЛКА',decision:'Для озера найди чёрную маркировку на Smreczyński Staw.',body:'У приюта легко решить, достаточно ли времени на дополнительный лесной подъём.'},
+      {ratio:.51,kicker:'05 / LAKE',name:'Smreczyński Staw',tag:'ТИХИЙ ФИНАЛ',meta:'≈ 6.8 км',level:'summit',prompt:'РАЗВОРОТ',decision:'От озера вернись той же чёрной веткой к Ornak, затем по зелёному в Kiry.',body:'Помост у озера — конец этой ветки; дальше по берегу размеченного продолжения нет.',photoIndex:1}
+    ],
+    terrain:[{from:0,to:.30,kind:'approach'},{from:.30,to:.426,kind:'navigation'},{from:.426,to:.51,kind:'effort'}],
+    sources:[['TPN','https://tpn.gov.pl/szlaki-turystyczne/kiry-polana-pisana-wawoz-krakow-schronisko-ornak-smreczynski-staw-kiry']]
+  },
+  chocholowska:{
+    issue:'FIELD MAP 09 / CHOCHOŁOWSKA',title:'Длинная долина, где расстояние — главная сложность.',
+    intro:'Переход от асфальта к гравию, психологическая середина, открытая поляна и приют, после которого ещё нужно вернуться.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Siwa Polana',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'ЛОГИСТИКА',decision:'Иди по зелёной маркировке в Dolina Chochołowska.',body:'Проверь правила въезда и транспорта: это длинный линейный подход, а не короткая прогулка к точке.'},
+      {ratio:.20,kicker:'01 / SURFACE',name:'Polana Huciska',tag:'КОНЕЦ ЛЁГКОГО АСФАЛЬТА',meta:'≈ 3.1 км',level:'info',prompt:'ЧТО МЕНЯЕТСЯ',decision:'Продолжай по зелёной долинной тропе.',body:'Дорожное покрытие становится менее ровным, но основная сложность всё ещё в общей дистанции.'},
+      {ratio:.35,kicker:'02 / DISTANCE',name:'Середина долины',tag:'НЕ ФИНИШ',meta:'≈ 5.3 км',level:'effort',prompt:'ТЕМП',decision:'Сверь время: после приюта придётся пройти почти тот же путь обратно.',body:'Рельеф спокойный, поэтому легко идти быстрее плана и забыть про запас на возвращение.'},
+      {ratio:.46,kicker:'03 / MEADOW',name:'Polana Chochołowska',tag:'ОТКРЫТАЯ ПОЛЯНА',meta:'≈ 7.0 км',level:'info',prompt:'ФОТОТОЧКА',decision:'Продолжай по зелёному к приюту, не уходя на хребтовые ответвления.',body:'Главная визуальная сцена маршрута; весенний крокусовый сезон резко увеличивает поток людей.',photoIndex:0},
+      {ratio:.50,kicker:'04 / SHELTER',name:'Schronisko Chochołowskie',tag:'ЦЕЛЬ',meta:'≈ 7.6 км',level:'summit',prompt:'РАЗВОРОТ',decision:'Для базового маршрута возвращайся тем же зелёным путём к Siwa Polana.',body:'Приют — не середина «лёгкой прогулки», а точка разворота полного 15-километрового дня.',photoIndex:1}
+    ],
+    terrain:[{from:0,to:.20,kind:'approach'},{from:.20,to:.46,kind:'effort'},{from:.46,to:.50,kind:'navigation'}],
+    sources:[['TPN','https://tpn.gov.pl/szlaki-turystyczne/siwa-polana-polana-huciska-polana-chocholowska']]
+  },
+  'gesia-szyja':{
+    issue:'FIELD MAP 10 / GĘSIA SZYJA',title:'Панорама доступная, лестница — нет.',
+    intro:'Лёгкий подход к Rusinowa Polana, ясный выбор на поляне, тысяча деревянных ступеней и point-to-point выход к Palenica.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Wierch Poroniec',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'МАРКИРОВКА',decision:'Следуй зелёной маркировке к Rusinowa Polana.',body:'Первые километры мягкие и подходят для разогрева; не суди по ним о подъёме на вершину.'},
+      {ratio:.20,kicker:'01 / MEADOW',name:'Rusinowa Polana',tag:'БОЛЬШАЯ ПАНОРАМА',meta:'≈ 1.6 км',level:'info',prompt:'ФОТОТОЧКА',decision:'На поляне найди зелёную маркировку к Gęsia Szyja.',body:'До поляны приходят с нескольких сторон, поэтому обратное направление не всегда совпадает с потоком людей.',photoIndex:0},
+      {ratio:.30,kicker:'02 / JUNCTION',name:'Bacówka',tag:'ВЕРШИНА ИЛИ ВИКТОРУВКИ',meta:'≈ 2.3 км',level:'nav',prompt:'ВЫБОР',decision:'Для вершины оставайся на зелёном подъёме; Wiktorówki — отдельное направление.',body:'Решение здесь определяет, входишь ли ты в самый крутой участок маршрута.'},
+      {ratio:.45,kicker:'03 / STAIRS',name:'Деревянные ступени',tag:'КРУТО И ДОЛГО',meta:'≈ 3.5 км',level:'effort',prompt:'СЛОЖНОСТЬ',decision:'Держи ровный темп и пропускай встречных только на устойчивых площадках.',body:'Серия ступеней набирает высоту быстро; мокрое дерево может быть скользким.'},
+      {ratio:.567,kicker:'04 / SUMMIT',name:'Gęsia Szyja',tag:'1489 М',meta:'≈ 4.4 км',level:'summit',prompt:'ФОТОТОЧКА',decision:'Продолжай по запланированной зелёной линии к финишу, не уходя на случайные боковые тропы.',body:'Скальная вершина даёт более высокий ракурс, но мало места при большом потоке.',photoIndex:1},
+      {ratio:.72,kicker:'05 / DESCENT',name:'Спуск к долине',tag:'СВЕРЬ НАПРАВЛЕНИЕ',meta:'≈ 5.6 км',level:'nav',prompt:'POINT TO POINT',decision:'Проверь, что выбранная ветка ведёт к Palenica Białczańska, а не обратно к Wierch Poroniec.',body:'После вершины сеть троп снова становится важнее рельефа.'},
+      {ratio:1,kicker:'06 / FINISH',name:'Palenica Białczańska',tag:'ФИНИШ',meta:'≈ 7.8 км',level:'info',prompt:'ТРАНСПОРТ',decision:'Возвращайся в Zakopane от Palenica, а не от стартового trailhead.',body:'Финиш в другом месте — это часть маршрута, а не ошибка геометрии.'}
+    ],
+    terrain:[{from:0,to:.30,kind:'approach'},{from:.30,to:.567,kind:'effort'},{from:.567,to:1,kind:'navigation'}],
+    sources:[['TPN','https://tpn.gov.pl/szlaki-turystyczne/zazadnia-wiktorowki-rusinowa-polana-i-gesia-szyja']]
+  },
+  nosal:{
+    issue:'FIELD MAP 11 / NOSAL',title:'Коротко не значит без последствий.',
+    intro:'Ранняя развилка над Kuźnice, быстрый набор, скальные ступени у вершины и спуск в другую точку.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Kuźnice',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'МАРКИРОВКА',decision:'Ищи зелёную маркировку на Nosal.',body:'Рядом начинаются маршруты к Hala Gąsienicowa и Kasprowy, поэтому название направления нужно проверить сразу.'},
+      {ratio:.10,kicker:'01 / JUNCTION',name:'Развилка над Kuźnice',tag:'ПОВОРОТ НА NOSAL',meta:'≈ 0.2 км',level:'nav',prompt:'КЛЮЧЕВАЯ РАЗВИЛКА',decision:'Оставайся на зелёной маркировке к Nosal, не уходи по синему в сторону Hala.',body:'Маршрут короткий, и ранняя ошибка съедает значительную часть дня.'},
+      {ratio:.35,kicker:'02 / CLIMB',name:'Лесной подъём',tag:'УКЛОН РАСТЁТ',meta:'≈ 0.8 км',level:'effort',prompt:'ТЕМП',decision:'Иди по зелёным меткам и не срезай серпантин.',body:'Высота набирается быстро; мокрые корни делают короткий подъём менее дружелюбным.'},
+      {ratio:.55,kicker:'03 / ROCK',name:'Скальный склон',tag:'ОТКРЫТЫЕ СТУПЕНИ',meta:'≈ 1.3 км',level:'danger',prompt:'ПОКРЫТИЕ',decision:'Держись размеченных каменных ступеней и оставляй дистанцию до людей сверху.',body:'На мокрой скале нужен аккуратный шаг, а на узких местах — терпение.',photoIndex:1},
+      {ratio:.641,kicker:'04 / SUMMIT',name:'Nosal',tag:'1206 М',meta:'≈ 1.5 км',level:'summit',prompt:'ВЕРШИНА',decision:'Продолжай по зелёному к Nosalowa Przełęcz; маршрут не возвращается тем же путём.',body:'Вершина компактная, зато быстро открывает вид поверх леса.',photoIndex:0},
+      {ratio:.78,kicker:'05 / PASS',name:'Nosalowa Przełęcz',tag:'СПУСК',meta:'≈ 1.9 км',level:'nav',prompt:'ДРУГОЙ ФИНИШ',decision:'Сверь зелёную ветку к Kuźnicka Polana.',body:'Развилки у перевала могут вернуть к другим долинам, если идти за потоком.'},
+      {ratio:1,kicker:'06 / FINISH',name:'Kuźnicka Polana',tag:'ФИНИШ',meta:'≈ 2.4 км',level:'info',prompt:'ГОРОД',decision:'Строй возвращение от фактического выхода, а не от Kuźnice.',body:'Финиш близко к городской сети, но не совпадает со стартом.'}
+    ],
+    terrain:[{from:0,to:.10,kind:'approach'},{from:.10,to:.55,kind:'effort'},{from:.55,to:.78,kind:'technical'},{from:.78,to:1,kind:'navigation'}],
+    sources:[['Zakopane.pl','https://www.zakopane.pl/strefa-turystyczna/turystyka/wycieczki-gorskie-latem/szlaki-lato']]
+  },
+  kopieniec:{
+    issue:'FIELD MAP 12 / KOPIENIEC',title:'Маленькая петля с большим горизонтом.',
+    intro:'Лесная развилка, выбор направления петли на поляне, короткий каменный подъём и другой спуск с вершины.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Toporowa Cyrhla',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'МАРКИРОВКА',decision:'Следуй зелёной маркировке к Polana Kopieniec.',body:'Старт находится вне главного потока Kuźnice; проверь остановку и обратный транспорт.'},
+      {ratio:.20,kicker:'01 / FOREST',name:'Лесная развилка',tag:'ДЕРЖИСЬ ЗЕЛЁНОГО',meta:'≈ 0.9 км',level:'nav',prompt:'НАВИГАЦИЯ',decision:'Не уходи на соседние долинные ветки; сверяй направление на Kopieniec.',body:'В лесу вершина не видна, а широкие дорожки могут выглядеть убедительнее маркированной тропы.'},
+      {ratio:.35,kicker:'02 / MEADOW',name:'Polana Kopieniec',tag:'ВЫБОР ПЕТЛИ',meta:'≈ 1.6 км',level:'nav',prompt:'КЛЮЧЕВАЯ РАЗВИЛКА',decision:'Выбери вершину по запланированной стороне петли; вернёшься с другой.',body:'Здесь полезно запомнить точку возвращения и направление выхода к Toporowa Cyrhla.',photoIndex:0},
+      {ratio:.45,kicker:'03 / CLIMB',name:'Финальный склон',tag:'КАМЕННЫЕ СТУПЕНИ',meta:'≈ 2.1 км',level:'effort',prompt:'СЛОЖНОСТЬ',decision:'Держись зелёных меток и уступай встречным на широких местах.',body:'Подъём короткий, но ощутимо круче всей лесной части.'},
+      {ratio:.50,kicker:'04 / SUMMIT',name:'Wielki Kopieniec',tag:'1328 М',meta:'≈ 2.3 км',level:'summit',prompt:'ПАНОРАМА',decision:'Продолжай петлю по зелёному с противоположной стороны вершины.',body:'Небольшая высота даёт неожиданно широкий обзор на высокие Татры.',photoIndex:1},
+      {ratio:.65,kicker:'05 / LOOP',name:'Возврат на поляну',tag:'ЗАМКНИ ПЕТЛЮ',meta:'≈ 3.0 км',level:'nav',prompt:'НАПРАВЛЕНИЕ ФИНИША',decision:'На поляне выбери зелёную ветку обратно к Toporowa Cyrhla.',body:'Не продолжай в сторону Jaszczurówka, если транспорт ждёт у старта.'},
+      {ratio:1,kicker:'06 / FINISH',name:'Toporowa Cyrhla',tag:'ФИНИШ',meta:'≈ 4.7 км',level:'info',prompt:'ТРАНСПОРТ',decision:'Проверь ближайшую остановку и направление автобуса.',body:'Петля заканчивается у того же trailhead.'}
+    ],
+    terrain:[{from:0,to:.35,kind:'approach'},{from:.35,to:.50,kind:'effort'},{from:.50,to:.65,kind:'technical'},{from:.65,to:1,kind:'navigation'}],
+    sources:[['Zakopane.pl','https://www.zakopane.pl/strefa-turystyczna/turystyka/wycieczki-gorskie-latem/szlaki-lato']]
+  },
+  wolowiec:{
+    issue:'FIELD MAP 13 / WOŁOWIEC',title:'Хребтовый день, который начинается в долине.',
+    intro:'Длинный подход к приюту, явный уход на Grześ, открытая граница через Rakoń и разворот с Wołowiec.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Siwa Polana',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'ДЛИННЫЙ ДЕНЬ',decision:'Следуй зелёной маркировке в Dolina Chochołowska.',body:'До настоящего хребтового маршрута ещё несколько километров долины; ранний старт обязателен.'},
+      {ratio:.27,kicker:'01 / SHELTER',name:'Schronisko Chochołowskie',tag:'ПОСЛЕДНИЙ ПРИЮТ',meta:'≈ 6.4 км',level:'info',prompt:'ПАУЗА + ПОГОДА',decision:'Сверь время и условия перед уходом на жёлтую тропу к Grześ.',body:'Отсюда начинается более серьёзная часть; возвращение к укрытию займёт время.'},
+      {ratio:.35,kicker:'02 / JUNCTION',name:'Подъём на Grześ',tag:'УХОД ИЗ ДОЛИНЫ',meta:'≈ 8.3 км',level:'nav',prompt:'КЛЮЧЕВАЯ РАЗВИЛКА',decision:'Выбирай жёлтую маркировку на Grześ.',body:'Если остаться на долинной линии, день закончится у приюта, а не на хребте.'},
+      {ratio:.43,kicker:'03 / RIDGE',name:'Grześ',tag:'ОТКРЫТЫЙ ХРЕБЕТ',meta:'≈ 10.1 км',level:'effort',prompt:'ПОГОДА',decision:'Продолжай по синей маркировке к Rakoń.',body:'Деревья остаются внизу; ветер и гроза теперь определяют возможность продолжения.'},
+      {ratio:.49,kicker:'04 / RIDGE',name:'Rakoń',tag:'ЕЩЁ НЕ ЦЕЛЬ',meta:'≈ 11.6 км',level:'nav',prompt:'КОНТРОЛЬ ВРЕМЕНИ',decision:'Оцени запас до Wołowiec и обратного спуска; держись польской маркировки.',body:'Широкий гребень обманчиво простой, но маршрут уже длинный.',photoIndex:1},
+      {ratio:.527,kicker:'05 / SUMMIT',name:'Wołowiec',tag:'2064 М',meta:'≈ 12.4 км',level:'summit',prompt:'РАЗВОРОТ',decision:'Не продолжай по словацким направлениям без отдельного плана; начинай возврат по заданной петле.',body:'Открытая вершина быстро становится некомфортной при ветре и облаке.',photoIndex:0},
+      {ratio:.60,kicker:'06 / DESCENT',name:'Развилка спуска',tag:'НЕ НА СЛОВАЦКУЮ СТОРОНУ',meta:'≈ 14.1 км',level:'danger',prompt:'НАВИГАЦИЯ',decision:'Сверь маркировку на возвращение в Dolina Chochołowska.',body:'На международном хребте неверный поворот меняет не только долину, но и страну финиша.'},
+      {ratio:1,kicker:'07 / FINISH',name:'Siwa Polana',tag:'ФИНИШ',meta:'≈ 23.6 км',level:'info',prompt:'ТРАНСПОРТ',decision:'Проверь, что успеваешь на обратный транспорт после длинного долинного выхода.',body:'Последние километры технически простые, но проходят на уставших ногах.'}
+    ],
+    terrain:[{from:0,to:.27,kind:'approach'},{from:.27,to:.43,kind:'effort'},{from:.43,to:.60,kind:'navigation'},{from:.60,to:1,kind:'approach'}],
+    sources:[['TPN: условия','https://tpn.gov.pl/komunikat-turystyczny']]
+  },
+  koscielec:{
+    issue:'FIELD MAP 14 / KOŚCIELEC',title:'Гранитная вершина без цепей.',
+    intro:'Длинный подход через Hala Gąsienicowa, решение у Czarny Staw и Karb, затем скальная работа руками без искусственных опор.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Kuźnice',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'ПЛАН',decision:'Следуй маршруту к Hala Gąsienicowa и Murowaniec.',body:'Первые километры совпадают с популярным маршрутом к Czarny Staw; техническая цель ещё далеко.'},
+      {ratio:.20,kicker:'01 / PASS',name:'Przełęcz między Kopami',tag:'ОТКРЫТЫЙ ПОДХОД',meta:'≈ 3.4 км',level:'effort',prompt:'ПОГОДА',decision:'Продолжай к Hala Gąsienicowa, наблюдая за облачностью над Kościelec.',body:'Если вершина уже закрыта облаком, выше ориентирование и оценка скалы станут сложнее.'},
+      {ratio:.266,kicker:'02 / SHELTER',name:'Murowaniec',tag:'ПОСЛЕДНИЙ ПРИЮТ',meta:'≈ 4.5 км',level:'info',prompt:'ПАУЗА + РЕШЕНИЕ',decision:'Продолжай по синей маркировке к Czarny Staw только при достаточном времени и устойчивой погоде.',body:'После приюта укрытий на финальной части нет.'},
+      {ratio:.34,kicker:'03 / LAKE',name:'Czarny Staw Gąsienicowy',tag:'ВЕРШИНА ВИДНА',meta:'≈ 5.8 км',level:'nav',prompt:'ВЫБОР МАРШРУТА',decision:'Сверь ветку к Karb и Kościelec; не продолжай автоматически к Zawrat.',body:'От озера уже видно масштаб пирамиды и можно трезво оценить условия.',photoIndex:1},
+      {ratio:.38,kicker:'04 / PASS',name:'Karb',tag:'ПОСЛЕДНИЙ РАЗВОРОТ',meta:'≈ 6.4 км',level:'nav',prompt:'КРИТЕРИЙ РЕШЕНИЯ',decision:'Если скала мокрая, видимость плохая или нет уверенности в спуске, разворачивайся здесь.',body:'Дальше маршрут становится техническим и не предлагает простой запасной линии.'},
+      {ratio:.40,kicker:'05 / SCRAMBLE',name:'Скальная тропа',tag:'БЕЗ ЦЕПЕЙ',meta:'≈ 6.8 км',level:'danger',prompt:'ТЕХНИЧЕСКИЙ УЧАСТОК',decision:'Следуй меткам по сухой скале, используй руки и не рассчитывай на цепи или скобы.',body:'Главная сложность — экспозиция, поиск линии и обязательный спуск тем же способом.',photoIndex:0},
+      {ratio:.416,kicker:'06 / SUMMIT',name:'Kościelec',tag:'2155 М',meta:'≈ 7.0 км',level:'summit',prompt:'СПУСК',decision:'Возвращайся тем же маршрутом через Karb; не ищи прямой спуск с вершины.',body:'Успех маршрута определяется не подъёмом, а безопасным спуском по тем же плитам.'}
+    ],
+    terrain:[{from:0,to:.266,kind:'approach'},{from:.266,to:.38,kind:'effort'},{from:.38,to:.416,kind:'technical'}],
+    sources:[['TPN: условия','https://tpn.gov.pl/komunikat-turystyczny'],['Zakopane.pl','https://www.zakopane.pl/strefa-turystyczna/turystyka/wycieczki-gorskie-latem/szlaki-lato']]
+  },
+  rysy:{
+    issue:'FIELD MAP 15 / RYSY',title:'25 километров до технического финала.',
+    intro:'Дорожный подход, два озера, развилка к другой перевальной цели, снежник у Bula и длинная цепная линия под вершиной.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Palenica Białczańska',tag:'СТАРТ ЗАТЕМНО',meta:'0.0 км',level:'info',prompt:'ДЛИННЫЙ ДЕНЬ',decision:'Начинай по красной дороге на Morskie Oko и держи жёсткий контроль времени.',body:'Техническая часть далеко, но именно поздний старт чаще всего отнимает запас на безопасный спуск.'},
+      {ratio:.113,kicker:'01 / JUNCTION',name:'Wodogrzmoty Mickiewicza',tag:'ОСТАВАЙСЯ НА КРАСНОМ',meta:'≈ 2.8 км',level:'nav',prompt:'РАННЯЯ РАЗВИЛКА',decision:'Продолжай по красной дороге к Morskie Oko; зелёный ведёт в Dolina Roztoki.',body:'Поворот к Пяти Ставам выглядит заманчиво, но это уже другой маршрут.'},
+      {ratio:.313,kicker:'02 / LAKE',name:'Morskie Oko',tag:'КОНТРОЛЬ ВРЕМЕНИ',meta:'≈ 7.7 км',level:'info',prompt:'ПОСЛЕДНЯЯ ИНФРАСТРУКТУРА',decision:'Продолжай по красной маркировке вдоль озера к Czarny Staw pod Rysami.',body:'Если здесь уже поздно или погода ухудшается, до цепей ещё далеко, а возвращение остаётся полным.',photoIndex:0},
+      {ratio:.402,kicker:'03 / LAKE',name:'Czarny Staw pod Rysami',tag:'НЕ НА MIĘGUSZOWIECKĄ',meta:'≈ 9.9 км',level:'nav',prompt:'КЛЮЧЕВАЯ РАЗВИЛКА',decision:'Для Rysy оставайся на красной маркировке; зелёный ведёт к Przełęcz pod Chłopkiem.',body:'В облаке направление двух высокогорных маршрутов легко перепутать.'},
+      {ratio:.44,kicker:'04 / SNOW',name:'Bula pod Rysami',tag:'СНЕГ МОЖЕТ ОСТАТЬСЯ',meta:'≈ 10.8 км',level:'danger',prompt:'УСЛОВИЯ',decision:'Оцени фактический снег, лёд и возможность безопасного спуска до входа в цепную линию.',body:'Сезон внизу не гарантирует летнего покрытия здесь; решение зависит от текущих условий и навыков.'},
+      {ratio:.47,kicker:'05 / CHAINS',name:'Rysa + цепи',tag:'КАМНЕПАД + ЭКСПОЗИЦИЯ',meta:'≈ 11.6 км',level:'danger',prompt:'ТЕХНИЧЕСКИЙ ФИНАЛ',decision:'Держи дистанцию, не стой под людьми и следуй красным меткам по цепям.',body:'Длинный крутой участок совмещает встречный поток, подвижные камни и экспозицию; спуск идёт здесь же.'},
+      {ratio:.498,kicker:'06 / SUMMIT',name:'Rysy',tag:'2499 М',meta:'≈ 12.3 км',level:'summit',prompt:'ТОЛЬКО ПОЛОВИНА',decision:'Возвращайся тем же польским маршрутом; не спускайся в Словакию без отдельной логистики.',body:'Вершина — географическая середина полного дня. Самая требовательная часть ещё повторится на спуске.',photoIndex:1}
+    ],
+    terrain:[{from:0,to:.313,kind:'approach'},{from:.313,to:.44,kind:'effort'},{from:.44,to:.498,kind:'technical'}],
+    sources:[['Zakopane.pl','https://www.zakopane.pl/strefa-turystyczna/turystyka/wycieczki-gorskie-latem/szlaki-lato/rysy'],['TPN: условия','https://tpn.gov.pl/komunikat-turystyczny']]
+  }
+};
