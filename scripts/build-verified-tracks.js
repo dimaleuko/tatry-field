@@ -30,7 +30,12 @@ const SPECS = {
   kopieniec: { segments: ['31b5e'] },
   wolowiec: { segments: ['w94x'] },
   koscielec: { segments: ['hdu1'], mirror: true },
-  rysy: { segments: ['3lrqx'] }
+  rysy: { segments: ['3lrqx'] },
+  szpiglasowy: { segments: ['ex3'] },
+  swinica: { segments: ['dq5q'] },
+  'kozi-wierch': { segments: ['pgty'] },
+  'skrajny-granat': { segments: ['spgo'], mirror: true },
+  starorobocianski: { segments: ['a1dw'] }
 };
 
 function haversineKm(a, b) {

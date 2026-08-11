@@ -62,3 +62,15 @@ Route narratives were cross-checked against the Tatra National Park route catalo
 - TPN Hala Gąsienicowa / Czarny Staw route description: https://tpn.gov.pl/szlaki-turystyczne/dolina-suchej-wody-hala-gasienicowa-czarny-staw-gasienicowy-przelecz-miedzy-kopami-boczan-kuznice
 - TPN Sarnia Skała route description: https://tpn.gov.pl/szlaki-turystyczne/dolina-strazyska-polana-strazyska-siklawica-strazyska-sarnia-skala-dolina-bialego-wielka-krokiew
 - TPN current tourist communication: https://tpn.gov.pl/komunikat-turystyczny
+
+## Phase 3.0 Polish high-route expansion
+
+The five added route maps use the following complete Mapa Turystyczna references; the build stores their GPX geometry ahead of deployment:
+
+- Szpiglasowy Wierch loop via Dolina Pięciu Stawów and Morskie Oko: https://mapa-turystyczna.pl/route/ex3
+- Świnica out-and-back via Świnicka Przełęcz: https://mapa-turystyczna.pl/route/dq5q
+- Kozi Wierch from Dolina Pięciu Stawów: https://mapa-turystyczna.pl/route/pgty
+- Skrajny Granat from Kuźnice and Czarny Staw: https://mapa-turystyczna.pl/route/spgo
+- Starorobociański Wierch loop from Siwa Polana: https://mapa-turystyczna.pl/route/a1dw
+
+Current access and mountain conditions remain governed by the TPN tourist bulletin. Licensed photo credits and direct Commons source links are stored per route in `data/route-photos.json`.

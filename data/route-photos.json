@@ -368,5 +368,25 @@
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rysy,_wierzcholek_slowacki.jpg"
     }
+  ],
+  "szpiglasowy": [
+    {"file":"Tatry - Dolina Pięciu Stawów Polskich.jpg","title":"Dolina Pięciu Stawów","alt":"Высокогорные озёра Dolina Pięciu Stawów Polskich","caption":"Озёрная долина перед уходом к цепям Szpiglasowa Przełęcz.","author":"Samsong","license":"CC BY-SA 3.0","licenseUrl":"https://creativecommons.org/licenses/by-sa/3.0/","sourceUrl":"https://commons.wikimedia.org/wiki/File:Tatry_-_Dolina_Pięciu_Stawów_Polskich.jpg"},
+    {"file":"Szpiglasowy Wierch a2.jpg","title":"Szpiglasowy Wierch","alt":"Szpiglasowa Przełęcz и вершина Szpiglasowy Wierch","caption":"Перевал, короткая вершинная ветка и рельеф над Five Lakes.","author":"Jerzy Opioła","license":"CC BY-SA 3.0","licenseUrl":"https://creativecommons.org/licenses/by-sa/3.0/","sourceUrl":"https://commons.wikimedia.org/wiki/File:Szpiglasowy_Wierch_a2.jpg"}
+  ],
+  "swinica": [
+    {"file":"Hala Gąsienicowa - sierpień.jpg","title":"Hala Gąsienicowa","alt":"Летняя Hala Gąsienicowa под Высокими Татрами","caption":"Последний мягкий пейзаж перед каменной котловиной и перевалом.","author":"Aneta Pawska","license":"CC BY 3.0","licenseUrl":"https://creativecommons.org/licenses/by/3.0/","sourceUrl":"https://commons.wikimedia.org/wiki/File:Hala_Gąsienicowa_-_sierpień.jpg"},
+    {"file":"Swinica - view from Kasprowy Wierch.JPG","title":"Świnica с запада","alt":"Скальная вершина Świnica со стороны Kasprowy Wierch","caption":"Хорошо читаются массив вершины и открытый характер финала.","author":"Monopol","license":"CC BY-SA 3.0","licenseUrl":"https://creativecommons.org/licenses/by-sa/3.0/","sourceUrl":"https://commons.wikimedia.org/wiki/File:Swinica_-_view_from_Kasprowy_Wierch.JPG"}
+  ],
+  "kozi-wierch": [
+    {"file":"Dolina Pięciu Stawów Polskich - Wielki Staw.jpg","title":"Wielki Staw","alt":"Wielki Staw в Dolina Pięciu Stawów Polskich","caption":"Озёрный подход, от которого отделяется чёрная тропа в Szeroki Żleb.","author":"Aneta Pawska","license":"CC BY 3.0","licenseUrl":"https://creativecommons.org/licenses/by/3.0/","sourceUrl":"https://commons.wikimedia.org/wiki/File:Dolina_Pięciu_Stawów_Polskich_-_Wielki_Staw.jpg"},
+    {"file":"Kozi Wierch.jpg","title":"Kozi Wierch","alt":"Скальный массив Kozi Wierch над Dolina Roztoki","caption":"Массив вершины и крутой рельеф, который не виден с дорожного подхода.","author":"Krzysztof Dudzik-Górnicki","license":"CC BY 3.0","licenseUrl":"https://creativecommons.org/licenses/by/3.0/","sourceUrl":"https://commons.wikimedia.org/wiki/File:Kozi_Wierch.jpg"}
+  ],
+  "skrajny-granat": [
+    {"file":"Czarny Staw Gąsienicowy Tatry 01.JPG","title":"Czarny Staw Gąsienicowy","alt":"Czarny Staw под гребнем Granaty","caption":"У озера заканчивается общий подход и начинается отдельная линия на Skrajny Granat.","author":"SkyMaja","license":"CC BY-SA 4.0","licenseUrl":"https://creativecommons.org/licenses/by-sa/4.0/","sourceUrl":"https://commons.wikimedia.org/wiki/File:Czarny_Staw_Gąsienicowy_Tatry_01.JPG"},
+    {"file":"Skrajny Granat a1.jpg","title":"Skrajny Granat","alt":"Скальная вершина Skrajny Granat","caption":"Финальная вершина отдельного подъёма; красная Orla Perć здесь только пересекается.","author":"Jerzy Opioła","license":"CC BY-SA 4.0","licenseUrl":"https://creativecommons.org/licenses/by-sa/4.0/","sourceUrl":"https://commons.wikimedia.org/wiki/File:Skrajny_Granat_a1.jpg"}
+  ],
+  "starorobocianski": [
+    {"file":"Trzydniowiański Wierch, Widok na Starorobociański Wierch.jpg","title":"Путь от Trzydniowiański","alt":"Вид с Trzydniowiański Wierch на Starorobociański Wierch","caption":"Отсюда виден реальный объём гребня, который ещё предстоит пройти.","author":"Bartek Bodak","license":"CC BY-SA 3.0 PL","licenseUrl":"https://creativecommons.org/licenses/by-sa/3.0/pl/","sourceUrl":"https://commons.wikimedia.org/wiki/File:Trzydniowia%C5%84ski_Wierch%2C_Widok_na_Starorobocia%C5%84ski_Wierch.jpg"},
+    {"file":"Starorobociański Wierch from Kończysty Wierch.jpg","title":"Starorobociański от Kończysty","alt":"Starorobociański Wierch с Kończysty Wierch","caption":"Финальный открытый набор к массивной вершине Западных Татр.","author":"Adrian Tync","license":"CC BY-SA 4.0","licenseUrl":"https://creativecommons.org/licenses/by-sa/4.0/","sourceUrl":"https://commons.wikimedia.org/wiki/File:Starorobocia%C5%84ski_Wierch_from_Ko%C5%84czysty_Wierch.jpg"}
   ]
 }

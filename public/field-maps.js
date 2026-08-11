@@ -220,5 +220,80 @@ window.TATRY_FIELD_MAPS={
     ],
     terrain:[{from:0,to:.313,kind:'approach'},{from:.313,to:.44,kind:'effort'},{from:.44,to:.498,kind:'technical'}],
     sources:[['Zakopane.pl','https://www.zakopane.pl/strefa-turystyczna/turystyka/wycieczki-gorskie-latem/szlaki-lato/rysy'],['TPN: условия','https://tpn.gov.pl/komunikat-turystyczny']]
+  },
+  szpiglasowy:{
+    issue:'FIELD MAP 16 / SZPIGLASOWY',title:'Две долины и один цепной порог.',
+    intro:'Где уйти с дороги к Morskie Oko, почему цепи лучше проходить вверх и как после вершины попасть на более плавный спуск.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Palenica Białczańska',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'ПЛАН ПЕТЛИ',decision:'Иди по красной дороге до Wodogrzmoty, но готовься первым делом уйти в Dolina Roztoki.',body:'Направление петли выбрано так, чтобы цепной участок проходить на подъём, а не спускаться по нему.'},
+      {ratio:.12,kicker:'01 / JUNCTION',name:'Wodogrzmoty Mickiewicza',tag:'ПОВОРОТ НА ЗЕЛЁНЫЙ',meta:'≈ 2.8 км',level:'nav',prompt:'КЛЮЧЕВАЯ РАЗВИЛКА',decision:'Сверни на зелёную маркировку в Dolina Roztoki; не продолжай пока к Morskie Oko.',body:'Если пропустить поворот, петля пойдёт в обратную сторону и цепи придётся проходить вниз.'},
+      {ratio:.31,kicker:'02 / LAKES',name:'Dolina Pięciu Stawów',tag:'ПОСЛЕДНЕЕ УКРЫТИЕ',meta:'≈ 7.4 км',level:'info',prompt:'ПОГОДА + ВРЕМЯ',decision:'У приюта оцени прогноз и запас дня перед уходом на жёлтую тропу к Szpiglasowa Przełęcz.',body:'Дальше нет быстрого укрытия, а возвращение в любую сторону остаётся длинным.',photoIndex:0},
+      {ratio:.405,kicker:'03 / JUNCTION',name:'Niżnie Solnisko',tag:'ЖЁЛТЫЙ НА ПЕРЕВАЛ',meta:'≈ 9.6 км',level:'nav',prompt:'НЕ НА ZAWРАТ',decision:'Выбирай жёлтую маркировку на Szpiglasowa Przełęcz; синяя идёт вдоль Five Lakes.',body:'В тумане широкая долина маскирует направление нужного ответвления.'},
+      {ratio:.465,kicker:'04 / CHAINS',name:'Под Szpiglasowa Przełęcz',tag:'ЦЕПИ + ЭКСПОЗИЦИЯ',meta:'≈ 11.0 км',level:'danger',prompt:'ТЕХНИЧЕСКИЙ ПОРОГ',decision:'Следуй жёлтым меткам и цепям; при мокрой скале, льду или встречной пробке не протискивайся.',body:'Короткий, но настоящий технический участок расположен уже после большого набора высоты.'},
+      {ratio:.497,kicker:'05 / SUMMIT',name:'Szpiglasowy Wierch',tag:'2172 М',meta:'≈ 11.8 км',level:'summit',prompt:'ВОЗВРАТ НА ПЕРЕВАЛ',decision:'Вернись к Szpiglasowa Przełęcz и спускайся по жёлтому к Dolina za Mnichem.',body:'Не ищи прямой спуск с вершины; вся логика продолжения снова проходит через перевал.',photoIndex:1},
+      {ratio:.68,kicker:'06 / LAKE',name:'Morskie Oko',tag:'ТЕХНИКА ПОЗАДИ',meta:'≈ 16.1 км',level:'nav',prompt:'ДЛИННЫЙ ФИНИШ',decision:'Выйди на красную дорогу и возвращайся по ней к Palenica.',body:'До транспорта ещё около восьми километров: простая дорога не означает короткий остаток.'},
+      {ratio:1,kicker:'07 / FINISH',name:'Palenica Białczańska',tag:'ФИНИШ',meta:'≈ 23.7 км',level:'info',prompt:'ТРАНСПОРТ',decision:'Проверь очередь и фактический последний рейс до Zakopane.',body:'Петля заканчивается у исходного trailhead.'}
+    ],
+    terrain:[{from:0,to:.31,kind:'approach'},{from:.31,to:.405,kind:'effort'},{from:.405,to:.465,kind:'navigation'},{from:.465,to:.51,kind:'technical'},{from:.51,to:.68,kind:'effort'},{from:.68,to:1,kind:'approach'}],
+    sources:[['Маршрут','https://mapa-turystyczna.pl/route/ex3'],['TPN: условия','https://tpn.gov.pl/komunikat-turystyczny']]
+  },
+  swinica:{
+    issue:'FIELD MAP 17 / ŚWINICA',title:'Перевал — только начало финала.',
+    intro:'Длинный подход через Murowaniec, каменная котловина, критерий разворота на Świnicka Przełęcz и цепи перед 2301 м.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Kuźnice',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'ПОЛНЫЙ ДЕНЬ',decision:'Следуй к Hala Gąsienicowa и не считай знакомый подход разминкой без затрат.',body:'До технической части далеко; запас на обратный путь нужно сохранить уже сейчас.'},
+      {ratio:.20,kicker:'01 / PASS',name:'Przełęcz między Kopami',tag:'ПРОВЕРЬ НЕБО',meta:'≈ 3.5 км',level:'effort',prompt:'ПОГОДА',decision:'Продолжай к Murowaniec только если вершина не собирает грозовое облако.',body:'Выше маршрут будет открытым, а быстрых укрытий после перевала не останется.'},
+      {ratio:.265,kicker:'02 / SHELTER',name:'Murowaniec',tag:'ПОСЛЕДНИЙ ПРИЮТ',meta:'≈ 4.6 км',level:'info',prompt:'ВРЕМЯ + ВОДА',decision:'Сверь темп, воду и прогноз до выхода к Zielony Staw.',body:'Это последняя полноценная инфраструктура перед скальной частью.',photoIndex:0},
+      {ratio:.375,kicker:'03 / BASIN',name:'Zielony Staw Gąsienicowy',tag:'КАМЕННЫЙ ЭТАЖ',meta:'≈ 6.5 км',level:'nav',prompt:'МАРКИРОВКА',decision:'Держись чёрной маркировки к Świnicka Przełęcz, не уходи по соседним озёрным веткам.',body:'Тропа становится грубее, склон круче, а линия в облаке читается хуже.'},
+      {ratio:.47,kicker:'04 / PASS',name:'Świnicka Przełęcz',tag:'ПОСЛЕДНИЙ РАЗВОРОТ',meta:'≈ 8.2 км',level:'danger',prompt:'УСЛОВИЯ НА СКАЛЕ',decision:'Не начинай красный финал при мокрой скале, льду, сильном ветре или плохой видимости.',body:'До вершины меньше километра, но по времени и сложности это отдельная часть маршрута.'},
+      {ratio:.485,kicker:'05 / CHAINS',name:'Żleb Blatona',tag:'ЦЕПИ + ОТКРЫТЫЙ СКЛОН',meta:'≈ 8.5 км',level:'danger',prompt:'ТЕХНИЧЕСКИЙ ФИНАЛ',decision:'Следуй красным меткам и не обходи цепи по случайным следам.',body:'Полированные ступени и экспозиция требуют свободных рук; этим же коридором предстоит спуск.'},
+      {ratio:.50,kicker:'06 / SUMMIT',name:'Świnica',tag:'2301 М',meta:'≈ 8.7 км',level:'summit',prompt:'ТОЛЬКО ПОЛОВИНА',decision:'Возвращайся через Świnicka Przełęcz по тому же польскому варианту.',body:'Не продолжай за вершину без отдельного плана: текущий маршрут — чистый out-and-back.',photoIndex:1}
+    ],
+    terrain:[{from:0,to:.265,kind:'approach'},{from:.265,to:.47,kind:'effort'},{from:.47,to:.50,kind:'technical'}],
+    sources:[['Маршрут','https://mapa-turystyczna.pl/route/dq5q'],['TPN: условия','https://tpn.gov.pl/komunikat-turystyczny']]
+  },
+  'kozi-wierch':{
+    issue:'FIELD MAP 18 / KOZI WIERCH',title:'Не Orla Perć, но уже серьёзные горы.',
+    intro:'Прямая польская линия из Five Lakes: где покинуть синюю тропу, когда начинается Szeroki Żleb и почему вершина не отменяет сложный спуск.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Palenica Białczańska',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'ДЛИННЫЙ ПОДХОД',decision:'Иди до Wodogrzmoty и сворачивай в Dolina Roztoki.',body:'Основная сложность спрятана далеко за долиной; ранний старт обязателен.'},
+      {ratio:.14,kicker:'01 / JUNCTION',name:'Wodogrzmoty Mickiewicza',tag:'ЗЕЛЁНЫЙ В ROZTOKI',meta:'≈ 2.8 км',level:'nav',prompt:'РАЗВИЛКА',decision:'Покинь красную дорогу и следуй зелёной маркировке к Five Lakes.',body:'Morskie Oko — другое направление и не ведёт к выбранной чёрной тропе.'},
+      {ratio:.36,kicker:'02 / SHELTER',name:'Schronisko Five Lakes',tag:'ПОСЛЕДНЕЕ УКРЫТИЕ',meta:'≈ 7.2 км',level:'info',prompt:'КОНТРОЛЬ УСЛОВИЙ',decision:'Перед продолжением оцени снег на склоне и облачность над Kozi Wierch.',body:'После приюта быстрых укрытий нет.',photoIndex:0},
+      {ratio:.425,kicker:'03 / JUNCTION',name:'Под Kozim Wierchem',tag:'ЧЁРНЫЙ В ЖЁЛОБ',meta:'≈ 8.5 км',level:'nav',prompt:'КЛЮЧЕВОЙ ПОВОРОТ',decision:'Сверни с синей тропы на чёрную маркировку к Kozi Wierch.',body:'Синяя продолжает вдоль долины; нужная ветка резко уходит вверх.'},
+      {ratio:.455,kicker:'04 / GULLY',name:'Szeroki Żleb',tag:'ЗДЕСЬ НАЧИНАЕТСЯ СЛОЖНОСТЬ',meta:'≈ 9.1 км',level:'danger',prompt:'КРУТО + СЫПУЧЕ',decision:'Держись размеченной линии на ребре, не срезай по дну жёлоба и сохраняй дистанцию.',body:'Уклон и подвижные камни опасны для людей ниже; снег превращает участок в зимнюю задачу.'},
+      {ratio:.50,kicker:'05 / SUMMIT',name:'Kozi Wierch',tag:'2291 М',meta:'≈ 10.0 км',level:'summit',prompt:'НЕ НА ORLA PERĆ',decision:'Разворачивайся по чёрной тропе; не продолжай по красной линии Orla Perć.',body:'На вершине пересекается маршрут другого класса. Текущий план заканчивается здесь.',photoIndex:1}
+    ],
+    terrain:[{from:0,to:.36,kind:'approach'},{from:.36,to:.425,kind:'navigation'},{from:.425,to:.455,kind:'effort'},{from:.455,to:.50,kind:'technical'}],
+    sources:[['Маршрут','https://mapa-turystyczna.pl/route/pgty'],['TPN: условия','https://tpn.gov.pl/komunikat-turystyczny']]
+  },
+  'skrajny-granat':{
+    issue:'FIELD MAP 19 / SKRAJNY GRANAT',title:'Подняться к Orla Perć — и не пойти по ней.',
+    intro:'Знакомый Czarny Staw, неприметный уход на жёлтый, крутой подъём и ясная граница между нашей вершиной и полным траверсом.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Kuźnice',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'ПЛАН OUT & BACK',decision:'Следуй к Hala Gąsienicowa и Czarny Staw.',body:'Сегодня красная Orla Perć не является маршрутом — только точкой встречи на вершине.'},
+      {ratio:.265,kicker:'01 / SHELTER',name:'Murowaniec',tag:'ПОСЛЕДНИЙ ПРИЮТ',meta:'≈ 4.3 км',level:'info',prompt:'ПОГОДА',decision:'Продолжай к Czarny Staw только при сухом бесснежном верхе.',body:'На крутом финале мокрые камни и снег меняют класс задачи.'},
+      {ratio:.35,kicker:'02 / LAKE',name:'Czarny Staw Gąsienicowy',tag:'ГРАНАТЫ НАД ОЗЕРОМ',meta:'≈ 5.7 км',level:'info',prompt:'ВИЗУАЛЬНАЯ ПРОВЕРКА',decision:'Осмотри верхний склон и продолжай по синему вдоль восточного берега.',body:'Отсюда хорошо видно масштаб набора, которого не чувствуется у Murowaniec.',photoIndex:0},
+      {ratio:.405,kicker:'03 / JUNCTION',name:'Под Granatami',tag:'ЖЁЛТЫЙ ВВЕРХ',meta:'≈ 6.6 км',level:'nav',prompt:'НЕ ПРОПУСТИ ПОВОРОТ',decision:'Сверни на жёлтую маркировку к Skrajny Granat.',body:'Синяя тропа ведёт дальше к Zawrat; это не наш маршрут.'},
+      {ratio:.445,kicker:'04 / CLIMB',name:'Скальный порог',tag:'КОРОТКАЯ ЦЕПЬ + КЛАМРА',meta:'≈ 7.3 км',level:'danger',prompt:'КАМНИ + ЭКСПОЗИЦИЯ',decision:'Держись жёлтых меток, используй цепь и скобу на самом неудобном месте и сохраняй дистанцию.',body:'Большая часть подъёма идёт по крутым камням; короткая искусственная страховка появляется на скальном пороге.'},
+      {ratio:.50,kicker:'05 / SUMMIT',name:'Skrajny Granat',tag:'2225 М / СТОП',meta:'≈ 8.2 км',level:'summit',prompt:'ГРАНИЦА МАРШРУТА',decision:'Вернись по жёлтой тропе. Не продолжай по красной Orla Perć.',body:'Красная маркировка с вершины — уже технический траверс другого уровня, не «ещё один километр».',photoIndex:1}
+    ],
+    terrain:[{from:0,to:.35,kind:'approach'},{from:.35,to:.405,kind:'navigation'},{from:.405,to:.445,kind:'effort'},{from:.445,to:.50,kind:'technical'}],
+    sources:[['Маршрут','https://mapa-turystyczna.pl/route/spgo'],['TPN: условия','https://tpn.gov.pl/komunikat-turystyczny']]
+  },
+  starorobocianski:{
+    issue:'FIELD MAP 20 / STAROROBOCIAŃSKI',title:'Длинный гребень без цепей и без скидок.',
+    intro:'Где выйти из Chochołowska, как читать широкий хребет в тумане и когда разворачиваться до самого высокого польского Западного Татра.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Siwa Polana',tag:'СТАРТ',meta:'0.0 км',level:'info',prompt:'10-ЧАСОВОЙ ДЕНЬ',decision:'Иди по зелёной оси Dolina Chochołowska и контролируй темп с первого километра.',body:'Технических цепей нет, но длина и набор делают маршрут серьёзным.'},
+      {ratio:.18,kicker:'01 / JUNCTION',name:'Polana Trzydniówka',tag:'КРАСНЫЙ ИЗ ДОЛИНЫ',meta:'≈ 4.2 км',level:'nav',prompt:'КЛЮЧЕВОЙ ПОВОРОТ',decision:'Сверни на красную маркировку к Trzydniowiański Wierch.',body:'Если продолжить по главной долине, попадёшь к Chochołowska shelter и потеряешь петлю.'},
+      {ratio:.31,kicker:'02 / RIDGE',name:'Trzydniowiański Wierch',tag:'ОТКРЫВАЕТСЯ ВЕСЬ ПЛАН',meta:'≈ 7.3 км',level:'effort',prompt:'ВРЕМЯ + ПОГОДА',decision:'Оцени видимость и запас до Kończysty; дальше укрытия нет.',body:'Отсюда Starorobociański уже виден, но между вами остаётся длинный открытый гребень.',photoIndex:0},
+      {ratio:.385,kicker:'03 / RIDGE',name:'Kończysty Wierch',tag:'ПОСЛЕДНЕЕ ПРОСТОЕ РЕШЕНИЕ',meta:'≈ 8.9 км',level:'nav',prompt:'КРИТЕРИЙ РАЗВОРОТА',decision:'Не продолжай при нарастающем ветре, грозе или плохой видимости.',body:'Следующий набор выше и круче; быстрых путей вниз с середины участка нет.',photoIndex:1},
+      {ratio:.435,kicker:'04 / CLIMB',name:'Starorobociańska Przełęcz',tag:'ФИНАЛЬНЫЙ НАБОР',meta:'≈ 10.0 км',level:'effort',prompt:'КРУТОЙ ТРАВЕРС',decision:'Следуй маркированной гребневой линии и не уходи на словацкую сторону по боковым следам.',body:'Широкий склон в облаке выглядит безобидно, но легко теряет визуальную линию маршрута.'},
+      {ratio:.49,kicker:'05 / SUMMIT',name:'Starorobociański Wierch',tag:'2176 М',meta:'≈ 11.3 км',level:'summit',prompt:'ПОЛОВИНА ДНЯ',decision:'Продолжай только по запланированной польской петле к Dolina Starorobociańska.',body:'Финиш всё ещё далеко; контролируй маркировку на открытом пограничном рельефе.'},
+      {ratio:.67,kicker:'06 / DESCENT',name:'Dolina Starorobociańska',tag:'ТУМАН ОСТАЁТСЯ СВЕРХУ',meta:'≈ 15.5 км',level:'nav',prompt:'СПУСК В ДОЛИНУ',decision:'Держись польской маркированной ветки до соединения с Dolina Chochołowska.',body:'После гребня ориентирование упрощается, но длинный каменистый спуск нагружает колени.'},
+      {ratio:1,kicker:'07 / FINISH',name:'Siwa Polana',tag:'ФИНИШ',meta:'≈ 23.1 км',level:'info',prompt:'ПОСЛЕДНИЙ РЕЙС',decision:'Сверь обратный транспорт; усталость не сокращает долинный выход.',body:'Петля заканчивается там же, где начиналась.'}
+    ],
+    terrain:[{from:0,to:.18,kind:'approach'},{from:.18,to:.31,kind:'effort'},{from:.31,to:.49,kind:'navigation'},{from:.49,to:.67,kind:'effort'},{from:.67,to:1,kind:'approach'}],
+    sources:[['Маршрут','https://mapa-turystyczna.pl/route/a1dw'],['TPN: условия','https://tpn.gov.pl/komunikat-turystyczny']]
   }
 };

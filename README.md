@@ -1,4 +1,4 @@
-# TATRY / FIELD — Phase 2.9
+# TATRY / FIELD — Phase 3.0
 
 Editorial hiking planner for the Polish Tatras, now with a **Live Trail Mode**.
 
@@ -133,3 +133,10 @@ Leaflet is now installed from npm and served locally by the Node service instead
 - links each map to its route reference and available official TPN or Zakopane route descriptions
 - preserves the verified full track under the colour overlays and treats every marker as approximate planning context rather than turn-by-turn navigation
 - validates route coverage, marker order, terrain ranges and photo references in `npm test`
+
+## Phase 3.0 Polish high-route expansion
+
+- grows the catalog from 15 to 20 routes with Szpiglasowy Wierch, Świnica, Kozi Wierch, Skrajny Granat and Starorobociański Wierch
+- adds source-backed GPX geometry, two licensed Wikimedia Commons highlights and a route-specific Field Map for every addition
+- models Kozi Wierch and Skrajny Granat as separate out-and-back routes instead of presenting a full Orla Perć traverse as an ordinary catalog hike
+- keeps every start and finish on the Polish side

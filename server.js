@@ -20,7 +20,7 @@ const VERIFIED_TRACKS = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(ROO
 const ROUTE_MAP = new Map(ROUTES.map((r) => [r.id, r]));
 const STAY_ZONES = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'stay-zones.json'), 'utf8'));
 const STAY_ZONE_MAP = new Map(STAY_ZONES.map((z) => [z.id, z]));
-const USER_AGENT = 'TatryFieldPhase2/0.4.0 (+source-backed route tracks; safety-first hiking guide)';
+const USER_AGENT = 'TatryFieldPhase3/0.5.0 (+source-backed route tracks; safety-first hiking guide)';
 
 const cache = new Map();
 function getCache(key) {
@@ -379,7 +379,7 @@ async function gpxForRoute(route) {
   const routed=await routeGeometry(route);
   const points=routed.geometry.coordinates;
   const trkpts=points.map(([lon,lat])=>`      <trkpt lat=\"${lat}\" lon=\"${lon}\"></trkpt>`).join('\n');
-  return `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx version=\"1.1\" creator=\"TATRY FIELD Phase 2\" xmlns=\"http://www.topografix.com/GPX/1/1\">\n  <metadata><name>${xmlEscape(route.name)}</name><desc>Source-backed reference track checked for distance and geometry. Follow official TPN trail markings and current safety information.</desc></metadata>\n  <trk><name>${xmlEscape(route.name)}</name><trkseg>\n${trkpts}\n  </trkseg></trk>\n</gpx>`;
+  return `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx version=\"1.1\" creator=\"TATRY FIELD Phase 3\" xmlns=\"http://www.topografix.com/GPX/1/1\">\n  <metadata><name>${xmlEscape(route.name)}</name><desc>Source-backed reference track checked for distance and geometry. Follow official TPN trail markings and current safety information.</desc></metadata>\n  <trk><name>${xmlEscape(route.name)}</name><trkseg>\n${trkpts}\n  </trkseg></trk>\n</gpx>`;
 }
 
 async function handleApi(req,res,url) {
@@ -424,4 +424,4 @@ const server=http.createServer(async(req,res)=>{
   } catch(error) { console.error(error); if(!res.headersSent) json(res,500,{error:error.message}); else res.end(); }
 });
 
-server.listen(PORT,()=>console.log(`TATRY FIELD Phase 2.9 → http://localhost:${PORT}`));
+server.listen(PORT,()=>console.log(`TATRY FIELD Phase 3.0 → http://localhost:${PORT}`));

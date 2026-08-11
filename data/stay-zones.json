@@ -25,7 +25,12 @@
       "kopieniec",
       "wolowiec",
       "koscielec",
-      "rysy"
+      "rysy",
+      "szpiglasowy",
+      "swinica",
+      "kozi-wierch",
+      "skrajny-granat",
+      "starorobocianski"
     ]
   },
   {
@@ -45,7 +50,9 @@
       "giewont",
       "czerwone",
       "nosal",
-      "koscielec"
+      "koscielec",
+      "swinica",
+      "skrajny-granat"
     ]
   },
   {
@@ -63,7 +70,8 @@
       "czerwone",
       "koscieliska",
       "chocholowska",
-      "wolowiec"
+      "wolowiec",
+      "starorobocianski"
     ]
   },
   {
@@ -82,7 +90,9 @@
       "kopieniec",
       "morskie-oko",
       "five-lakes",
-      "rysy"
+      "rysy",
+      "szpiglasowy",
+      "kozi-wierch"
     ]
   },
   {
@@ -99,7 +109,9 @@
     "routes": [
       "morskie-oko",
       "five-lakes",
-      "rysy"
+      "rysy",
+      "szpiglasowy",
+      "kozi-wierch"
     ]
   }
 ]
