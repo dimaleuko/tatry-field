@@ -1,4 +1,4 @@
-# TATRY / FIELD — Phase 3.0
+# TATRY / FIELD — Phase 3.1
 
 Editorial hiking planner for the Polish Tatras, now with a **Live Trail Mode**.
 
@@ -140,3 +140,12 @@ Leaflet is now installed from npm and served locally by the Node service instead
 - adds source-backed GPX geometry, two licensed Wikimedia Commons highlights and a route-specific Field Map for every addition
 - models Kozi Wierch and Skrajny Granat as separate out-and-back routes instead of presenting a full Orla Perć traverse as an ordinary catalog hike
 - keeps every start and finish on the Polish side
+
+## Phase 3.1 hiking preparation field kit
+
+- adds a full preparation guide directly after the BASE CAMP / housing section
+- separates an ordinary trail day from a high-mountain day with exposure, chains and larger safety margins
+- covers clothing layers, backpack essentials, preflight decisions, small packing hacks and explicit behaviours to avoid
+- keeps winter equipment conditional on both real mountain conditions and the skills to use it
+- grounds the safety copy in current TPN and TOPR guidance and links directly to official bulletins
+- uses two original, brand-free editorial images made for the project instead of copying Pinterest pins or campaign assets

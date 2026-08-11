@@ -74,3 +74,13 @@ The five added route maps use the following complete Mapa Turystyczna references
 - Starorobociański Wierch loop from Siwa Polana: https://mapa-turystyczna.pl/route/a1dw
 
 Current access and mountain conditions remain governed by the TPN tourist bulletin. Licensed photo credits and direct Commons source links are stored per route in `data/route-photos.json`.
+
+## Phase 3.1 hiking preparation guide
+
+The packing and decision guidance is grounded in the official sources already treated as authoritative by the product:
+
+- TOPR safety FAQ and planning guidance: https://topr.pl/
+- TPN current conditions, warnings, closures and visitor rules: https://tpn.gov.pl/komunikat-turystyczny
+- TOPR avalanche bulletin for snow-covered conditions: https://lawiny.topr.pl/
+
+The guide intentionally distinguishes basic all-season essentials from route- and condition-specific technical equipment. Crampons, an ice axe and avalanche equipment are never presented as useful without the training to use them. The two section images are original TATRY / FIELD editorial assets generated for this project; they contain no third-party logos or copied Pinterest imagery.

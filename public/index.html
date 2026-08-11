@@ -3,11 +3,61 @@
 <title>TATRY / FIELD — нишевый хайкинг</title>
 <link rel="stylesheet" href="/vendor/leaflet/leaflet.css"><link rel="stylesheet" href="/styles.css">
 </head><body><div class="noise"></div>
-<header class="topbar"><a class="brand" href="/"><span class="brand-dot"></span>TATRY / FIELD</a><nav class="toplinks"><a href="#routes">20 маршрутов</a><a href="#photo-code">Фото-код</a><a href="https://tpn.gov.pl/komunikat-turystyczny" target="_blank" rel="noopener">TPN ↗</a><a href="https://topr.pl/" target="_blank" rel="noopener">TOPR ↗</a></nav></header>
-<section class="hero"><div class="eyebrow">Polish Tatras / Phase 3.0 / 20 field maps + compare + live trail mode</div><h1>Нишевый<br>хайкинг</h1><div class="hero-grid"><div class="hero-copy"><b>20 маршрутов только с польскими стартами, реальные фотохайлайты, сравнение выбора, terrain-карта, жильё по логистике и режим навигации в дороге.</b> У каждого маршрута есть Field Map: полноценный топографический контекст, точки решений, смена нагрузки, критерии разворота и фотографии прямо на треке.</div><div class="official-mini"><div class="row"><span><i class="live"></i>official layer</span><span id="officialState">проверка…</span></div><p id="officialText">Условия в горах меняются быстрее планов. Здесь — маршруты и логистика; TPN/TOPR остаются последним обязательным check перед выходом.</p></div></div></section>
+<header class="topbar"><a class="brand" href="/"><span class="brand-dot"></span>TATRY / FIELD</a><nav class="toplinks"><a href="#routes">20 маршрутов</a><a href="#prep-guide">Подготовка</a><a href="#photo-code">Фото-код</a><a href="https://tpn.gov.pl/komunikat-turystyczny" target="_blank" rel="noopener">TPN ↗</a><a href="https://topr.pl/" target="_blank" rel="noopener">TOPR ↗</a></nav></header>
+<section class="hero"><div class="eyebrow">Polish Tatras / Phase 3.1 / 20 field maps + compare + live trail mode + field kit</div><h1>Нишевый<br>хайкинг</h1><div class="hero-grid"><div class="hero-copy"><b>20 маршрутов только с польскими стартами, реальные фотохайлайты, сравнение выбора, terrain-карта, жильё по логистике и режим навигации в дороге.</b> У каждого маршрута есть Field Map: полноценный топографический контекст, точки решений, смена нагрузки, критерии разворота и фотографии прямо на треке.</div><div class="official-mini"><div class="row"><span><i class="live"></i>official layer</span><span id="officialState">проверка…</span></div><p id="officialText">Условия в горах меняются быстрее планов. Здесь — маршруты и логистика; TPN/TOPR остаются последним обязательным check перед выходом.</p></div></div></section>
 <div class="controls"><button class="chip" data-filter="under4">≤ 4 часов</button><button class="chip" data-filter="noChains">Без цепей</button><button class="chip" data-filter="beginner">Для новичка</button><button class="chip" data-filter="beautiful">Самые красивые</button><button class="chip" data-filter="quiet">Не слишком людно</button><button class="chip" data-filter="hike">Просто хайк</button><button class="chip" data-filter="height">С целью / высотой</button><button class="chip" data-filter="easyReturn">Легко обратно в Zakopane</button><button class="chip" data-filter="reset">Сбросить</button><span class="count" id="count"></span></div>
 <main class="workspace" id="routes"><section class="map-shell"><div id="map" class="map"></div><div class="map-note"><b>Планирование:</b> Zakopane, Kuźnice, Morskie Oko и основные trailheads выделены поверх топографической карты. Наведи на маршрут — увидишь линию в контексте города.<br><br><b>В дороге:</b> открой карточку маршрута и нажми <b>START TRAIL MODE</b> — там есть GPS, прогресс, отклонение от трека и подробный zoom.</div></section><section class="routes" id="routeList"><div class="empty">Загружаю Татры…</div></section></main>
 <section class="stay-guide" id="stay-guide"><div class="stay-guide-head"><div><div class="eyebrow">BASE CAMP / ГДЕ ЖИТЬ</div><h2>Выбирай жильё не по Krupówki,<br>а по утренней логистике.</h2></div><p>Если вы без машины и ещё не знаете точные маршруты — центр у Dworzec обычно самый универсальный. Если уже понятно, какая часть Татр приоритетна, база ближе к trailhead экономит очень много сил утром и вечером.</p></div><div class="stay-zones" id="stayZones"><span class="loading">Собираю районы…</span></div><div class="source-note stay-source">Кнопки Booking открывают внешний поиск по району. Цены и доступность здесь пока не подтягиваются: официальный Booking Demand API требует партнёрского доступа.</div></section>
+<section class="prep-guide" id="prep-guide" aria-labelledby="prep-guide-title">
+  <div class="prep-topline"><span>FIELD KIT / TATRY 01—02</span><span>СОБРАНО ДЛЯ ОДНОДНЕВНЫХ МАРШРУТОВ</span></div>
+  <header class="prep-head">
+    <div><div class="eyebrow">HOW TO PACK / БЕЗ ЛИШНЕГО ГЕРОИЗМА</div><h2 id="prep-guide-title">Как подготовиться<br>к хайку — и вернуться<br>с тем же настроением.</h2></div>
+    <div class="prep-intro"><p>Один и тот же прогноз ощущается по-разному в долине и на открытом гребне. Поэтому ниже — не один универсальный «лук», а два режима сборов: спокойный trail day и высокогорный день с ветром, камнем, цепями и правом вовремя развернуться.</p><a href="https://tpn.gov.pl/komunikat-turystyczny" target="_blank" rel="noopener">Открыть актуальный TPN bulletin ↗</a></div>
+  </header>
+  <div class="prep-preflight" aria-label="Четыре проверки до выхода">
+    <div class="prep-preflight-title"><span>00 / BEFORE ZIP</span><strong>Четыре вопроса<br>до рюкзака.</strong></div>
+    <div><span>01</span><b>Маршрут подходит всей группе?</b><p>Считай время, набор и сложность по самому слабому участнику.</p></div>
+    <div><span>02</span><b>Что говорит TPN сегодня?</b><p>Проверь закрытия, ремонт, снег, мокрую скалу и движение на тропе.</p></div>
+    <div><span>03</span><b>Какая погода наверху?</b><p>Температура, ветер и гроза важнее красивой иконки «солнечно» в Zakopane.</p></div>
+    <div><span>04</span><b>Где твоя точка разворота?</b><p>Назначь время заранее и оставь запас на спуск до темноты.</p></div>
+  </div>
+
+  <article class="prep-chapter prep-chapter-trail" aria-labelledby="prep-trail-title">
+    <figure class="prep-visual">
+      <img src="/assets/hike-prep-trail-day.webp" alt="Компактный набор для дневного хайка: рюкзак, слои одежды, обувь, вода, еда, карта, фонарь и аптечка" loading="lazy" decoding="async">
+      <div class="prep-visual-stamp"><span>01 / TRAIL DAY</span><b>18—22 L</b><small>ДОЛИНА · ЛЕС · НИЖНИЙ ХРЕБЕТ</small></div>
+      <figcaption><span>PACK LIGHT / KEEP THE ESSENTIALS</span><span>Original editorial for TATRY / FIELD</span></figcaption>
+    </figure>
+    <div class="prep-chapter-body">
+      <header><span class="prep-index">01</span><div><small>ПРОСТО ХАЙК</small><h3 id="prep-trail-title">Легко —<br>не значит налегке.</h3><p>Для долины, лесной петли или невысокой вершины не нужен экспедиционный гардероб. Нужна компактная система, которая переживёт дождь, натёртую пятку и задержку на пару часов.</p></div></header>
+      <div class="prep-kit-grid">
+        <section class="prep-kit-card"><span>WEAR / НА СЕБЯ</span><h4>Три слоя, которые не спорят</h4><ul><li>Дышащая футболка или тонкий base layer.</li><li>Лёгкий флис — надеть на остановке, не когда уже замёрз.</li><li>Ветро- и дождезащитная куртка сверху рюкзака.</li><li>Разношенные trail shoes или ботинки с цепкой подошвой.</li><li>Треккинговые носки, кепка или панама.</li></ul></section>
+        <section class="prep-kit-card"><span>PACK / ВНУТРЬ</span><h4>Минимум, который решает день</h4><ul><li>Вода в двух ёмкостях + еда и резервный перекус.</li><li>Телефон, offline-карта, powerbank и короткий кабель.</li><li>Мини-аптечка, пластыри от мозолей, личные лекарства.</li><li>Налобный фонарь — даже если план вернуться днём.</li><li>SPF, очки, салфетки и пакет для своего мусора.</li></ul></section>
+      </div>
+      <div class="prep-hacks"><span>LITTLE HACKS / 04</span><div><b>Раздели воду.</b><p>Две бутылки надёжнее одной и лучше балансируют рюкзак.</p></div><div><b>Сухое — в zip bag.</b><p>Телефон, запасной слой и документы не должны проверять мембрану на веру.</p></div><div><b>Shell — наверх.</b><p>Если ради куртки надо выгрузить весь рюкзак, ты наденешь её слишком поздно.</p></div><div><b>Разнашивай дома.</b><p>Первый длинный маршрут — плохой тест для новой обуви и носков.</p></div></div>
+      <aside class="prep-avoid"><span>DON'T / НЕ НАДО</span><p>Не рассчитывай на хлопковую толстовку как на единственный тёплый слой, воду из ручья, «там точно будет schronisko» и заряд телефона на 18%. Не уходи с маркированной тропы ради кадра.</p></aside>
+    </div>
+  </article>
+
+  <article class="prep-chapter prep-chapter-high" aria-labelledby="prep-high-title">
+    <figure class="prep-visual">
+      <img src="/assets/hike-prep-high-mountain.webp" alt="Набор для высокогорного маршрута: тёплые и защитные слои, прочная обувь, перчатки, шлем, карта, вода, фонарь и аварийный комплект" loading="lazy" decoding="async">
+      <div class="prep-visual-stamp"><span>02 / HIGH MOUNTAIN</span><b>28—32 L</b><small>СКАЛА · ГРЕБЕНЬ · ЦЕПИ</small></div>
+      <figcaption><span>MORE MARGIN / LESS EGO</span><span>Original editorial for TATRY / FIELD</span></figcaption>
+    </figure>
+    <div class="prep-chapter-body">
+      <header><span class="prep-index">02</span><div><small>ВЫСОКОГОРНЫЙ ХАЙК</small><h3 id="prep-high-title">Добавь запас.<br>Убавь эго.</h3><p>Открытый рельеф, большая высота набора, камень и искусственные опоры меняют цену ошибки. Здесь важны не только вещи, но опыт, техника и план B, который не стыдно использовать.</p></div></header>
+      <div class="prep-kit-grid">
+        <section class="prep-kit-card"><span>WEAR / СИСТЕМА</span><h4>Тепло без перегрева на подъёме</h4><ul><li>Base layer, флис, утепляющий слой и waterproof shell.</li><li>Тёплая шапка или buff; тонкие и прочные перчатки для цепей.</li><li>Устойчивая обувь с цепкой подошвой и знакомой посадкой.</li><li>Очки и SPF: высота усиливает солнце даже в облаках.</li><li>Шлем — там, где маршрут и риск падающих камней этого требуют.</li></ul></section>
+        <section class="prep-kit-card"><span>PACK / ЗАПАС</span><h4>Всё из trail day — плюс margin</h4><ul><li>Больше воды и еды, чем требует идеальный тайминг.</li><li>Сухой тёплый слой, перчатки и emergency blanket.</li><li>Бумажная или offline-карта, полный powerbank, налобник.</li><li>Аптечка, свисток, номер TOPR и приложение Ratunek.</li><li>Техническое снаряжение — только под маршрут, условия и свои навыки.</li></ul></section>
+      </div>
+      <div class="prep-hacks prep-hacks-high"><span>DECISION KIT / 04</span><div><b>Стартуй рано.</b><p>Но учитывай действующие правила TPN: маршрут должен закончиться до темноты.</p></div><div><b>Смотри на группу.</b><p>Темп и решение о продолжении задаёт не самый быстрый, а самый уставший.</p></div><div><b>Гроза = вниз.</b><p>Гребни, цепи и металлические опоры — не место пережидать грозу.</p></div><div><b>Зима — отдельный навык.</b><p>Раки, ледоруб и лавинный комплект помогают только тем, кто умеет ими пользоваться.</p></div></div>
+      <aside class="prep-avoid"><span>TURN AROUND / БЕЗ ТОРГА</span><p>Разворачивайся при грозе, сильном ветре, мокрой или обледенелой скале, потере маркировки, сбитом тайминге или страхе, который ломает технику движения. Raczki не предназначены для крутого рельефа с риском падения.</p></aside>
+    </div>
+  </article>
+
+  <footer class="prep-official"><div><span>OFFICIAL CHECK / LAST WORD</span><strong>Гид помогает собрать рюкзак.<br>Условия решают, можно ли идти.</strong></div><p>Перед каждым выходом заново проверь маршрут, прогноз, туристический bulletin TPN и, при снежном покрове, лавинный bulletin TOPR. Указанные литры — ориентир для однодневного похода, а не норма безопасности.</p><div class="prep-official-links"><a href="https://tpn.gov.pl/komunikat-turystyczny" target="_blank" rel="noopener">TPN CONDITIONS ↗</a><a href="https://topr.pl/" target="_blank" rel="noopener">TOPR SAFETY ↗</a><a href="https://lawiny.topr.pl/" target="_blank" rel="noopener">AVALANCHE ↗</a></div></footer>
+</section>
 <section class="photo-code" id="photo-code" aria-labelledby="photo-code-title">
   <div class="photo-code-topline"><span>NICHE HIKER FIELD GUIDE</span><span>06 PHOTO RITUALS / ABSOLUTELY OPTIONAL</span></div>
   <div class="photo-code-head">
