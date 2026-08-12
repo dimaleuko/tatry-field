@@ -1,5 +1,6 @@
 const LEVELS={1:'Кофе в термосе',2:'Выгулять Salomon',3:'Уже не brunch',4:'Руки на скалу',5:'Позвони маме'};
 const ZAKOPANE={name:'ZAKOPANE',lat:49.2992,lon:19.9496,kind:'city'};
+const HOME_BASE=window.TatryMapPoints.home;
 const LANDMARKS=[
   ZAKOPANE,
   {name:'KUŹNICE',lat:49.2705,lon:19.9816,kind:'trailhead'},
@@ -17,7 +18,7 @@ const TOPO_ATTR='Map data © OpenStreetMap contributors · Map style © OpenTopo
 const DETAIL_URL='https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const DETAIL_ATTR='© OpenStreetMap contributors';
 const id=location.pathname.split('/').filter(Boolean).pop();
-let route,routes=[],stayZones=[],map,routeOutline,routeLayer,routeBounds,geometryData,routeMarkers=null,contextLayer=null,poiLayer=null;
+let route,routes=[],stayZones=[],map,routeOutline,routeLayer,routeBounds,geometryData,routeMarkers=null,contextLayer=null,poiLayer=null,homeMarker=null;
 let fieldMapLeaflet=null,fieldRouteGroup=null,fieldMapBounds=null,fieldStopMarkers=[];
 let trailPois=[];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -31,10 +32,11 @@ function haversineKm(a,b){const R=6371,rad=Math.PI/180,dLat=(b.lat-a.lat)*rad,dL
 function haversineM(a,b){return haversineKm(a,b)*1000}
 function landmarkIcon(l){return L.divIcon({className:'landmark-icon-wrap',html:`<div class="landmark-label ${l.kind}"><i></i><span>${esc(l.name)}</span></div>`,iconSize:[150,28],iconAnchor:[8,14]})}
 function routePin(kind,label){return L.divIcon({className:'route-pin-wrap',html:`<div class="route-pin ${kind}"><i></i><span>${esc(label)}</span></div>`,iconSize:[190,34],iconAnchor:[12,17]})}
-function addContextLandmarks(){contextLayer.clearLayers();LANDMARKS.forEach(l=>L.marker([l.lat,l.lon],{icon:landmarkIcon(l),interactive:false,zIndexOffset:l.kind==='city'?450:100}).addTo(contextLayer))}
+function addContextLandmarks(){contextLayer.clearLayers();LANDMARKS.forEach(l=>L.marker([l.lat,l.lon],{icon:landmarkIcon(l),interactive:false,zIndexOffset:l.kind==='city'?450:100}).addTo(contextLayer));homeMarker=window.TatryMapPoints.addHomeMarker(contextLayer)}
 function fitRoute(){if(routeBounds?.isValid())map.fitBounds(routeBounds.pad(.11),{animate:true,maxZoom:14})}
-function fitContext(){if(!routeBounds?.isValid())return;const b=L.latLngBounds(routeBounds);b.extend([ZAKOPANE.lat,ZAKOPANE.lon]);map.fitBounds(b.pad(.14),{animate:true,maxZoom:11})}
-function bindMapViews(){document.querySelectorAll('[data-map-view]').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('[data-map-view]').forEach(x=>x.classList.remove('active'));btn.classList.add('active');btn.dataset.mapView==='context'?fitContext():fitRoute()})}
+function fitContext(){if(!routeBounds?.isValid())return;const b=L.latLngBounds(routeBounds);b.extend([HOME_BASE.lat,HOME_BASE.lon]);map.fitBounds(b.pad(.14),{animate:true,maxZoom:11})}
+function fitHome(){map.setView([HOME_BASE.lat,HOME_BASE.lon],15,{animate:true});homeMarker?.openPopup()}
+function bindMapViews(){document.querySelectorAll('[data-map-view]').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('[data-map-view]').forEach(x=>x.classList.remove('active'));btn.classList.add('active');if(btn.dataset.mapView==='context')fitContext();else if(btn.dataset.mapView==='home')fitHome();else fitRoute()})}
 function returnClass(score){return score>=5?'excellent':score>=4?'good':'caution'}
 function kindLabel(r){return r.routeKind==='height'?'ЦЕЛЬ: ВЫСОТА':'ПРОСТО ХАЙК'}
 function googleDirections(lat,lon,mode='walking'){return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}&travelmode=${mode}&dir_action=navigate`}
@@ -59,7 +61,7 @@ function renderFieldMapShell(){
   return `<section class="field-map" id="fieldMap" role="tabpanel" hidden aria-labelledby="fieldMapTitle">
     <header class="field-map-header"><div><span>${esc(config.issue)}</span><h3 id="fieldMapTitle">${esc(config.title)}</h3></div><p>${esc(config.intro)}</p></header>
     <div class="field-map-layout"><div class="field-terrain-map" id="fieldTerrainMap" aria-label="Топографическая карта маршрута ${esc(route.name)} с интерактивными этапами"></div><aside class="field-map-readout" id="fieldMapReadout" aria-live="polite"></aside></div>
-    <footer class="field-map-footer"><div class="field-map-key"><span class="approach">подход</span><span class="effort">набор / нагрузка</span><span class="navigation">точки решения</span><span class="technical">сложное покрытие</span></div><p>Цветом выделены ключевые участки; тонкая линия сохраняет полный трек. Точки привязаны приблизительно и не заменяют маркировку, офлайн-карту или актуальные сообщения TPN/TOPR. Источники: ${fieldSourceLinks(config)}.</p></footer>
+    <footer class="field-map-footer"><div class="field-map-key"><span class="approach">подход</span><span class="effort">набор / нагрузка</span><span class="navigation">точки решения</span><span class="technical">сложное покрытие</span></div><div class="field-home-action"><button type="button" data-field-home>⌂ ПОКАЗАТЬ НАШ ДОМ</button><p>Цветом выделены ключевые участки; тонкая линия сохраняет полный трек. Точки привязаны приблизительно и не заменяют маркировку, офлайн-карту или актуальные сообщения TPN/TOPR. Источники: ${fieldSourceLinks(config)}.</p></div></footer>
     <div class="field-photo-overlay" id="fieldPhotoOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="fieldPhotoTitle"><button type="button" class="field-photo-close" data-field-photo-close aria-label="Закрыть фотографию">×</button><div class="field-photo-dialog"><img id="fieldPhotoImage" alt=""><div><span>ROUTE PHOTO / МЕСТО НА ТРЕКЕ</span><h4 id="fieldPhotoTitle"></h4><p id="fieldPhotoCaption"></p><div id="fieldPhotoCredit" class="photo-credit"></div></div></div></div>
   </section>`;
 }
@@ -119,6 +121,7 @@ function renderFieldMap(coords){
   const colors={approach:'#b7ff35',effort:'#ffd166',navigation:'#f8f2e7',technical:'#ff5b43'};
   config.terrain.forEach(segment=>L.polyline(fieldLatLngs(fieldSegmentCoordinates(model,segment.from,segment.to)),{color:colors[segment.kind],weight:7,opacity:1,lineJoin:'round',lineCap:'round',interactive:false,className:`field-route-${segment.kind}`}).addTo(fieldRouteGroup));
   config.stops.forEach((stop,index)=>{const [lon,lat]=fieldCoordinateAt(model,stop.ratio);const marker=L.marker([lat,lon],{icon:fieldStopIcon(stop,index),zIndexOffset:1200+index,title:`${index+1}. ${stop.name}`,alt:`Этап ${index+1}: ${stop.name}`}).addTo(fieldRouteGroup);marker.on('click',()=>fieldMapReadout(index));fieldStopMarkers.push(marker)});
+  window.TatryMapPoints.addHomeMarker(fieldMapLeaflet);
   fieldMapBounds=L.latLngBounds(fullLatLngs);fieldMapLeaflet.setView(fieldMapBounds.getCenter(),12);
   fieldMapReadout(0,{focusMap:false});
 }
@@ -145,6 +148,7 @@ function bindFieldMap(){
   document.querySelectorAll('[data-map-mode]').forEach(button=>button.addEventListener('click',()=>setMapMode(button.dataset.mapMode)));
   const field=document.querySelector('#fieldMap');
   field?.addEventListener('click',event=>{
+    if(event.target.closest('[data-field-home]')){fieldMapLeaflet?.setView([HOME_BASE.lat,HOME_BASE.lon],15,{animate:true});return}
     const photo=event.target.closest('[data-field-photo-open]');
     if(photo){openFieldPhoto(Number(photo.dataset.fieldPhotoOpen));return}
     if(event.target.closest('[data-field-photo-close]')||event.target.id==='fieldPhotoOverlay'){closeFieldPhoto();return}
@@ -157,7 +161,7 @@ function bindFieldMap(){
 }
 
 function renderBase(){
-  const straight=haversineKm(ZAKOPANE,{lat:route.startLat,lon:route.startLon});
+  const straight=haversineKm(HOME_BASE,{lat:route.startLat,lon:route.startLon});
   const obj=route.objective||{name:route.goal||route.end,altitude:route.maxAlt,type:'цель'};
   const ret=route.returnToZakopane||{};
   const exp=route.experience||{};
@@ -175,7 +179,7 @@ function renderBase(){
     ${renderRouteHighlights(route.photos)}
     <section class="route-section route-story-section"><div class="story-head"><div class="eyebrow">ROUTE STORY / ЧЕГО ЖДАТЬ</div><h2>Как ощущается этот маршрут.</h2><p>${esc(exp.routeStory||exp.intro||route.why)}</p></div><div class="story-top-grid"><div class="why-go-panel"><small>WHY GO</small><div class="why-go-tags">${renderStoryTags(exp.whyGo?.tags||[])}</div><p>${esc(exp.whyGo?.text||route.why)}</p></div><div class="terrain-panel"><div class="terrain-title"><small>TERRAIN MIX</small><span>примерная доля маршрута</span></div>${renderTerrainMix(exp.terrainMix||[])}</div></div><div class="story-grid"><div class="story-card"><small>Город / подход</small><p>${esc(exp.city||'')}</p></div><div class="story-card"><small>Что под ногами</small><p>${esc(exp.terrain||'')}</p></div><div class="story-card story-card-wide"><small>Ради каких видов идти</small><p>${esc(exp.views||'')}</p></div></div><div class="route-logic"><div><small>Почему старт здесь</small><p>${esc(exp.whyStart||'')}</p></div><div><small>Почему финиш здесь</small><p>${esc(exp.whyFinish||'')}</p></div></div><div class="tradeoff-block"><div class="tradeoff-title"><small>TRADE-OFFS</small><b>За что платишь ради этого маршрута.</b></div><div class="tradeoff-list">${(exp.tradeOffs||[]).map((x,i)=>`<div><span>${String(i+1).padStart(2,'0')}</span><p>${esc(x)}</p></div>`).join('')}</div></div><div class="day-flow"><div class="day-flow-label">ДЕНЬ ПО АКТАМ</div>${(exp.flow||[]).map((x,i)=>`<div class="day-flow-step"><span>${String(i+1).padStart(2,'0')}</span><b>${esc(x)}</b></div>`).join('')}</div><div class="source-note">Terrain mix — кураторская приблизительная доля маршрута по характеру покрытия/ландшафта, а не GPS-измерение. Route Story помогает представить день, но не заменяет маркировку на местности и актуальные сообщения TPN.</div></section>
     <section class="route-section trail-launch-section"><div class="trail-launch-copy"><div class="eyebrow">LIVE TRAIL MODE</div><h2>В дороге — уже не обзорная карта.</h2><p>Показывает твою позицию на треке, GPS accuracy, прогресс, расстояние до цели и ближайших POI, а также предупреждает, если ты ушёл от линии маршрута.</p></div><button class="trail-launch" id="openTrailMode"><span>START</span><b>TRAIL MODE</b><i>→</i></button><div class="source-note secure-note" id="secureNote"></div></section>
-    <section class="route-section"><h2>Маршрут / GPX</h2><div class="map-toolbar map-toolbar-rich"><div><span id="routeGeometryMeta" class="loading">Загружаю эталонный трек…</span><span class="context-distance">Старт ≈ ${straight.toFixed(1)} км по прямой от центра Zakopane</span></div><div class="map-toolbar-actions">${FIELD_MAPS[route.id]?'<div class="map-mode-toggle" role="tablist" aria-label="Вид карты"><button class="active" type="button" role="tab" aria-controls="topoMapPanel" data-map-mode="topo" aria-selected="true">TOPO MAP</button><button type="button" role="tab" aria-controls="fieldMap" data-map-mode="field" aria-selected="false">FIELD MAP <span>BETA</span></button></div>':''}<div class="map-view-toggle"><button class="active" data-map-view="route">Маршрут</button><button data-map-view="context">Где это?</button></div><a class="btn acid" href="/api/gpx/${route.id}">Скачать GPX</a></div></div><div class="map-frame"><div id="topoMapPanel" class="topo-map-panel" role="tabpanel"><div id="detailMap" class="detail-map"></div><div class="map-legend"><span><i class="legend-start"></i>старт / финиш</span><span><i class="legend-goal"></i>цель / ключевая точка</span><span><i class="legend-route"></i>маршрут</span></div></div>${renderFieldMapShell()}</div><div class="source-note" id="mapSourceNote">Планировочная карта показывает контекст. Линия взята из маршрутного источника и проверена по длине, границам региона и разрывам. Это всё равно не официальный GPX TPN: на местности следуй маркировке и актуальным сообщениям TPN/TOPR.</div></section>
+    <section class="route-section"><h2>Маршрут / GPX</h2><div class="map-toolbar map-toolbar-rich"><div><span id="routeGeometryMeta" class="loading">Загружаю эталонный трек…</span><span class="context-distance">От нашего дома до старта ≈ ${straight.toFixed(1)} км по прямой</span></div><div class="map-toolbar-actions">${FIELD_MAPS[route.id]?'<div class="map-mode-toggle" role="tablist" aria-label="Вид карты"><button class="active" type="button" role="tab" aria-controls="topoMapPanel" data-map-mode="topo" aria-selected="true">TOPO MAP</button><button type="button" role="tab" aria-controls="fieldMap" data-map-mode="field" aria-selected="false">FIELD MAP <span>BETA</span></button></div>':''}<div class="map-view-toggle"><button class="active" data-map-view="route">Маршрут</button><button data-map-view="context">Маршрут + дом</button><button data-map-view="home">Дом</button></div><a class="btn acid" href="/api/gpx/${route.id}">Скачать GPX</a></div></div><div class="map-frame"><div id="topoMapPanel" class="topo-map-panel" role="tabpanel"><div id="detailMap" class="detail-map"></div><div class="map-legend"><span><i class="legend-start"></i>старт / финиш</span><span><i class="legend-goal"></i>цель / ключевая точка</span><span><i class="legend-route"></i>маршрут</span><span><i class="legend-home"></i>наш дом</span></div></div>${renderFieldMapShell()}</div><div class="source-note" id="mapSourceNote">Планировочная карта показывает контекст. Линия взята из маршрутного источника и проверена по длине, границам региона и разрывам. Это всё равно не официальный GPX TPN: на местности следуй маркировке и актуальным сообщениям TPN/TOPR.</div></section>
     <section class="route-section"><h2>Профиль высот</h2><div class="elevation" id="elevation"><span class="loading">Считаю профиль…</span></div><div class="profile-meta" id="profileMeta"></div></section>
     <section class="route-section"><h2>Планирование заранее</h2><div class="planning-box"><div><small>Лучший период</small><b>${esc(route.best||'зависит от условий')}</b></div><p>Мы не используем ранний прогноз для поездки через неделю или две: он создаёт ложную уверенность. План B можно подготовить заранее, а погоду и TPN/TOPR нужно проверить ближе к дате и ещё раз утром.</p></div></section>
     <section class="route-section morning-section" id="morningSection"><div class="intelligence-head"><div><div class="eyebrow">MORNING BRIEFING / РЕШЕНИЕ НА СЕГОДНЯ</div><h2>GO, ADJUST<br>или ниже.</h2></div><p>Свежая погода для верхней точки + TPN + твой профиль + то, что видно на месте. Это не сертификат безопасности.</p></div><div id="morningBriefing"><span class="loading">Собираю свежий briefing…</span></div></section>
@@ -304,7 +308,7 @@ function trailOverlayHtml(){
     <div class="trail-dashboard"><div><small>Прогресс</small><b id="trailProgress">—</b><span id="trailRemaining">— км осталось</span></div><div><small>До цели</small><b id="trailObjective">—</b><span>${esc(obj.name)} · ${obj.altitude} м</span></div><div><small>Ближайший POI</small><b id="trailPoiDistance">—</b><span id="trailPoiName">загружаю точки…</span></div><div><small>GPS</small><b id="trailAccuracy">—</b><span id="trailHeading">heading —</span></div></div>
     <div class="trail-map-wrap"><div id="trailMap" class="trail-map"></div><div class="trail-map-key"><span><i class="key-user"></i>ты</span><span><i class="key-done"></i>пройдено</span><span><i class="key-route"></i>трек</span></div></div>
     <div class="trail-actions"><button class="trail-action primary" id="startGps">START GPS</button><button class="trail-action" id="startCompass">COMPASS</button><button class="trail-action" id="recenterTrail">RECENTER</button><button class="trail-action demo" id="demoTrail">DEMO +</button></div>
-    <div class="trail-bottom"><div class="trail-nav-group"><span>GET TO START</span><a target="_blank" rel="noopener" href="${googleDirections(route.startLat,route.startLon,'walking')}">Google ↗</a><a target="_blank" rel="noopener" href="${appleDirections(route.startLat,route.startLon,'w')}">Apple ↗</a></div><div class="trail-nav-group"><span>GET BACK TO ZAKOPANE</span><a target="_blank" rel="noopener" href="${googleDirections(ZAKOPANE.lat,ZAKOPANE.lon,'transit')}">Google ↗</a><a target="_blank" rel="noopener" href="${appleDirections(ZAKOPANE.lat,ZAKOPANE.lon,'r')}">Apple ↗</a></div><div class="trail-caveat">Не turn-by-turn гарантия. Следуй официальной маркировке на местности. GPS в горах может ошибаться; интерфейс всегда показывает reported accuracy.</div></div>
+    <div class="trail-bottom"><div class="trail-nav-group"><span>GET TO START</span><a target="_blank" rel="noopener" href="${googleDirections(route.startLat,route.startLon,'walking')}">Google ↗</a><a target="_blank" rel="noopener" href="${appleDirections(route.startLat,route.startLon,'w')}">Apple ↗</a></div><div class="trail-nav-group"><span>GET HOME</span><a target="_blank" rel="noopener" href="${googleDirections(HOME_BASE.lat,HOME_BASE.lon,'driving')}">Google ↗</a><a target="_blank" rel="noopener" href="${appleDirections(HOME_BASE.lat,HOME_BASE.lon,'d')}">Apple ↗</a></div><div class="trail-caveat">Не turn-by-turn гарантия. Следуй официальной маркировке на местности. GPS в горах может ошибаться; интерфейс всегда показывает reported accuracy.</div></div>
   </div>`;
 }
 function openTrailMode(){
@@ -324,6 +328,7 @@ function initTrailMap(){
   const detail=L.tileLayer(DETAIL_URL,{maxZoom:19,attribution:DETAIL_ATTR});
   const topo=L.tileLayer(TOPO_URL,{maxZoom:17,attribution:TOPO_ATTR});
   detail.addTo(trailMap);L.control.layers({'DETAIL · OSM':detail,'TOPO':topo},null,{position:'topright',collapsed:true}).addTo(trailMap);L.control.zoom({position:'bottomright'}).addTo(trailMap);L.control.scale({imperial:false,position:'bottomleft'}).addTo(trailMap);
+  window.TatryMapPoints.addHomeMarker(trailMap);
   if(geometryData?.geometry){drawTrailGeometry()}else{const timer=setInterval(()=>{if(geometryData?.geometry){clearInterval(timer);drawTrailGeometry()}},250)}
 }
 function drawTrailGeometry(){

@@ -1,6 +1,7 @@
 const LEVELS={1:'Кофе в термосе',2:'Выгулять Salomon',3:'Уже не brunch',4:'Руки на скалу',5:'Позвони маме'};
 const TOPO_URL='https://tile.opentopomap.org/{z}/{x}/{y}.png';
 const TOPO_ATTR='Map data © OpenStreetMap contributors · Map style © OpenTopoMap (CC-BY-SA)';
+const HOME_BASE=window.TatryMapPoints.home;
 const LANDMARKS=[
   {name:'ZAKOPANE',lat:49.2992,lon:19.9496,kind:'city'},
   {name:'KUŹNICE',lat:49.2705,lon:19.9816,kind:'trailhead'},
@@ -30,6 +31,7 @@ function initMap(){
   L.tileLayer(TOPO_URL,{maxZoom:17,attribution:TOPO_ATTR}).addTo(map);
   contextLayer.addTo(map);
   LANDMARKS.forEach(l=>L.marker([l.lat,l.lon],{icon:landmarkIcon(l),interactive:false,zIndexOffset:l.kind==='city'?450:100}).addTo(contextLayer));
+  window.TatryMapPoints.addHomeMarker(contextLayer);
 }
 function markerIcon(){return L.divIcon({className:'',html:'<div class="trailhead-dot"></div>',iconSize:[18,18],iconAnchor:[9,9]})}
 function visible(r){
@@ -188,7 +190,7 @@ function syncMarkers(list){
       markers[r.id].addTo(map);
     } else if(markers[r.id]) map.removeLayer(markers[r.id]);
   });
-  if(list.length){const bounds=L.latLngBounds(list.map(r=>[r.startLat,r.startLon]));bounds.extend([49.2992,19.9496]);if(bounds.isValid())map.fitBounds(bounds.pad(.15),{animate:false,maxZoom:11})}
+  if(list.length){const bounds=L.latLngBounds(list.map(r=>[r.startLat,r.startLon]));bounds.extend([HOME_BASE.lat,HOME_BASE.lon]);if(bounds.isValid())map.fitBounds(bounds.pad(.15),{animate:false,maxZoom:11})}
 }
 function removePreviewLayers(){
   if(activeOutline){map.removeLayer(activeOutline);activeOutline=null}
@@ -198,7 +200,7 @@ function fitOverview(){
   const list=routes.filter(visible);
   if(!list.length)return;
   const bounds=L.latLngBounds(list.map(r=>[r.startLat,r.startLon]));
-  bounds.extend([49.2992,19.9496]);
+  bounds.extend([HOME_BASE.lat,HOME_BASE.lon]);
   if(bounds.isValid())map.fitBounds(bounds.pad(.15),{animate:false,maxZoom:11});
 }
 function clearPreview(){
@@ -216,7 +218,7 @@ async function preview(id){
     removePreviewLayers();
     activeOutline=L.geoJSON(g.geometry,{style:{color:'#fff8e8',weight:9,opacity:.95,lineCap:'round',lineJoin:'round'}}).addTo(map);
     activeLine=L.geoJSON(g.geometry,{style:{color:'#ff4f2e',weight:5,opacity:1,lineCap:'round',lineJoin:'round'}}).addTo(map);
-    const b=activeLine.getBounds();b.extend([49.2992,19.9496]);map.fitBounds(b.pad(.13),{maxZoom:12});
+    const b=activeLine.getBounds();b.extend([HOME_BASE.lat,HOME_BASE.lon]);map.fitBounds(b.pad(.13),{maxZoom:12});
   }catch{}
 }
 
