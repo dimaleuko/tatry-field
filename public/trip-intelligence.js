@@ -104,7 +104,7 @@
     if (!primary) return null;
     const zoneRoutes = zoneRouteSet(options.zoneId, zones);
     const primaryLoad = routeLoad(primary);
-    const candidates = routes.filter(route => route.id !== primary.id && !route.chains && route.exposure !== 'high' && route.diff <= primary.diff && route.hours <= primary.hours + .5 && routeLoad(route) < primaryLoad);
+    const candidates = routes.filter(route => route.id !== primary.id && !route.temporarilyClosed && !route.chains && route.exposure !== 'high' && route.diff <= primary.diff && route.hours <= primary.hours + .5 && routeLoad(route) < primaryLoad);
     return candidates.sort((a, b) => {
       const rank = route => {
         const fit = personalizedDifficulty(route, profile);
@@ -128,10 +128,11 @@
       car: Boolean(options.car),
       rhythm: ['balanced', 'scenic', 'ambitious'].includes(options.rhythm) ? options.rhythm : 'balanced'
     };
+    const availableRoutes = routes.filter(route => !route.temporarilyClosed);
     const context = { ...normalized, profile: normalizeProfile(profile), savedIds: new Set(saved), zoneRoutes: zoneRouteSet(normalized.zoneId, zones), used: new Set(), previousLoad: 0 };
     const days = [];
     for (let index = 0; index < normalized.days; index += 1) {
-      const primary = [...routes].sort((a, b) => scoreRoute(b, context) - scoreRoute(a, context))[0];
+      const primary = [...availableRoutes].sort((a, b) => scoreRoute(b, context) - scoreRoute(a, context))[0];
       if (!primary) break;
       const fit = personalizedDifficulty(primary, context.profile);
       days.push({ index, date: isoDate(normalized.startDate, index), primaryId: primary.id, backupId: null, fit, load: Math.round(routeLoad(primary) * 10) / 10 });
@@ -141,9 +142,9 @@
     const primaryIds = new Set(days.map(day => day.primaryId));
     const backupIds = new Set();
     days.forEach(day => {
-      const primary = routes.find(route => route.id === day.primaryId);
-      const cleanPool = routes.filter(route => !primaryIds.has(route.id) && !backupIds.has(route.id));
-      const fallbackPool = routes.filter(route => !primaryIds.has(route.id));
+      const primary = availableRoutes.find(route => route.id === day.primaryId);
+      const cleanPool = availableRoutes.filter(route => !primaryIds.has(route.id) && !backupIds.has(route.id));
+      const fallbackPool = availableRoutes.filter(route => !primaryIds.has(route.id));
       const backup = planBFor(primary, cleanPool, normalized, context.profile, zones) || planBFor(primary, fallbackPool, normalized, context.profile, zones);
       day.backupId = backup?.id || null;
       if (backup) backupIds.add(backup.id);
@@ -210,6 +211,7 @@
     const reasons = [];
     const raise = (level, reason) => { severity = Math.max(severity, level); if (reason) reasons.push(reason); };
     const fit = weatherDay?.fit;
+    if (route.temporarilyClosed) raise(2, route.closure?.text || 'Маршрут официально закрыт.');
     if (!weatherDay || !fit) raise(1, 'Нет полного свежего прогноза для старта и верхней точки.');
     else if (fit.level === 'avoid') raise(2, ...(fit.reasons?.slice(0, 1) || ['Погодные условия не подходят для высокого маршрута.']));
     else if (fit.level === 'caution') (fit.reasons || ['Прогноз требует корректировки плана.']).forEach(reason => raise(1, reason));

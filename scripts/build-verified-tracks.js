@@ -36,7 +36,17 @@ const SPECS = {
   swinica: { segments: ['dq5q'] },
   'kozi-wierch': { segments: ['pgty'] },
   'skrajny-granat': { segments: ['spgo'], mirror: true },
-  starorobocianski: { segments: ['a1dw'] }
+  starorobocianski: { segments: ['a1dw'] },
+  zawrat: { segments: ['1yn8'] },
+  'kozia-przelecz': { segments: ['svgi'] },
+  'kobylarzowy-zleb': {
+    segments: [
+      { slug: 'yvww', reverse: true },
+      { slug: '6tmq', reverse: true }
+    ]
+  },
+  krzyzne: { segments: ['bcrz'] },
+  'przelecz-pod-chlopkiem': { segments: ['bs8g'] }
 };
 
 function haversineKm(a, b) {
@@ -112,10 +122,16 @@ async function buildRoute(id, spec) {
 }
 
 async function main() {
+  const refresh = process.env.REFRESH_TRACKS === '1';
+  const refreshIds = new Set((process.env.REFRESH_TRACKS_IDS || '').split(',').filter(Boolean));
+  const previous = fs.existsSync(OUTPUT)
+    ? JSON.parse(zlib.gunzipSync(fs.readFileSync(OUTPUT)).toString('utf8')).routes || {}
+    : {};
   const routes = {};
   for (const [id, spec] of Object.entries(SPECS)) {
-    routes[id] = await buildRoute(id, spec);
-    process.stdout.write(`${id}: ${routes[id].distanceKm} km, ${routes[id].pointCount} points\n`);
+    const useCached = !refresh && !refreshIds.has(id) && previous[id];
+    routes[id] = useCached ? previous[id] : await buildRoute(id, spec);
+    process.stdout.write(`${id}: ${routes[id].distanceKm} km, ${routes[id].pointCount} points${useCached ? ' (cached)' : ''}\n`);
   }
   const foothillTracks = JSON.parse(fs.readFileSync(FOOTHILL_TRACKS, 'utf8'));
   for (const [id, track] of Object.entries(foothillTracks)) {

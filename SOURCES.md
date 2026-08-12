@@ -91,3 +91,15 @@ The guide intentionally distinguishes basic all-season essentials from route- an
 - A route name match in the TPN extraction only raises a manual-review flag; it is never interpreted automatically as either a closure or an opening.
 - Manual wet-rock, snow/ice, visibility and group-readiness signals deliberately override a superficially good forecast on exposed or chain-assisted routes.
 - Route-specific packing remains planning assistance rather than equipment certification. Current official conditions, technical training and the needs of the entire group stay authoritative.
+
+## Phase 3.3 advanced Polish routes
+
+Five advanced routes were added with prominent safety gates, verified reference tracks, decision-point Field Maps and licensed Wikimedia Commons photographs:
+
+- Zawrat, Kuźnice → Five Lakes → Palenica: https://mapa-turystyczna.pl/route/1yn8
+- Kozia Przełęcz, Palenica → Five Lakes → Kuźnice: https://mapa-turystyczna.pl/route/svgi
+- Kobylarzowy Żleb → Małołączniak, ascending the gully and descending through Mała Łąka: https://mapa-turystyczna.pl/route/yvww and https://mapa-turystyczna.pl/route/6tmq
+- Krzyżne, Kuźnice → Dolina Pańszczycy → Five Lakes → Palenica: https://mapa-turystyczna.pl/route/bcrz
+- Mięguszowiecka Przełęcz pod Chłopkiem out-and-back from Palenica: https://mapa-turystyczna.pl/route/bs8g
+
+As of 12 August 2026, the yellow Pusta Dolinka – Kozia Przełęcz section is closed in both directions until further notice while TPN replaces chains: https://tpn.gov.pl/aktualnosci/szlak-na-odcinku-pusta-dolinka-kozia-przelecz-czasowo-zamkniety. The route remains visible for future comparison, carries a prominent closure treatment and is excluded from automatic trip plans and Plan B selection. The status must be rechecked against the official TPN source before any future use.

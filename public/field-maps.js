@@ -340,5 +340,85 @@ window.TATRY_FIELD_MAPS={
     ],
     terrain:[{from:0,to:.18,kind:'approach'},{from:.18,to:.38,kind:'approach'},{from:.38,to:.585,kind:'navigation'},{from:.585,to:.74,kind:'navigation'},{from:.74,to:.916,kind:'effort'},{from:.916,to:1,kind:'navigation'}],
     sources:[['Zakopane: Gubałówka–Butorowy','https://www.zakopane.pl/en/tourist-area/tourism/a-walk-around-zakopane/gubalowka'],['Gubałówka ridge account','https://tinkadventures.com/2021/12/04/gubalowka-ridge-from-zakopane-to-chocholow/'],['OSM foot routing','https://routing.openstreetmap.de/about.html']]
+  },
+  'zawrat':{
+    issue:'FIELD MAP 24 / ZAWRAT',title:'Цепи — середина решения, не декорация.',
+    intro:'Где заканчивается обычный подход, почему северную стенку идём вверх и когда не входить в технический участок.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Kuźnice',tag:'СТАРТ РАНО',meta:'0.0 км',level:'info',prompt:'ЛИНЕЙНАЯ ЛОГИСТИКА',decision:'Проверь последний рейс из Palenica и зафиксируй turnaround time.',body:'Финиш далеко от старта; запас времени важнее быстрого первого часа.'},
+      {ratio:.225,kicker:'01 / SHELTER',name:'Murowaniec',tag:'ПОСЛЕДНИЙ УДОБНЫЙ ПИТ-СТОП',meta:'≈ 4.8 км',level:'info',prompt:'ВОДА + УСЛОВИЯ',decision:'Если скала мокрая, ветер сильнее прогноза или группа уже устала — выбери озеро вместо перевала.',body:'После приюта инфраструктуры до Five Lakes не будет.'},
+      {ratio:.365,kicker:'02 / LAKE',name:'Czarny Staw Gąsienicowy',tag:'СИНЯЯ К ZAWRAT',meta:'≈ 7.7 км',level:'nav',prompt:'НЕ НА KOŚCIELEC / GRANATY',decision:'Оставайся на синей линии к Zmarzły Staw и Zawrat; сверяй каждую цветную развилку.',body:'Озеро собирает сразу несколько популярных технических направлений.'},
+      {ratio:.435,kicker:'03 / COMMIT',name:'Zmarzły Staw',tag:'ПОСЛЕДНИЙ ПРОСТОЙ РАЗВОРОТ',meta:'≈ 9.2 км',level:'danger',prompt:'GO / NO-GO',decision:'Не входи на цепи при влаге, льду, грозе, очереди без временного запаса или неуверенности группы.',body:'Дальше темп задают опоры, люди впереди и качество сцепления.',photoIndex:0},
+      {ratio:.505,kicker:'04 / CHAINS',name:'Северная стенка',tag:'ЦЕПИ + ЭКСПОЗИЦИЯ',meta:'≈ 10.7 км',level:'danger',prompt:'ТРИ ТОЧКИ ОПОРЫ',decision:'Держи дистанцию, не обгоняй на опорах и не стой под людьми, которые могут сбросить камень.',body:'Именно этот сектор делает маршрут экспертным; GPX не показывает качество каждой опоры.'},
+      {ratio:.54,kicker:'05 / PASS',name:'Zawrat',tag:'2158 М',meta:'≈ 11.4 км',level:'summit',prompt:'НЕ НА ORLA / ŚWINICA',decision:'Для этого траверса спускайся в сторону Five Lakes. Красные направления — другие сложные маршруты.',body:'На перевале легко принять эмоциональное решение добавить лишнюю вершину — не меняй план без резерва.',photoIndex:1},
+      {ratio:.70,kicker:'06 / VALLEY',name:'Dolina Pięciu Stawów',tag:'ТЕХНИКА ПОЗАДИ',meta:'≈ 14.8 км',level:'info',prompt:'ДЛИННЫЙ ВЫХОД',decision:'Продолжай через Dolina Roztoki к Palenica; сложность снизилась, расстояние ещё нет.',body:'Усталость после цепей часто недооценивает оставшиеся дорожные километры.'},
+      {ratio:1,kicker:'07 / FINISH',name:'Palenica Białczańska',tag:'ФИНИШ',meta:'≈ 21.1 км',level:'info',prompt:'ТРАНСПОРТ',decision:'Иди к заранее проверенной остановке; используй запасной pickup, если последний рейс ушёл.',body:'Линейный день заканчивается не там, где начинался.'}
+    ],
+    terrain:[{from:0,to:.365,kind:'approach'},{from:.365,to:.435,kind:'navigation'},{from:.435,to:.54,kind:'technical'},{from:.54,to:.70,kind:'effort'},{from:.70,to:1,kind:'approach'}],
+    sources:[['TPN conditions','https://tpn.gov.pl/komunikat-turystyczny'],['TPN trail rules','https://tpn.gov.pl/turystyka-piesza'],['route reference','https://mapa-turystyczna.pl/route/1yn8']]
+  },
+  'kozia-przelecz':{
+    issue:'FIELD MAP 25 / KOZIA PRZEŁĘCZ',title:'Сейчас закрыто. Карта объясняет — не разрешает.',
+    intro:'Официальное закрытие стоит выше GPX, фотографий и старых рилсов. Этапы сохранены только для будущего планирования после открытия.',
+    stops:[
+      {ratio:0,kicker:'00 / STATUS',name:'Palenica Białczańska',tag:'НЕ СТАРТОВАТЬ',meta:'0.0 км',level:'danger',prompt:'TPN CLOSED',decision:'Выбери другой маршрут: Pusta Dolinka — Kozia Przełęcz закрыт в обе стороны до отмены.',body:'Наличие трека в каталоге не означает, что по нему можно идти сейчас.'},
+      {ratio:.15,kicker:'01 / JUNCTION',name:'Wodogrzmoty Mickiewicza',tag:'PLAN B НИЖЕ',meta:'≈ 3.0 км',level:'nav',prompt:'АЛЬТЕРНАТИВА',decision:'Для разрешённого дня можно выбрать Dolina Roztoki / Five Lakes без выхода на закрытый перевал.',body:'Не пытайся собрать обход закрытого участка по немаркированному рельефу.'},
+      {ratio:.39,kicker:'02 / SHELTER',name:'Five Lakes shelter',tag:'НЕ ИДТИ В PUSTA DOLINKA',meta:'≈ 7.8 км',level:'danger',prompt:'ЗАКРЫТЫЙ СЕКТОР',decision:'Следуй указателям TPN и не входи на жёлтый участок к Kozia Przełęcz.',body:'Закрытие связано с заменой цепей — искусственные опоры нельзя считать доступными.'},
+      {ratio:.455,kicker:'03 / TERRAIN',name:'Pusta Dolinka',tag:'ЗАКРЫТО ДО ОТМЕНЫ',meta:'≈ 9.0 км',level:'danger',prompt:'ТОЛЬКО ПОСЛЕ ОТКРЫТИЯ',decision:'После официального открытия здесь понадобится новая проверка условий и своего опыта.',body:'Крутые стены и металлические ступени делают этот сектор одним из самых технических.',photoIndex:1},
+      {ratio:.50,kicker:'04 / PASS',name:'Kozia Przełęcz',tag:'2137 М / ЗАКРЫТО',meta:'≈ 9.8 км',level:'summit',prompt:'НЕ НА КРАСНЫЙ',decision:'После будущего открытия жёлтый траверс спускается к Kozia Dolinka; лестница Orla Perć не входит в маршрут.',body:'Узкая седловина — не место менять план и продолжать на Orla Perć.',photoIndex:0},
+      {ratio:.60,kicker:'05 / DESCENT',name:'Zmarzły Staw',tag:'КРУТОЙ СПУСК',meta:'≈ 11.8 км',level:'danger',prompt:'ПОСЛЕ ОТКРЫТИЯ',decision:'На мокрой скале этот спуск неприемлем для обычного летнего планирования.',body:'Северная сторона проще южной, но всё ещё требует цепей, устойчивого шага и запаса.'},
+      {ratio:1,kicker:'06 / FINISH',name:'Kuźnice',tag:'БУДУЩИЙ ФИНИШ',meta:'≈ 19.7 км',level:'info',prompt:'НЕ СЕГОДНЯ',decision:'Пока TPN не снимет закрытие, до этой точки приходят только другие разрешённые маршруты.',body:'Статус должен быть проверен заново в день планирования.'}
+    ],
+    terrain:[{from:0,to:.39,kind:'approach'},{from:.39,to:.50,kind:'technical'},{from:.50,to:.60,kind:'technical'},{from:.60,to:1,kind:'approach'}],
+    sources:[['TPN closure','https://tpn.gov.pl/aktualnosci/szlak-na-odcinku-pusta-dolinka-kozia-przelecz-czasowo-zamkniety'],['TPN conditions','https://tpn.gov.pl/komunikat-turystyczny'],['route reference','https://mapa-turystyczna.pl/route/svgi']]
+  },
+  'kobylarzowy-zleb':{
+    issue:'FIELD MAP 26 / KOBYLARZOWY',title:'Вверх по желобу, вниз через Mała Łąka.',
+    intro:'Где проверить поверхность до цепей, как снизить камнепадный риск и почему широкий купол наверху требует карты.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Nędzówka',tag:'СТАРТ ПЕТЛИ',meta:'0.0 км',level:'info',prompt:'8+ ЧАСОВ',decision:'Сохрани офлайн-трек и назначь turnaround time до входа в желоб.',body:'Петля вернётся сюда через Mała Łąka и Przysłop Miętusi.'},
+      {ratio:.16,kicker:'01 / JUNCTION',name:'Przysłop Miętusi',tag:'СИНИЙ К MAŁOŁĄCZNIAK',meta:'≈ 2.6 км',level:'nav',prompt:'ВХОД В ДРУГОЙ ДЕНЬ',decision:'Выбирай синюю маркировку через Kobylarz; не уходи по чёрной в Mała Łąka раньше времени.',body:'Здесь спокойная прогулка превращается в серьёзный горный выход.'},
+      {ratio:.29,kicker:'02 / COMMIT',name:'Kobylarz',tag:'ПРОВЕРЬ ЖЕЛОБ',meta:'≈ 4.7 км',level:'danger',prompt:'СНЕГ / ВЛАГА / ЛЮДИ',decision:'Если виден снег, течёт вода, падают камни или группа не уверена — разворот здесь.',body:'Выше нет лёгкого обхода технического порога.',photoIndex:0},
+      {ratio:.37,kicker:'03 / CHAINS',name:'Kobylarzowy Żleb',tag:'ЦЕПИ + КАМНЕПАД',meta:'≈ 6.0 км',level:'danger',prompt:'ДИСТАНЦИЯ + КАСКА',decision:'Поднимайся по одному, не стой под человеком выше и не спускай камни на следующую группу.',body:'Узость желоба усиливает последствия даже небольшого падающего камня.',photoIndex:1},
+      {ratio:.45,kicker:'04 / SUMMIT',name:'Małołączniak',tag:'2096 М',meta:'≈ 7.3 км',level:'summit',prompt:'КРАЙ НЕ ПЛОЩАДКА',decision:'Держись маркировки и не подходи к северному обрыву; в тумане сверяй направление на Kopa Kondracka.',body:'После узкого желоба вершина кажется безопасно широкой — это визуальная ловушка.'},
+      {ratio:.58,kicker:'05 / RIDGE',name:'Kopa Kondracka',tag:'ВЕТЕР + ТУМАН',meta:'≈ 9.4 км',level:'nav',prompt:'ЖЁЛТЫЙ В MAŁA ŁĄKA',decision:'На Kondracka Przełęcz уходи по жёлтой линии в Dolina Małej Łąki.',body:'Не продолжай к Giewont или Kasprowy только потому, что гребень выглядит простым.'},
+      {ratio:.82,kicker:'06 / VALLEY',name:'Wielka Polana Małołącka',tag:'СПУСК ПРОЩЕ',meta:'≈ 13.3 км',level:'info',prompt:'ДОЛИННЫЙ ВЫХОД',decision:'Продолжай к Gronik; следи за мокрыми корнями и усталостью.',body:'Техническая часть закончилась, но колени получают длинный спуск.'},
+      {ratio:1,kicker:'07 / FINISH',name:'Nędzówka',tag:'ПЕТЛЯ ЗАМКНУТА',meta:'≈ 16.2 км',level:'info',prompt:'ВОЗВРАЩЕНИЕ',decision:'Используй заранее проверенный локальный транспорт или pickup.',body:'Маршрут возвращается к точке старта после лесной связки от Przysłop Miętusi.'}
+    ],
+    terrain:[{from:0,to:.29,kind:'approach'},{from:.29,to:.45,kind:'technical'},{from:.45,to:.58,kind:'navigation'},{from:.58,to:.82,kind:'effort'},{from:.82,to:1,kind:'approach'}],
+    sources:[['TPN conditions','https://tpn.gov.pl/komunikat-turystyczny'],['route reference','https://mapa-turystyczna.pl/route/yvww'],['route extension','https://mapa-turystyczna.pl/route/6tmq']]
+  },
+  'krzyzne':{
+    issue:'FIELD MAP 27 / KRZYŻNE',title:'Без цепей. С большим счётом по времени.',
+    intro:'Длинная Pańszczyca, навигационная тишина, осыпной финал и точка, где весь вид появляется за один шаг.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Kuźnice',tag:'СТАРТ РАНО',meta:'0.0 км',level:'info',prompt:'9+ ЧАСОВ',decision:'Проверь световой запас, turnaround time и последний рейс из Palenica.',body:'Длина — главный технический фактор этого маршрута.'},
+      {ratio:.225,kicker:'01 / SHELTER',name:'Murowaniec',tag:'ПОСЛЕДНИЙ ПИТ-СТОП',meta:'≈ 4.8 км',level:'info',prompt:'ВОДА + PLAN B',decision:'При низкой облачности, ветре или плохом темпе оставайся на более коротком маршруте Hala Gąsienicowa.',body:'Дальше укрытия и быстрые выходы заканчиваются.'},
+      {ratio:.34,kicker:'02 / JUNCTION',name:'Dolina Pańszczycy',tag:'ЖЁЛТЫЙ К KRZYŻNE',meta:'≈ 7.2 км',level:'nav',prompt:'НЕ НА GRANATY',decision:'Держи жёлтую маркировку через Pańszczyca; не втягивайся в красную Orla Perć.',body:'В тумане широкая каменная долина перестаёт подсказывать направление.'},
+      {ratio:.43,kicker:'03 / LAKE',name:'Czerwony Staw',tag:'ПОСЛЕДНЯЯ ОЦЕНКА',meta:'≈ 9.2 км',level:'danger',prompt:'ТЕМП + ВИДИМОСТЬ',decision:'Если к этому месту график уже сорван или седловина в облаке — разворачивайся.',body:'Финальный набор круче, осыпнее и медленнее предыдущих километров.'},
+      {ratio:.49,kicker:'04 / SCREE',name:'Финальный склон',tag:'ОСЫПЬ + КРУТИЗНА',meta:'≈ 10.4 км',level:'danger',prompt:'УСТОЙЧИВЫЙ ШАГ',decision:'Держись разметки, не срезай серпантины и сохраняй дистанцию от людей выше.',body:'Цепей нет, но рыхлая поверхность всё равно требует внимания.'},
+      {ratio:.515,kicker:'05 / PASS',name:'Krzyżne',tag:'2112 М',meta:'≈ 11.0 км',level:'summit',prompt:'BIG REVEAL',decision:'Не продолжай по красной Orla Perć; спускайся по жёлтой линии к Five Lakes.',body:'Главная панорама дня открывается резко и полностью.',photoIndex:1},
+      {ratio:.64,kicker:'06 / DESCENT',name:'Над Five Lakes',tag:'КРУТОЙ СПУСК',meta:'≈ 13.6 км',level:'effort',prompt:'КОЛЕНИ + ВРЕМЯ',decision:'Не ускоряйся ради автобуса на рыхлых ступенях; лучше используй запасной pickup.',body:'После перевала впереди всё ещё большой долинный выход.',photoIndex:0},
+      {ratio:1,kicker:'07 / FINISH',name:'Palenica Białczańska',tag:'ФИНИШ',meta:'≈ 21.3 км',level:'info',prompt:'ПОСЛЕДНИЙ РЕЙС',decision:'Сверь остановку; в высокий сезон учитывай очередь.',body:'День завершается далеко от Kuźnice.'}
+    ],
+    terrain:[{from:0,to:.34,kind:'approach'},{from:.34,to:.43,kind:'navigation'},{from:.43,to:.515,kind:'technical'},{from:.515,to:.64,kind:'effort'},{from:.64,to:1,kind:'approach'}],
+    sources:[['TPN conditions','https://tpn.gov.pl/komunikat-turystyczny'],['route reference','https://mapa-turystyczna.pl/route/bcrz'],['PTTK Krzyżne','https://malopolska.szlaki.pttk.pl/2209-pttk-malopolska-krzyzne']]
+  },
+  'przelecz-pod-chlopkiem':{
+    issue:'FIELD MAP 28 / POD CHŁOPKIEM',title:'Подход длинный. Ошибка наверху — короткая.',
+    intro:'Где перестать считать день прогулкой к озеру, когда назначить разворот и почему Kazalnica требует каски и дисциплины.',
+    stops:[
+      {ratio:0,kicker:'00 / START',name:'Palenica Białczańska',tag:'ОЧЕНЬ РАНО',meta:'0.0 км',level:'info',prompt:'11+ ЧАСОВ',decision:'Зафиксируй время разворота и запасной pickup до выхода.',body:'Даже без очередей это один из самых длинных дней каталога.'},
+      {ratio:.31,kicker:'01 / SHELTER',name:'Morskie Oko',tag:'ПОСЛЕДНЯЯ ИНФРАСТРУКТУРА',meta:'≈ 7.7 км',level:'info',prompt:'НЕ ПЕРЕОЦЕНИ ЛЁГКИЙ ПОДХОД',decision:'Пополнить воду и оценить темп нужно здесь; техническая часть ещё впереди.',body:'Асфальт не должен создавать ложное ощущение, что половина сложности уже позади.'},
+      {ratio:.385,kicker:'02 / LAKE',name:'Czarny Staw pod Rysami',tag:'ЗЕЛЁНЫЙ, НЕ КРАСНЫЙ',meta:'≈ 9.6 км',level:'nav',prompt:'КЛЮЧЕВАЯ РАЗВИЛКА',decision:'На Pod Chłopkiem выбирай зелёную маркировку; красная ведёт на Rysy.',body:'В облаке и при большом потоке эта ошибка выглядит удивительно правдоподобно.'},
+      {ratio:.42,kicker:'03 / COMMIT',name:'Bańdzioch / Kazalnica',tag:'КАСКА + TURNAROUND',meta:'≈ 10.4 км',level:'danger',prompt:'КАМНЕПАД / ПОВЕРХНОСТЬ',decision:'При свежем камнепаде, влаге, льду, встречной пробке или сбитом графике — вниз сейчас.',body:'Выше эвакуация сложнее, а спуск проходит по тем же опорам.',photoIndex:0},
+      {ratio:.47,kicker:'04 / LEDGES',name:'Экспонированные полки',tag:'ЦЕПИ + ВОЗДУХ',meta:'≈ 11.7 км',level:'danger',prompt:'НЕ ОБГОНЯТЬ',decision:'Три точки опоры, дистанция и никакой съёмки в движении.',body:'GPX показывает линию, но не ширину полки и качество следующей опоры.'},
+      {ratio:.50,kicker:'05 / PASS',name:'Przełęcz pod Chłopkiem',tag:'2307 М',meta:'≈ 12.4 км',level:'summit',prompt:'ГРАНИЦА, НЕ ПЕРЕХОД',decision:'Разворачивайся по тому же зелёному маршруту; продолжения на словацкую сторону в плане нет.',body:'Высшая точка — ровно половина дистанции, а не конец работы.',photoIndex:1},
+      {ratio:.58,kicker:'06 / DESCENT',name:'Kazalnica вниз',tag:'УСТАЛОСТЬ + ЭКСПОЗИЦИЯ',meta:'≈ 14.4 км',level:'danger',prompt:'МЕДЛЕННЕЕ, ЧЕМ ХОЧЕТСЯ',decision:'Сохраняй ту же технику и дистанцию; не торопись ради автобуса.',body:'Большинство ошибок происходит не на подъёме, а на знакомом обратном участке.'},
+      {ratio:.69,kicker:'07 / SHELTER',name:'Morskie Oko',tag:'ТЕХНИКА ПОЗАДИ',meta:'≈ 17.1 км',level:'info',prompt:'ЕЩЁ 7+ КМ',decision:'Оцени свет и транспорт; при необходимости активируй pickup.',body:'До Palenica остаётся длинный дорожный спуск.'},
+      {ratio:1,kicker:'08 / FINISH',name:'Palenica Białczańska',tag:'ФИНИШ',meta:'≈ 24.8 км',level:'info',prompt:'ВОЗВРАЩЕНИЕ',decision:'Не рассчитывай, что последний рейс дождётся технической задержки.',body:'Маршрут закончен только у trailhead, не у перевала.'}
+    ],
+    terrain:[{from:0,to:.385,kind:'approach'},{from:.385,to:.42,kind:'effort'},{from:.42,to:.50,kind:'technical'},{from:.50,to:.58,kind:'technical'},{from:.58,to:.69,kind:'effort'},{from:.69,to:1,kind:'approach'}],
+    sources:[['TPN conditions','https://tpn.gov.pl/komunikat-turystyczny'],['route reference','https://mapa-turystyczna.pl/route/bs8g'],['route description','https://natatry.pl/tatry-wysokie/okolice-morskiego-oka/przelecz-pod-chlopkiem']]
   }
 };

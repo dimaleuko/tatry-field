@@ -50,6 +50,11 @@ function visible(r){
 function fmtCrowd(v){return v==='low'?'низко':v==='med'?'средне':'много'}
 function returnClass(score){return score>=5?'excellent':score>=4?'good':'caution'}
 function kindLabel(r){return r.routeKind==='height'?'ЦЕЛЬ: ВЫСОТА':'ПРОСТО ХАЙК'}
+function routeStatusMarkup(route){
+  if(route.temporarilyClosed)return `<span class="route-status closed">TPN: ЗАКРЫТО ДО ОТМЕНЫ</span>`;
+  if(route.safetyNotice)return `<span class="route-status expert">EXPERT / УСЛОВИЯ РЕШАЮТ</span>`;
+  return '';
+}
 function routePhotoPair(photos=[]){
   const pair=photos.slice(0,2);
   if(!pair.length)return '';
@@ -65,9 +70,9 @@ function routeCard(r,i,savedSet=new Set()){
   const isSaved=savedSet.has(r.id);
   return `<article class="route-card${isSaved?' saved':''}" data-id="${r.id}">
     <a class="route-card-link" href="/route/${r.id}">
-      <div class="route-head"><div><div class="route-number">${String(i+1).padStart(2,'0')} / ${String(routes.length).padStart(2,'0')}</div><h2 class="route-title">${esc(r.name)}</h2><div class="route-short">${esc(r.short)}</div></div><div class="trail-ready-pill">TRAIL MODE →</div></div>
+      <div class="route-head"><div><div class="route-number">${String(i+1).padStart(2,'0')} / ${String(routes.length).padStart(2,'0')}</div><h2 class="route-title">${esc(r.name)}</h2><div class="route-short">${esc(r.short)}</div></div><div class="trail-ready-pill${r.temporarilyClosed?' closed':''}">${r.temporarilyClosed?'CLOSED BY TPN':'TRAIL MODE →'}</div></div>
       ${routePhotoPair(r.photos)}
-      <div class="route-flags"><span class="route-kind ${r.routeKind}">${kindLabel(r)}</span><span class="objective-chip">${esc(objective.name)} · ${objective.altitude} м</span><span class="return-chip ${returnClass(ret.score)}">↩ Zakopane ${ret.score||'—'}/5</span></div>
+      <div class="route-flags">${routeStatusMarkup(r)}<span class="route-kind ${r.routeKind}">${kindLabel(r)}</span><span class="objective-chip">${esc(objective.name)} · ${objective.altitude} м</span><span class="return-chip ${returnClass(ret.score)}">↩ Zakopane ${ret.score||'—'}/5</span></div>
       <div class="metrics"><div class="metric"><small>Время</small><b>${r.hours} ч</b></div><div class="metric"><small>Дистанция</small><b>${r.km} км</b></div><div class="metric"><small>Набор</small><b>+${r.ascent} м</b></div><div class="metric"><small>Уровень</small><b>${r.diff}/5</b></div><div class="metric"><small>Цепи</small><b>${r.chains?'да':'нет'}</b></div><div class="metric"><small>Толпы</small><b>${fmtCrowd(r.crowd)}</b></div></div>${personalFitMarkup(r)}
       <div class="tags"><span class="tag">${LEVELS[r.diff]}</span>${r.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
     </a>
@@ -147,6 +152,7 @@ function compareRows(){
     ['Для тебя',route=>{const fit=tripStore.personalizedDifficulty(route);return fit.status==='unknown'?'Заполни профиль':`${fit.score}/5 · ${fit.label}${fit.gaps[0]?` · ${fit.gaps[0]}`:''}`}],
     ['Цепи',route=>route.chains?'Да':'Нет'],
     ['Толпы',route=>fmtCrowd(route.crowd)],
+    ['Статус',route=>route.temporarilyClosed?'TPN: закрыто до отмены':route.safetyNotice?'Экспертный маршрут · только по условиям':'Проверь свежий TPN'],
     ['Старт',route=>route.start],
     ['Главная цель',route=>`${route.objective?.name||route.goal||route.end} · ${route.objective?.altitude||route.maxAlt} м`],
     ['Обратно в Zakopane',route=>`${route.returnToZakopane?.score||'—'}/5 · ${route.returnToZakopane?.label||''}${route.returnToZakopane?.typicalTime?` · ${route.returnToZakopane.typicalTime}`:''}`],

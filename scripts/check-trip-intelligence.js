@@ -31,6 +31,7 @@ const plan = trip.generateTrip(routes, {
 assert.equal(plan.days.length, 5, 'planner should build five active days');
 const primaryIds = plan.days.map(day => day.primaryId);
 assert.equal(new Set(primaryIds).size, primaryIds.length, 'primary routes should not repeat');
+assert.equal(primaryIds.includes('kozia-przelecz'), false, 'closed route must not enter an automatic trip plan');
 for (const day of plan.days) {
   const primary = routes.find(route => route.id === day.primaryId);
   const backup = routes.find(route => route.id === day.backupId);
@@ -45,6 +46,7 @@ for (const day of plan.days) {
 }
 
 const giewont = routes.find(route => route.id === 'giewont');
+const kozia = routes.find(route => route.id === 'kozia-przelecz');
 const official = { tpn: { ok: true, routeMentions: [] } };
 const goodDay = { fit: { level: 'good', reasons: [] }, summit: { minTemp: 8, maxTemp: 14, maxGust: 24, maxPrecipProb: 10, precipMm: 0 } };
 const dangerDay = { fit: { level: 'avoid', reasons: ['Грозовой код в прогнозе.'] }, summit: {} };
@@ -54,5 +56,6 @@ assert.notEqual(trip.morningBriefing(giewont, goodDay, { tpn: { ok: false } }, p
 const easy = routes.find(route => route.id === 'morskie-oko');
 assert.notEqual(trip.morningBriefing(easy, goodDay, official, profile, {}, routes, {}, zones).key, 'go', 'unread official bulletin must never return GO');
 assert.equal(trip.morningBriefing(easy, goodDay, official, profile, { officialRead: true }, routes, {}, zones).key, 'go', 'compatible easy route may return GO only after manual TPN confirmation');
+assert.equal(trip.morningBriefing(kozia, goodDay, official, profile, { officialRead: true }, routes, {}, zones).key, 'skip', 'closed route must always return SKIP');
 
 console.log(`trip intelligence: ${routes.length} route profiles, ${plan.days.length} trip days, Plan B and briefing invariants OK`);

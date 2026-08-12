@@ -33,7 +33,12 @@
       "starorobocianski",
       "pajakowka-gubalowka-loop",
       "pajakowka-gubalowka-butorowy-loop",
-      "gubalowka-ridge-dzianisz"
+      "gubalowka-ridge-dzianisz",
+      "zawrat",
+      "kozia-przelecz",
+      "kobylarzowy-zleb",
+      "krzyzne",
+      "przelecz-pod-chlopkiem"
     ]
   },
   {
@@ -55,7 +60,9 @@
       "nosal",
       "koscielec",
       "swinica",
-      "skrajny-granat"
+      "skrajny-granat",
+      "zawrat",
+      "krzyzne"
     ]
   },
   {
@@ -77,7 +84,8 @@
       "starorobocianski",
       "pajakowka-gubalowka-loop",
       "pajakowka-gubalowka-butorowy-loop",
-      "gubalowka-ridge-dzianisz"
+      "gubalowka-ridge-dzianisz",
+      "kobylarzowy-zleb"
     ]
   },
   {
@@ -98,7 +106,9 @@
       "five-lakes",
       "rysy",
       "szpiglasowy",
-      "kozi-wierch"
+      "kozi-wierch",
+      "kozia-przelecz",
+      "przelecz-pod-chlopkiem"
     ]
   },
   {
@@ -117,7 +127,9 @@
       "five-lakes",
       "rysy",
       "szpiglasowy",
-      "kozi-wierch"
+      "kozi-wierch",
+      "kozia-przelecz",
+      "przelecz-pod-chlopkiem"
     ]
   }
 ]

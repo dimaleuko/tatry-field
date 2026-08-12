@@ -453,6 +453,7 @@ async function handleApi(req,res,url) {
   if(kind==='trail-pois') return json(res,200,await trailPois(route));
   if(kind==='stays') return json(res,200,await nearbyStays(route));
   if(kind==='gpx') {
+    if(route.temporarilyClosed) return json(res,423,{error:'GPX недоступен: участок маршрута официально закрыт TPN до отмены.',sourceUrl:route.safetyNotice?.sourceUrl||'https://tpn.gov.pl/komunikat-turystyczny'});
     const body=await gpxForRoute(route);
     return text(res,200,body,'application/gpx+xml; charset=utf-8',{'content-disposition':`attachment; filename=\"${route.id}.gpx\"`});
   }
