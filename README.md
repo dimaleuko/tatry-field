@@ -21,7 +21,11 @@ Editorial hiking planner for the Polish Tatras, now with a **Live Trail Mode**.
 - adds a route-page morning briefing that combines fresh start/summit weather, TPN availability, the experience profile and manual observations such as wet rock, snow/ice, poor visibility or an unready group
 - keeps the briefing deliberately non-binary: `GO*`, `ADJUST` or `SKIP HIGH ROUTE`, always with reasons, official links and a safety caveat
 - generates and persists a route-specific backpack checklist from duration, ascent, exposure, chain use, risks and the route's own gear notes
-- tests all 20 personalized profiles plus multi-day uniqueness, Plan B invariants and briefing fail-safe behaviour in `npm test`
+- tests all 23 personalized profiles plus multi-day uniqueness, Plan B invariants and briefing fail-safe behaviour in `npm test`
+
+## Walk-out routes from Pająkówka
+
+Three lower-elevation routes start at the shared home base: a short Gubałówka loop, a Gubałówka–Butorowy loop, and a linear ridge traverse to Dzianisz. They use bundled OpenStreetMap foot geometry and each has a Field Map with navigation decisions plus two licensed Wikimedia Commons photo points. These are foothill hikes, not substitutes for the high-mountain routes in the main catalog.
 
 ## What changed in 2.3
 

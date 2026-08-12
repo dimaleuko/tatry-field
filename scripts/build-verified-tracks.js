@@ -4,6 +4,7 @@ const zlib = require('zlib');
 
 const ROOT = path.resolve(__dirname, '..');
 const OUTPUT = path.join(ROOT, 'data', 'verified-tracks.json.gz');
+const FOOTHILL_TRACKS = path.join(ROOT, 'data', 'foothill-tracks.json');
 const SOURCE_BASE = 'https://mapa-turystyczna.pl/route/';
 const USER_AGENT = 'TatryField/0.2.7 (route geometry build; source attribution in SOURCES.md)';
 
@@ -116,10 +117,17 @@ async function main() {
     routes[id] = await buildRoute(id, spec);
     process.stdout.write(`${id}: ${routes[id].distanceKm} km, ${routes[id].pointCount} points\n`);
   }
+  const foothillTracks = JSON.parse(fs.readFileSync(FOOTHILL_TRACKS, 'utf8'));
+  for (const [id, track] of Object.entries(foothillTracks)) {
+    const coords = track.geometry?.coordinates || [];
+    if (coords.length < 2) throw new Error(`${id}: bundled foothill track has no geometry`);
+    routes[id] = track;
+    process.stdout.write(`${id}: ${track.distanceKm} km, ${track.pointCount} points (OSM foot routing)\n`);
+  }
   const payload = {
     version: 1,
     generatedAt: new Date().toISOString(),
-    attribution: 'Reference route tracks: mapa-turystyczna.pl; underlying map data: OpenStreetMap contributors',
+    attribution: 'Reference route tracks: mapa-turystyczna.pl and routing.openstreetmap.de; underlying map data: OpenStreetMap contributors',
     routes
   };
   fs.writeFileSync(OUTPUT, zlib.gzipSync(`${JSON.stringify(payload)}\n`, { level: 9 }));

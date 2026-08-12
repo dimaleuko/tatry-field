@@ -131,7 +131,7 @@ function verifiedGeometry(route) {
   return {
     geometry: track.geometry,
     distanceKm: Math.round(checked.distanceKm * 100) / 100,
-    source: 'Reference hiking track · mapa-turystyczna.pl / OpenStreetMap',
+    source: 'Bundled reference hiking track · cited sources / OpenStreetMap',
     sourceUrls: track.sourceUrls || [],
     approximate: false,
     verified: true,

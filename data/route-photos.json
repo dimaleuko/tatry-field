@@ -388,5 +388,71 @@
   "starorobocianski": [
     {"file":"Trzydniowiański Wierch, Widok na Starorobociański Wierch.jpg","title":"Путь от Trzydniowiański","alt":"Вид с Trzydniowiański Wierch на Starorobociański Wierch","caption":"Отсюда виден реальный объём гребня, который ещё предстоит пройти.","author":"Bartek Bodak","license":"CC BY-SA 3.0 PL","licenseUrl":"https://creativecommons.org/licenses/by-sa/3.0/pl/","sourceUrl":"https://commons.wikimedia.org/wiki/File:Trzydniowia%C5%84ski_Wierch%2C_Widok_na_Starorobocia%C5%84ski_Wierch.jpg"},
     {"file":"Starorobociański Wierch from Kończysty Wierch.jpg","title":"Starorobociański от Kończysty","alt":"Starorobociański Wierch с Kończysty Wierch","caption":"Финальный открытый набор к массивной вершине Западных Татр.","author":"Adrian Tync","license":"CC BY-SA 4.0","licenseUrl":"https://creativecommons.org/licenses/by-sa/4.0/","sourceUrl":"https://commons.wikimedia.org/wiki/File:Starorobocia%C5%84ski_Wierch_from_Ko%C5%84czysty_Wierch.jpg"}
+  ],
+  "pajakowka-gubalowka-loop": [
+    {
+      "file": "Gubałówka, Poland in August 2017, 02.jpg",
+      "title": "Панорама Gubałówka",
+      "alt": "Панорама Татр и Zakopane с Gubałówka",
+      "caption": "Главная награда короткой петли — вся стена Татр напротив.",
+      "author": "Kgbo",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Guba%C5%82%C3%B3wka,_Poland_in_August_2017,_02.jpg"
+    },
+    {
+      "file": "Gubałówka, Poland in August 2017, 04.jpg",
+      "title": "Gubałówka летом",
+      "alt": "Летний вид с развитого хребта Gubałówka",
+      "caption": "Наверху это скорее панорамная promenade, чем дикая горная тропа.",
+      "author": "Kgbo",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Guba%C5%82%C3%B3wka,_Poland_in_August_2017,_04.jpg"
+    }
+  ],
+  "pajakowka-gubalowka-butorowy-loop": [
+    {
+      "file": "Wyciąg na Butorowy Wierch.JPG",
+      "title": "Butorowy Wierch",
+      "alt": "Кресельная дорога на Butorowy Wierch и панорама Татр",
+      "caption": "Западная точка петли: тише, леснее и с узнаваемым видом на Giewont.",
+      "author": "Zoobek",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Wyci%C4%85g_na_Butorowy_Wierch.JPG"
+    },
+    {
+      "file": "Pasmo Gubałowskie T57-2.jpg",
+      "title": "Хребет над Kościelisko",
+      "alt": "Вид из Kościelisko на Butorowy Wierch и Gubałówka",
+      "caption": "Снизу хорошо читается вся линия, по которой проходит середина маршрута.",
+      "author": "Jerzy Opioła",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pasmo_Guba%C5%82owskie_T57-2.jpg"
+    }
+  ],
+  "gubalowka-ridge-dzianisz": [
+    {
+      "file": "Pasmo Gubałowskie T57-1.JPG",
+      "title": "Западная часть Pasmo Gubałowskie",
+      "alt": "Palenica Kościeliska, Butorowy Wierch и Gubałówka со стороны Kościelisko",
+      "caption": "Первые километры траверса соединяют три мягкие вершины одного предгорного хребта.",
+      "author": "Jerzy Opioła",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pasmo_Guba%C5%82owskie_T57-1.JPG"
+    },
+    {
+      "file": "Dzianisz 2PG1.jpg",
+      "title": "Dzianisz и Татры",
+      "alt": "Сельский Dzianisz с панорамой Татр",
+      "caption": "К финишу туристическая Gubałówka сменяется спокойным сельским Podhale.",
+      "author": "Jerzy Opioła",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dzianisz_2PG1.jpg"
+    }
   ]
 }

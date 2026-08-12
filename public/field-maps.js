@@ -295,5 +295,50 @@ window.TATRY_FIELD_MAPS={
     ],
     terrain:[{from:0,to:.18,kind:'approach'},{from:.18,to:.31,kind:'effort'},{from:.31,to:.49,kind:'navigation'},{from:.49,to:.67,kind:'effort'},{from:.67,to:1,kind:'approach'}],
     sources:[['Маршрут','https://mapa-turystyczna.pl/route/a1dw'],['TPN: условия','https://tpn.gov.pl/komunikat-turystyczny']]
+  },
+  'pajakowka-gubalowka-loop':{
+    issue:'FIELD MAP 21 / GUBAŁÓWKA FROM HOME',title:'Панорама Татр прямо от нашей двери.',
+    intro:'Короткая петля без транспорта: где дорога становится грунтовой, где открывается главный вид и почему развитая Gubałówka — не высокогорье.',
+    stops:[
+      {ratio:0,kicker:'00 / HOME',name:'Apartamenty Polana Pająkówka',tag:'СТАРТ У ДОМА',meta:'0.0 км',level:'info',prompt:'WALK-OUT',decision:'Выходи пешком и сразу сохрани офлайн-карту локальных дорог.',body:'Транспорт и парковка не нужны; задача дня начинается прямо у нашего домика.'},
+      {ratio:.16,kicker:'01 / JUNCTION',name:'Верхняя Pająkówka',tag:'НЕ УЙТИ К ДОМАМ',meta:'≈ 0.6 км',level:'nav',prompt:'ЛОКАЛЬНАЯ РАЗВИЛКА',decision:'На боковых дорогах сверяй линию трека, а не просто направление «вверх».',body:'Много частных подъездов выглядят одинаково; это главный навигационный нюанс короткой петли.'},
+      {ratio:.34,kicker:'02 / VIEW',name:'Окно на Татры',tag:'ПЕРВАЯ ПАНОРАМА',meta:'≈ 1.3 км',level:'summit',prompt:'ФОТОТОЧКА',decision:'Остановись только вне проезда и не выходи на край частного участка.',body:'Здесь хребет впервые открывает Zakopane и всю стену Татр напротив.',photoIndex:0},
+      {ratio:.50,kicker:'03 / RIDGE',name:'Gubałówka — верхняя станция',tag:'РАЗВИТЫЙ ХРЕБЕТ',meta:'≈ 1.9 км',level:'info',prompt:'НЕ HIGH ALPINE',decision:'Используй инфраструктуру как паузу, но не путай доступность с гарантией хорошей погоды.',body:'Кафе, аттракционы и толпа делают точку простой, но ветер и облачность всё равно меняются.',photoIndex:1},
+      {ratio:.68,kicker:'04 / TURN',name:'Поворот к Pająkówka',tag:'СХОД С ПРОМЕНАДА',meta:'≈ 2.6 км',level:'nav',prompt:'НУЖНАЯ ВЕТКА',decision:'Покинь развитую гребневую дорогу по линии трека к дому.',body:'Если продолжить по хребту, уйдёшь в сторону Butorowy и превратишь короткую петлю в другой маршрут.'},
+      {ratio:.84,kicker:'05 / DESCENT',name:'Грунтовый спуск',tag:'СКОЛЬЗКО ПОСЛЕ ДОЖДЯ',meta:'≈ 3.2 км',level:'effort',prompt:'ТЕМП НА СПУСКЕ',decision:'На мокрой траве и колее сократи шаг; не срезай через участки.',body:'Технически просто, но именно здесь грязь чаще всего меняет заявленное время.'},
+      {ratio:1,kicker:'06 / FINISH',name:'Наш дом',tag:'ФИНИШ',meta:'≈ 3.8 км',level:'info',prompt:'RECOVERY DAY',decision:'Маршрут закончен; дополнительная логистика не нужна.',body:'Хороший короткий выход на день приезда или между большими горами.'}
+    ],
+    terrain:[{from:0,to:.16,kind:'approach'},{from:.16,to:.34,kind:'navigation'},{from:.34,to:.68,kind:'approach'},{from:.68,to:.84,kind:'navigation'},{from:.84,to:1,kind:'effort'}],
+    sources:[['Zakopane: Gubałówka','https://www.zakopane.pl/en/tourist-area/tourism/a-walk-around-zakopane/gubalowka'],['OSM foot routing','https://routing.openstreetmap.de/about.html']]
+  },
+  'pajakowka-gubalowka-butorowy-loop':{
+    issue:'FIELD MAP 22 / BUTOROWY LOOP',title:'Тихий лес, затем весь панорамный фасад.',
+    intro:'Домашняя петля подлиннее: как выйти к Butorowy, где начинается официальный ridge walk и где не пропустить спуск обратно к Pająkówka.',
+    stops:[
+      {ratio:0,kicker:'00 / HOME',name:'Apartamenty Polana Pająkówka',tag:'СТАРТ У ДОМА',meta:'0.0 км',level:'info',prompt:'ПОЛНЫЙ КРУГ',decision:'Иди западнее к Butorowy; Gubałówka оставляем на вторую половину.',body:'Так маршрут постепенно переходит от тихой части к главной панораме.'},
+      {ratio:.12,kicker:'01 / JUNCTION',name:'Западная связка',tag:'ПРОВЕРЬ ТРЕК',meta:'≈ 0.7 км',level:'nav',prompt:'ЧАСТНЫЕ ДОРОГИ',decision:'Держись публичной пешеходной линии и не срезай через дворы.',body:'На карте связка понятнее, чем на местности: подъездные дороги здесь очень похожи.'},
+      {ratio:.27,kicker:'02 / PEAK',name:'Butorowy Wierch',tag:'1160 М',meta:'≈ 1.5 км',level:'summit',prompt:'ЗАПАДНАЯ ТОЧКА',decision:'От верхней станции продолжай на восток по хребту в сторону Gubałówka.',body:'Лесная точка и кресельная дорога отмечают начало самой панорамной части.',photoIndex:0},
+      {ratio:.43,kicker:'03 / RIDGE',name:'Окна над Kościelisko',tag:'ТАТРЫ НАПРОТИВ',meta:'≈ 2.4 км',level:'info',prompt:'ФОТО БЕЗ РИСКА',decision:'Для остановки выбери широкую обочину, не стой на проезжей части.',body:'На открытых промежутках видно, как Butorowy и Gubałówka складываются в один хребет.',photoIndex:1},
+      {ratio:.66,kicker:'04 / BUSY',name:'Gubałówka',tag:'КАФЕ + ТОЛПА',meta:'≈ 3.7 км',level:'info',prompt:'КОНТРОЛЬ ВРЕМЕНИ',decision:'Отдохни, но оставь запас на локальный спуск к дому.',body:'Официальная прогулка по гребню здесь заканчивается; наша петля продолжаетcя к Pająkówka.'},
+      {ratio:.78,kicker:'05 / TURN',name:'Сход с хребта',tag:'НЕ ПРОПУСТИ',meta:'≈ 4.4 км',level:'nav',prompt:'КЛЮЧЕВОЙ ПОВОРОТ',decision:'Сверни с основной гребневой дороги по треку к жилью.',body:'Продолжение прямо уводит к верхней станции и центру Gubałówka, а не домой.'},
+      {ratio:1,kicker:'06 / FINISH',name:'Наш дом',tag:'ФИНИШ',meta:'≈ 5.6 км',level:'info',prompt:'БЕЗ ТРАНСПОРТА',decision:'Круг замкнут у Pająkówka.',body:'Самая содержательная лёгкая петля, которую можно начать буквально от двери.'}
+    ],
+    terrain:[{from:0,to:.12,kind:'approach'},{from:.12,to:.27,kind:'navigation'},{from:.27,to:.66,kind:'approach'},{from:.66,to:.78,kind:'navigation'},{from:.78,to:1,kind:'effort'}],
+    sources:[['Zakopane: Gubałówka–Butorowy','https://www.zakopane.pl/en/tourist-area/tourism/a-walk-around-zakopane/gubalowka'],['OSM foot routing','https://routing.openstreetmap.de/about.html']]
+  },
+  'gubalowka-ridge-dzianisz':{
+    issue:'FIELD MAP 23 / RIDGE TO DZIANISZ',title:'Длинный хребет, где карта важнее рук.',
+    intro:'Линейный маршрут от дома: туристическая Gubałówka, лесной Butorowy, грязные западные связки и заранее организованный финиш в Dzianisz.',
+    stops:[
+      {ratio:0,kicker:'00 / HOME',name:'Apartamenty Polana Pająkówka',tag:'СТАРТ У ДОМА',meta:'0.0 км',level:'info',prompt:'ЛИНЕЙНЫЙ ДЕНЬ',decision:'До выхода договорись о pickup или такси из Dzianisz.',body:'Главный риск сегодня логистический: финиш не возвращает к машине и жилью автоматически.'},
+      {ratio:.18,kicker:'01 / RIDGE',name:'Gubałówka',tag:'ПОСЛЕДНЯЯ ТОЛПА',meta:'≈ 1.9 км',level:'info',prompt:'ВОДА + СВЯЗЬ',decision:'Пополнить воду и проверить заряд лучше здесь; дальше инфраструктура редеет.',body:'После развитой Gubałówka маршрут постепенно становится сельским и заметно тише.'},
+      {ratio:.38,kicker:'02 / PEAK',name:'Butorowy Wierch',tag:'1160 М',meta:'≈ 4.0 км',level:'summit',prompt:'ПРОДОЛЖАТЬ НА ЗАПАД',decision:'От верхней станции держи западное продолжение красного хребта.',body:'До этой точки всё ещё легко развернуться домой; дальше начинается линейная часть.',photoIndex:0},
+      {ratio:.585,kicker:'03 / JUNCTION',name:'Palenica Kościeliska',tag:'МНОГО БОКОВЫХ ДОРОГ',meta:'≈ 6.3 км',level:'nav',prompt:'СВЕРКА КАЖДОГО ПОВОРОТА',decision:'Следуй загруженному треку и маркировке; не выбирай дорогу только по ширине.',body:'Полевые и лесовозные колеи часто выглядят логичнее нужной линии — это главный навигационный участок.'},
+      {ratio:.74,kicker:'04 / TRACKS',name:'Западные поля',tag:'ГРЯЗЬ + КОЛЕИ',meta:'≈ 7.9 км',level:'effort',prompt:'ПОКРЫТИЕ',decision:'После дождя закладывай больше времени и обходи глубокие колеи по устойчивой кромке.',body:'Технических скал нет, но мокрый грунт может заметно замедлить весь траверс.'},
+      {ratio:.916,kicker:'05 / VIEW',name:'Gruszków Wierch',tag:'ТИХАЯ ПАНОРАМА',meta:'≈ 9.8 км',level:'summit',prompt:'ФИНИШ УЖЕ БЛИЗКО',decision:'Продолжай к Dzianisz по выбранной линии, не сворачивая к случайным хуторам.',body:'Вместо коммерческого хребта — сельское Podhale и Татры далеко за спиной.',photoIndex:1},
+      {ratio:1,kicker:'06 / FINISH',name:'Dzianisz Rondo',tag:'PICKUP POINT',meta:'≈ 10.7 км',level:'info',prompt:'ОБРАТНАЯ ЛОГИСТИКА',decision:'Используй заранее согласованный транспорт; не рассчитывай на частый случайный рейс.',body:'Линейный маршрут закончен. Координаты финиша сохранены в карточке.'}
+    ],
+    terrain:[{from:0,to:.18,kind:'approach'},{from:.18,to:.38,kind:'approach'},{from:.38,to:.585,kind:'navigation'},{from:.585,to:.74,kind:'navigation'},{from:.74,to:.916,kind:'effort'},{from:.916,to:1,kind:'navigation'}],
+    sources:[['Zakopane: Gubałówka–Butorowy','https://www.zakopane.pl/en/tourist-area/tourism/a-walk-around-zakopane/gubalowka'],['Gubałówka ridge account','https://tinkadventures.com/2021/12/04/gubalowka-ridge-from-zakopane-to-chocholow/'],['OSM foot routing','https://routing.openstreetmap.de/about.html']]
   }
 };
