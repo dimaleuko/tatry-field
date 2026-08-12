@@ -1,6 +1,15 @@
-# TATRY / FIELD — Phase 3.2
+# TATRY / FIELD — Phase 3.3
 
 Editorial hiking planner for the Polish Tatras, now with a **Live Trail Mode**.
+
+## Phase 3.3 group route voting
+
+- turns any two or three saved routes into a shared vote with a short link
+- asks each participant for a visible name and one route choice
+- shows the live score, named voter chips, the current leader or a tie
+- lets the same displayed name change its choice instead of creating a second vote
+- refreshes an open result board automatically every eight seconds without interrupting form input
+- keeps polls for 60 days in `GROUP_VOTES_FILE` (defaults to an ignored runtime JSON file); production should point this variable at persistent storage because Render's ordinary filesystem is ephemeral
 
 ## Phase 3.2 personal trip intelligence
 

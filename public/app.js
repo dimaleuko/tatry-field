@@ -130,6 +130,8 @@ function syncSavedUi(){
   $('#compareTrayRoutes').innerHTML=savedRoutes().map(route=>`<button type="button" class="compare-route-chip" data-remove-saved="${route.id}" aria-label="Убрать ${esc(route.name)} из сохранённых">${esc(route.name)} <span>×</span></button>`).join('');
   $('#openCompare').disabled=ids.length<2;
   $('#openCompare').textContent=ids.length>=2?`Сравнить ${ids.length}`:'Сравнить';
+  const voteButton=$('#openGroupVote');if(voteButton)voteButton.disabled=ids.length<2;
+  window.TatryGroupVote?.refreshShortlist();
   if($('#compareOverlay')?.classList.contains('open'))renderCompareContent();
 }
 function compareRows(){
@@ -273,7 +275,7 @@ async function loadOfficial(){try{const d=await fetch('/api/official').then(r=>r
 async function boot(){
   initMap();
   const [rd,sd]=await Promise.all([fetch('/api/routes').then(r=>r.json()),fetch('/api/stay-zones').then(r=>r.json())]);
-  routes=rd.routes;stayZones=sd.zones||[];renderStayZones();render();initTripStudio();
+  routes=rd.routes;stayZones=sd.zones||[];renderStayZones();render();initTripStudio();window.TatryGroupVote?.init({routes,savedStore});
   routes.forEach(r=>{if(!markers[r.id])markers[r.id]=L.marker([r.startLat,r.startLon],{icon:markerIcon(),zIndexOffset:300}).addTo(map).bindTooltip(`<b>${esc(r.start)}</b><br>${esc(r.name)}`,{direction:'top',offset:[0,-6]})});
   if(new URLSearchParams(location.search).get('compare')==='1'&&savedRoutes().length>=2)setTimeout(openCompare,0);
   await Promise.allSettled([loadOfficial()]);

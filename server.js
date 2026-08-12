@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 const { URL } = require('url');
+const { createGroupVoteStore } = require('./lib/group-votes');
 
 const PORT = Number(process.env.PORT || 8787);
 const ROOT = __dirname;
@@ -20,7 +21,11 @@ const VERIFIED_TRACKS = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(ROO
 const ROUTE_MAP = new Map(ROUTES.map((r) => [r.id, r]));
 const STAY_ZONES = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'stay-zones.json'), 'utf8'));
 const STAY_ZONE_MAP = new Map(STAY_ZONES.map((z) => [z.id, z]));
-const USER_AGENT = 'TatryFieldPhase3/0.7.0 (+source-backed route tracks; safety-first hiking guide)';
+const USER_AGENT = 'TatryFieldPhase3/0.8.0 (+source-backed route tracks; safety-first hiking guide)';
+const GROUP_VOTES = createGroupVoteStore({
+  filePath: process.env.GROUP_VOTES_FILE || path.join(ROOT, 'data', 'group-votes.runtime.json'),
+  validRouteIds: ROUTES.map((route) => route.id)
+});
 
 const cache = new Map();
 function getCache(key) {
@@ -39,6 +44,39 @@ function text(res, status, body, contentType='text/plain; charset=utf-8', extra=
   res.end(body);
 }
 function safeRoute(id) { return ROUTE_MAP.get(id); }
+
+async function readJsonBody(req, maxBytes = 16 * 1024) {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.setEncoding('utf8');
+    req.on('data', (chunk) => {
+      body += chunk;
+      if (Buffer.byteLength(body) > maxBytes) {
+        reject(Object.assign(new Error('Request body is too large'), { status: 413 }));
+        req.destroy();
+      }
+    });
+    req.on('end', () => {
+      if (!body) return resolve({});
+      try { resolve(JSON.parse(body)); }
+      catch { reject(Object.assign(new Error('Invalid JSON'), { status: 400 })); }
+    });
+    req.on('error', reject);
+  });
+}
+
+function publicVote(poll) {
+  const votes = Object.values(poll.votes || {}).sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+  return {
+    id: poll.id,
+    title: poll.title,
+    routeIds: poll.routeIds,
+    votes,
+    createdAt: poll.createdAt,
+    updatedAt: poll.updatedAt,
+    expiresAt: poll.expiresAt
+  };
+}
 
 async function fetchJson(url, opts = {}) {
   const response = await fetch(url, {
@@ -383,6 +421,24 @@ async function gpxForRoute(route) {
 }
 
 async function handleApi(req,res,url) {
+  if (url.pathname === '/api/group-votes' && req.method === 'POST') {
+    const body = await readJsonBody(req);
+    const poll = GROUP_VOTES.create(body);
+    return json(res, 201, { vote: publicVote(poll) });
+  }
+  const voteMatch = url.pathname.match(/^\/api\/group-votes\/([A-Z2-9]{7})(?:\/vote)?$/i);
+  if (voteMatch) {
+    const code = voteMatch[1].toUpperCase();
+    if (req.method === 'GET' && !url.pathname.endsWith('/vote')) {
+      const poll = GROUP_VOTES.get(code);
+      return poll ? json(res, 200, { vote: publicVote(poll) }) : json(res, 404, { error: 'Vote not found or expired' });
+    }
+    if (req.method === 'POST' && url.pathname.endsWith('/vote')) {
+      const poll = GROUP_VOTES.vote(code, await readJsonBody(req));
+      return json(res, 200, { vote: publicVote(poll) });
+    }
+    return json(res, 405, { error: 'Method not allowed' }, { allow: url.pathname.endsWith('/vote') ? 'POST' : 'GET' });
+  }
   if (url.pathname === '/api/routes') return json(res,200,{routes:ROUTES});
   if (url.pathname === '/api/stay-zones') return json(res,200,{zones:STAY_ZONES.map(z=>({...z,bookingUrl:bookingSearchUrl(z.bookingQuery)}))});
   if (url.pathname === '/api/weather-all') { const day=Math.max(0,Math.min(1,Number(url.searchParams.get('day')||0))); return json(res,200,await bulkWeather(day)); }
@@ -421,7 +477,7 @@ const server=http.createServer(async(req,res)=>{
     let rel=url.pathname==='/'?'/index.html':url.pathname;
     const file=path.normalize(path.join(PUBLIC,rel));
     return serveFile(res,file);
-  } catch(error) { console.error(error); if(!res.headersSent) json(res,500,{error:error.message}); else res.end(); }
+  } catch(error) { console.error(error); if(!res.headersSent) json(res,error.status||500,{error:error.message}); else res.end(); }
 });
 
-server.listen(PORT,()=>console.log(`TATRY FIELD Phase 3.2 → http://localhost:${PORT}`));
+server.listen(PORT,()=>console.log(`TATRY FIELD Phase 3.3 → http://localhost:${PORT}`));
