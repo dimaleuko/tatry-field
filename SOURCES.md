@@ -84,3 +84,10 @@ The packing and decision guidance is grounded in the official sources already tr
 - TOPR avalanche bulletin for snow-covered conditions: https://lawiny.topr.pl/
 
 The guide intentionally distinguishes basic all-season essentials from route- and condition-specific technical equipment. Crampons, an ice axe and avalanche equipment are never presented as useful without the training to use them. The two section images are original TATRY / FIELD editorial assets generated for this project; they contain no third-party logos or copied Pinterest imagery.
+
+## Phase 3.2 morning briefing and route packs
+
+- Fresh route briefings use the existing Open-Meteo start/summit forecasts and the current TPN/TOPR endpoints listed above.
+- A route name match in the TPN extraction only raises a manual-review flag; it is never interpreted automatically as either a closure or an opening.
+- Manual wet-rock, snow/ice, visibility and group-readiness signals deliberately override a superficially good forecast on exposed or chain-assisted routes.
+- Route-specific packing remains planning assistance rather than equipment certification. Current official conditions, technical training and the needs of the entire group stay authoritative.

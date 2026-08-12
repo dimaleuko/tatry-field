@@ -1,6 +1,18 @@
-# TATRY / FIELD — Phase 3.1
+# TATRY / FIELD — Phase 3.2
 
 Editorial hiking planner for the Polish Tatras, now with a **Live Trail Mode**.
+
+## Phase 3.2 personal trip intelligence
+
+- adds a persistent experience profile based on comfortable hours, ascent, chain experience and tolerance for exposed terrain
+- recalculates every route into a personal `fit / ambitious / big jump` state without hiding the original editorial difficulty
+- builds a two-to-five-day trip around the selected accommodation zone, transport mode, desired rhythm and saved-route priorities
+- avoids repeating routes and penalizes two demanding days in a row
+- attaches a lower-load Plan B without chains or high exposure to every day when a suitable alternative exists
+- adds a route-page morning briefing that combines fresh start/summit weather, TPN availability, the experience profile and manual observations such as wet rock, snow/ice, poor visibility or an unready group
+- keeps the briefing deliberately non-binary: `GO*`, `ADJUST` or `SKIP HIGH ROUTE`, always with reasons, official links and a safety caveat
+- generates and persists a route-specific backpack checklist from duration, ascent, exposure, chain use, risks and the route's own gear notes
+- tests all 20 personalized profiles plus multi-day uniqueness, Plan B invariants and briefing fail-safe behaviour in `npm test`
 
 ## What changed in 2.3
 

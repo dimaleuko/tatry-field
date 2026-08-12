@@ -16,6 +16,7 @@ let routes=[],stayZones=[],filters=new Set(),map,markers={},activeOutline=null,a
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const savedStore=window.TatrySavedRoutes;
+const tripStore=window.TatryTrip;
 let compareReturnFocus=null;
 let compareNoticeTimer=null;
 
@@ -52,6 +53,10 @@ function routePhotoPair(photos=[]){
   if(!pair.length)return '';
   return `<div class="route-photo-pair" aria-label="Фотографии маршрута">${pair.map((photo,i)=>`<div class="route-card-photo ${i===0?'primary':'secondary'}"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${esc(photo.src)}" alt="${esc(photo.alt)}"><span>${esc(photo.title)}</span></div>`).join('')}</div>`;
 }
+function personalFitMarkup(route){
+  const fit=tripStore.personalizedDifficulty(route);
+  return `<div class="personal-fit ${fit.status}"><span>ДЛЯ ТЕБЯ</span><b>${fit.status==='unknown'?'—':`${fit.score}/5`} · ${esc(fit.label)}</b><small>${fit.gaps.length?esc(fit.gaps[0]):esc(fit.note||'Параметры совпадают с привычной нагрузкой.')}</small></div>`;
+}
 function routeCard(r,i,savedSet=new Set()){
   const objective=r.objective||{name:r.goal||r.end,altitude:r.maxAlt};
   const ret=r.returnToZakopane||{};
@@ -61,7 +66,7 @@ function routeCard(r,i,savedSet=new Set()){
       <div class="route-head"><div><div class="route-number">${String(i+1).padStart(2,'0')} / ${String(routes.length).padStart(2,'0')}</div><h2 class="route-title">${esc(r.name)}</h2><div class="route-short">${esc(r.short)}</div></div><div class="trail-ready-pill">TRAIL MODE →</div></div>
       ${routePhotoPair(r.photos)}
       <div class="route-flags"><span class="route-kind ${r.routeKind}">${kindLabel(r)}</span><span class="objective-chip">${esc(objective.name)} · ${objective.altitude} м</span><span class="return-chip ${returnClass(ret.score)}">↩ Zakopane ${ret.score||'—'}/5</span></div>
-      <div class="metrics"><div class="metric"><small>Время</small><b>${r.hours} ч</b></div><div class="metric"><small>Дистанция</small><b>${r.km} км</b></div><div class="metric"><small>Набор</small><b>+${r.ascent} м</b></div><div class="metric"><small>Уровень</small><b>${r.diff}/5</b></div><div class="metric"><small>Цепи</small><b>${r.chains?'да':'нет'}</b></div><div class="metric"><small>Толпы</small><b>${fmtCrowd(r.crowd)}</b></div></div>
+      <div class="metrics"><div class="metric"><small>Время</small><b>${r.hours} ч</b></div><div class="metric"><small>Дистанция</small><b>${r.km} км</b></div><div class="metric"><small>Набор</small><b>+${r.ascent} м</b></div><div class="metric"><small>Уровень</small><b>${r.diff}/5</b></div><div class="metric"><small>Цепи</small><b>${r.chains?'да':'нет'}</b></div><div class="metric"><small>Толпы</small><b>${fmtCrowd(r.crowd)}</b></div></div>${personalFitMarkup(r)}
       <div class="tags"><span class="tag">${LEVELS[r.diff]}</span>${r.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
     </a>
     <button type="button" class="route-save-btn${isSaved?' saved':''}" data-save-route="${r.id}" aria-pressed="${isSaved}" aria-label="${isSaved?'Убрать из сохранённых':'Сохранить для сравнения'}: ${esc(r.name)}">${isSaved?'СОХРАНЕНО ✓':'СОХРАНИТЬ +'}</button>
@@ -135,6 +140,7 @@ function compareRows(){
     ['Набор',route=>`+${route.ascent} м`],
     ['Макс. высота',route=>`${route.maxAlt} м`],
     ['Сложность',route=>`${route.diff}/5 · ${LEVELS[route.diff]}`],
+    ['Для тебя',route=>{const fit=tripStore.personalizedDifficulty(route);return fit.status==='unknown'?'Заполни профиль':`${fit.score}/5 · ${fit.label}${fit.gaps[0]?` · ${fit.gaps[0]}`:''}`}],
     ['Цепи',route=>route.chains?'Да':'Нет'],
     ['Толпы',route=>fmtCrowd(route.crowd)],
     ['Старт',route=>route.start],
@@ -223,11 +229,51 @@ function stayCard(z){
   </article>`;
 }
 function renderStayZones(){if($('#stayZones'))$('#stayZones').innerHTML=stayZones.map(stayCard).join('')}
+function localIso(offset=0){const d=new Date();d.setDate(d.getDate()+offset);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function tripDateLabel(value){try{return new Intl.DateTimeFormat('ru-RU',{weekday:'short',day:'numeric',month:'short'}).format(new Date(`${value}T12:00:00`))}catch{return value}}
+function profileFromForm(){
+  const form=$('#tripProfileForm');
+  return {configured:true,maxHours:Number(form.elements.maxHours.value),maxAscent:Number(form.elements.maxAscent.value),chains:form.elements.chains.value,exposure:form.elements.exposure.value};
+}
+function fillProfileForm(){
+  const form=$('#tripProfileForm'),profile=tripStore.getProfile();if(!form)return;
+  form.elements.maxHours.value=String(profile.maxHours);form.elements.maxAscent.value=String(profile.maxAscent);form.elements.chains.value=profile.chains;form.elements.exposure.value=profile.exposure;
+  $('#tripProfileStatus').textContent=profile.configured?'Профиль сохранён. Карточки уже пересчитаны.':'Пока используем осторожные значения по умолчанию.';
+}
+function populateTripZones(){
+  const select=$('#tripZoneSelect');if(!select)return;
+  select.innerHTML=stayZones.map(zone=>`<option value="${esc(zone.id)}">${esc(zone.name)}</option>`).join('');
+}
+function updateTripSavedHint(){const hint=$('#tripSavedHint');if(hint)hint.textContent=`Сохранённые маршруты в приоритете: ${savedStore?.get().length||0}`}
+function tripRouteMeta(route){return `${route.hours} ч · ${route.km} км · +${route.ascent} м · ${route.chains?'цепи':'без цепей'}`}
+function activeDaysLabel(count){return count===2||count===3||count===4?`${count} активных дня`:`${count} активных дней`}
+function renderTripPlan(plan=tripStore.getTrip()){
+  const host=$('#tripPlan');if(!host)return;
+  if(!plan?.days?.length){host.innerHTML='<div class="trip-plan-empty"><span>03 / YOUR DAYS</span><b>Заполни профиль и нажми «Собрать поездку».</b><p>Plan B здесь означает менее сложный и менее экспонированный маршрут. Это не погодная рекомендация заранее.</p></div>';return}
+  const zone=stayZones.find(item=>item.id===plan.zoneId);
+  const rhythm={balanced:'баланс нагрузки',scenic:'максимум видов',ambitious:'амбициозно'}[plan.rhythm]||plan.rhythm;
+  const cards=plan.days.map((day,index)=>{
+    const primary=routes.find(route=>route.id===day.primaryId),backup=routes.find(route=>route.id===day.backupId);if(!primary)return '';
+    const fit=tripStore.personalizedDifficulty(primary);
+    return `<article class="trip-day-card"><div class="trip-day-index"><span>DAY ${String(index+1).padStart(2,'0')}</span><b>${esc(tripDateLabel(day.date))}</b></div><div class="trip-primary"><small>PRIMARY / ПРИ ХОРОШИХ УСЛОВИЯХ</small><h3><a href="/route/${primary.id}">${esc(primary.name)} →</a></h3><p>${esc(tripRouteMeta(primary))}</p><div class="trip-fit ${fit.status}">${fit.score}/5 для тебя · ${esc(fit.label)}</div></div><div class="trip-backup"><small>PLAN B / НИЖЕ РИСК И НАГРУЗКА</small>${backup?`<h4><a href="/route/${backup.id}">${esc(backup.name)} →</a></h4><p>${esc(tripRouteMeta(backup))}</p>`:'<h4>Свободный / восстановительный день</h4><p>Подходящий более лёгкий дубль не найден.</p>'}</div></article>`;
+  }).join('');
+  host.innerHTML=`<header class="trip-plan-head"><div><span>03 / YOUR DAYS</span><h3>${activeDaysLabel(plan.days.length)} · ${esc(zone?.name||'база не выбрана')}</h3><p>${esc(rhythm)} · ${plan.car?'с машиной':'без машины'} · план не использует ранний прогноз</p></div><button type="button" data-clear-trip>ОЧИСТИТЬ</button></header><div class="trip-days">${cards}</div><footer class="trip-plan-note"><b>Почему Plan B не равен прогнозу:</b> он заранее уменьшает сложность, экспозицию и нагрузку. Утром всё равно открой конкретный маршрут — там briefing пересчитает решение по свежей погоде, TPN и фактическим условиям.</footer>`;
+}
+function initTripStudio(){
+  fillProfileForm();populateTripZones();updateTripSavedHint();
+  const builder=$('#tripBuilderForm');builder.elements.startDate.min=localIso(0);builder.elements.startDate.value=tripStore.getTrip()?.startDate||localIso(1);
+  if(tripStore.getTrip()){const plan=tripStore.getTrip();builder.elements.days.value=String(plan.days.length);builder.elements.zoneId.value=plan.zoneId;builder.elements.rhythm.value=plan.rhythm;builder.elements.car.checked=Boolean(plan.car)}
+  renderTripPlan();
+  $('#tripProfileForm').addEventListener('submit',event=>{event.preventDefault();tripStore.setProfile(profileFromForm());$('#tripProfileStatus').textContent='Сохранено. Все маршруты пересчитаны под этот диапазон.';render();renderTripPlan()});
+  builder.addEventListener('submit',event=>{event.preventDefault();let profile=tripStore.getProfile();if(!profile.configured){profile=tripStore.setProfile(profileFromForm());$('#tripProfileStatus').textContent='Профиль сохранён вместе с поездкой.'}const plan=tripStore.generateTrip(routes,{startDate:builder.elements.startDate.value,days:Number(builder.elements.days.value),zoneId:builder.elements.zoneId.value,rhythm:builder.elements.rhythm.value,car:builder.elements.car.checked},profile,savedStore?.get()||[],stayZones);tripStore.setTrip(plan);render();renderTripPlan(plan);hostScroll()});
+  $('#tripPlan').addEventListener('click',event=>{if(event.target.closest('[data-clear-trip]')){tripStore.clearTrip();renderTripPlan(null)}});
+}
+function hostScroll(){const plan=$('#tripPlan');if(plan&&window.matchMedia('(max-width: 760px)').matches)plan.scrollIntoView({behavior:'smooth',block:'start'})}
 async function loadOfficial(){try{const d=await fetch('/api/official').then(r=>r.json());$('#officialState').textContent=d.tpn?.ok?'TPN online':'link only';$('#officialText').textContent=d.tpn?.ok?'TPN отвечает. Проверяй официальный текст ближе к дате и ещё раз утром перед стартом.':'Не удалось прочитать TPN автоматически — используй официальный линк.'}catch{$('#officialState').textContent='link only'}}
 async function boot(){
   initMap();
   const [rd,sd]=await Promise.all([fetch('/api/routes').then(r=>r.json()),fetch('/api/stay-zones').then(r=>r.json())]);
-  routes=rd.routes;stayZones=sd.zones||[];renderStayZones();render();
+  routes=rd.routes;stayZones=sd.zones||[];renderStayZones();render();initTripStudio();
   routes.forEach(r=>{if(!markers[r.id])markers[r.id]=L.marker([r.startLat,r.startLon],{icon:markerIcon(),zIndexOffset:300}).addTo(map).bindTooltip(`<b>${esc(r.start)}</b><br>${esc(r.name)}`,{direction:'top',offset:[0,-6]})});
   if(new URLSearchParams(location.search).get('compare')==='1'&&savedRoutes().length>=2)setTimeout(openCompare,0);
   await Promise.allSettled([loadOfficial()]);
@@ -258,5 +304,6 @@ document.addEventListener('keydown',event=>{
   if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
 });
-window.addEventListener('tatry:saved-routes',syncSavedUi);
+window.addEventListener('tatry:saved-routes',()=>{syncSavedUi();updateTripSavedHint()});
+window.addEventListener('tatry:trip-profile',()=>{if(routes.length)render()});
 boot().catch(err=>{console.error(err);const el=document.querySelector('#routeList');if(el)el.innerHTML='<div class="empty"><b>Не удалось запустить карту.</b><br>Обнови страницу. Если ошибка повторяется — map library не загрузилась.</div>';});

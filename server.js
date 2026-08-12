@@ -20,7 +20,7 @@ const VERIFIED_TRACKS = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(ROO
 const ROUTE_MAP = new Map(ROUTES.map((r) => [r.id, r]));
 const STAY_ZONES = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'stay-zones.json'), 'utf8'));
 const STAY_ZONE_MAP = new Map(STAY_ZONES.map((z) => [z.id, z]));
-const USER_AGENT = 'TatryFieldPhase3/0.6.0 (+source-backed route tracks; safety-first hiking guide)';
+const USER_AGENT = 'TatryFieldPhase3/0.7.0 (+source-backed route tracks; safety-first hiking guide)';
 
 const cache = new Map();
 function getCache(key) {
@@ -424,4 +424,4 @@ const server=http.createServer(async(req,res)=>{
   } catch(error) { console.error(error); if(!res.headersSent) json(res,500,{error:error.message}); else res.end(); }
 });
 
-server.listen(PORT,()=>console.log(`TATRY FIELD Phase 3.1 → http://localhost:${PORT}`));
+server.listen(PORT,()=>console.log(`TATRY FIELD Phase 3.2 → http://localhost:${PORT}`));
