@@ -1,4 +1,4 @@
-const LEVELS={1:'Кофе в термосе',2:'Выгулять Salomon',3:'Уже не brunch',4:'Руки на скалу',5:'Позвони маме'};
+const LEVELS={1:'WELLNESS CORE',2:'МОИ SALOMON ТАМ, ГДЕ ИМ МЕСТО',3:'КОЛЕНИ ПОБАЛИВАЮТ',4:'DON’T LOOK DOWN IN ANGER',5:'ВЫЗЫВАЙТЕ ВЕРТОЛЁТ'};
 const TOPO_URL='https://tile.opentopomap.org/{z}/{x}/{y}.png';
 const TOPO_ATTR='Map data © OpenStreetMap contributors · Map style © OpenTopoMap (CC-BY-SA)';
 const HOME_BASE=window.TatryMapPoints.home;

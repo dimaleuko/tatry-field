@@ -1,4 +1,4 @@
-const LEVELS={1:'Кофе в термосе',2:'Выгулять Salomon',3:'Уже не brunch',4:'Руки на скалу',5:'Позвони маме'};
+const LEVELS={1:'WELLNESS CORE',2:'МОИ SALOMON ТАМ, ГДЕ ИМ МЕСТО',3:'КОЛЕНИ ПОБАЛИВАЮТ',4:'DON’T LOOK DOWN IN ANGER',5:'ВЫЗЫВАЙТЕ ВЕРТОЛЁТ'};
 const ZAKOPANE={name:'ZAKOPANE',lat:49.2992,lon:19.9496,kind:'city'};
 const HOME_BASE=window.TatryMapPoints.home;
 const LANDMARKS=[
