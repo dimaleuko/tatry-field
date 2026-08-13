@@ -139,11 +139,18 @@ body.trail-open{overflow:hidden}.trail-overlay{position:fixed;inset:0;background
 .photo-code-head .eyebrow{color:var(--acid);font-weight:900;margin-bottom:12px}
 .photo-code-head h2{max-width:900px;margin:0;font-size:clamp(38px,5.1vw,76px);line-height:.86;letter-spacing:-.065em;text-transform:uppercase}
 .photo-code-head>p{max-width:420px;margin:0;padding-bottom:5px;font-size:14px;line-height:1.6;color:#afb2aa}
-.pose-moodboard{position:relative;z-index:1;margin:0;border:1px solid rgba(255,255,255,.26);background:#d8dde4;overflow:hidden}
-.pose-moodboard>img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;filter:none}
-.pose-moodboard-badge{position:absolute;left:14px;top:14px;display:grid;gap:2px;padding:10px 12px;background:var(--acid);color:#111;border:1px solid #111;box-shadow:5px 5px 0 #111;transform:rotate(-1.2deg)}
+.pose-moodboard{position:relative;z-index:1;max-width:1240px;margin:0 auto;background:transparent}
+.pose-moodboard-badge{position:relative;z-index:2;display:grid;width:max-content;gap:2px;margin:0 0 15px;padding:10px 12px;background:var(--acid);color:#111;border:1px solid #111;box-shadow:5px 5px 0 #111;transform:rotate(-1.2deg)}
 .pose-moodboard-badge span{font-size:10px;font-weight:900;letter-spacing:.13em}
 .pose-moodboard-badge small{font-size:7px;letter-spacing:.04em}
+.pose-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pose-shot{min-width:0;border:1px solid rgba(255,255,255,.26);background:#d8dde4}
+.pose-shot-crop{position:relative;aspect-ratio:1;overflow:hidden;background:#d8dde4}
+.pose-shot-crop img{position:absolute;display:block;width:300%;height:200%;max-width:none;filter:none}
+.pose-shot:nth-child(1) img{left:0;top:0}.pose-shot:nth-child(2) img{left:-100%;top:0}.pose-shot:nth-child(3) img{left:-200%;top:0}
+.pose-shot:nth-child(4) img{left:0;top:-100%}.pose-shot:nth-child(5) img{left:-100%;top:-100%}.pose-shot:nth-child(6) img{left:-200%;top:-100%}
+.pose-shot>span{display:flex;align-items:center;gap:9px;min-height:36px;padding:9px 10px;background:#121924;color:#b8bdc6;font-size:7px;font-weight:900;letter-spacing:.12em}
+.pose-shot>span b{display:grid;place-items:center;width:20px;height:20px;border:1px solid #747b87;color:#f3f0e7;font-size:7px}
 .pose-moodboard figcaption{display:flex;justify-content:space-between;gap:20px;padding:10px 12px;border-top:1px solid rgba(255,255,255,.2);font-size:8px;letter-spacing:.12em;color:#92968e;text-transform:uppercase}
 .pose-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);margin-top:26px;border-top:1px solid rgba(255,255,255,.3);border-left:1px solid rgba(255,255,255,.3)}
 .pose-card{min-height:290px;display:flex;flex-direction:column;padding:18px;border-right:1px solid rgba(255,255,255,.3);border-bottom:1px solid rgba(255,255,255,.3);transition:background .2s ease,color .2s ease}
@@ -161,8 +168,8 @@ body.trail-open{overflow:hidden}.trail-overlay{position:fixed;inset:0;background
 .pose-safety>span{align-self:start;font-size:8px;font-weight:900;letter-spacing:.15em}
 .pose-safety strong{font-size:clamp(30px,3.5vw,54px);line-height:.86;letter-spacing:-.055em;text-transform:uppercase}
 .pose-safety p{max-width:640px;margin:0;font-size:12px;line-height:1.55}
-@media(max-width:940px){.photo-code-head{grid-template-columns:1fr;gap:20px}.photo-code-head>p{max-width:650px}.pose-grid{grid-template-columns:repeat(2,1fr)}.pose-safety{grid-template-columns:120px 1fr}.pose-safety p{grid-column:2}}
-@media(max-width:600px){.photo-code{padding:34px 15px 42px}.photo-code-topline{align-items:flex-start;flex-direction:column;gap:6px}.photo-code-head{padding:23px 0 20px}.photo-code-head h2{font-size:clamp(35px,10.6vw,50px)}.photo-code-head>p{font-size:12px}.pose-moodboard>img{aspect-ratio:3/2}.pose-moodboard-badge{left:9px;top:9px;transform:none}.pose-moodboard figcaption{align-items:flex-start;flex-direction:column;gap:5px}.pose-grid{grid-template-columns:1fr;margin-top:18px}.pose-card{min-height:238px;padding:16px}.pose-card-top{margin-bottom:34px}.pose-card h3{font-size:31px}.pose-safety{grid-template-columns:1fr;gap:14px;padding:17px}.pose-safety p{grid-column:auto}.pose-safety>span{margin-bottom:8px}}
+@media(max-width:940px){.photo-code-head{grid-template-columns:1fr;gap:20px}.photo-code-head>p{max-width:650px}.pose-photo-grid{gap:8px}.pose-grid{grid-template-columns:repeat(2,1fr)}.pose-safety{grid-template-columns:120px 1fr}.pose-safety p{grid-column:2}}
+@media(max-width:600px){.photo-code{padding:34px 15px 42px}.photo-code-topline{align-items:flex-start;flex-direction:column;gap:6px}.photo-code-head{padding:23px 0 20px}.photo-code-head h2{font-size:clamp(35px,10.6vw,50px)}.photo-code-head>p{font-size:12px}.pose-moodboard-badge{margin-bottom:12px;transform:none}.pose-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.pose-shot>span{min-height:33px;padding:7px;font-size:6px;letter-spacing:.08em}.pose-shot>span b{flex:0 0 18px;width:18px;height:18px}.pose-moodboard figcaption{align-items:flex-start;flex-direction:column;gap:5px}.pose-grid{grid-template-columns:1fr;margin-top:18px}.pose-card{min-height:238px;padding:16px}.pose-card-top{margin-bottom:34px}.pose-card h3{font-size:31px}.pose-safety{grid-template-columns:1fr;gap:14px;padding:17px}.pose-safety p{grid-column:auto}.pose-safety>span{margin-bottom:8px}}
 @media(prefers-reduced-motion:reduce){.pose-card{transition:none}}
 
 /* Phase 2.6 — saved routes + comparison */
