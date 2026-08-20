@@ -474,7 +474,9 @@ const server=http.createServer(async(req,res)=>{
   try {
     if(url.pathname.startsWith('/api/')) { const handled=await handleApi(req,res,url); if(handled!==false)return; return json(res,404,{error:'Unknown API route'}); }
     if(url.pathname.startsWith('/vendor/leaflet/')) { const rel=url.pathname.slice('/vendor/leaflet/'.length); return serveFromRoot(res,LEAFLET_DIST,path.join(LEAFLET_DIST,rel)); }
+    if(/^\/en\/route\/[a-z0-9-]+\/?$/.test(url.pathname)) return serveFile(res,path.join(PUBLIC,'route.en.html'));
     if(/^\/route\/[a-z0-9-]+\/?$/.test(url.pathname)) return serveFile(res,path.join(PUBLIC,'route.html'));
+    if(url.pathname==='/en'||url.pathname==='/en/') return serveFile(res,path.join(PUBLIC,'index.en.html'));
     let rel=url.pathname==='/'?'/index.html':url.pathname;
     const file=path.normalize(path.join(PUBLIC,rel));
     return serveFile(res,file);

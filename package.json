@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "build:tracks": "node scripts/build-verified-tracks.js",
-    "test": "node scripts/check-tracks.js && node scripts/check-field-maps.js && node scripts/check-advanced-routes.js && node scripts/check-trip-intelligence.js && node scripts/check-group-votes.js && node scripts/check-home-base.js"
+    "test": "node scripts/check-tracks.js && node scripts/check-field-maps.js && node scripts/check-advanced-routes.js && node scripts/check-trip-intelligence.js && node scripts/check-group-votes.js && node scripts/check-home-base.js && node scripts/check-english-version.js"
   },
   "engines": {
     "node": ">=20"
