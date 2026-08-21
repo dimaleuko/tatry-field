@@ -46,7 +46,8 @@ const SPECS = {
     ]
   },
   krzyzne: { segments: ['bcrz'] },
-  'przelecz-pod-chlopkiem': { segments: ['bs8g'] }
+  'przelecz-pod-chlopkiem': { segments: ['bs8g'] },
+  'kasprowy-gasienicowa-loop': { segments: ['3gm5z'] }
 };
 
 function haversineKm(a, b) {

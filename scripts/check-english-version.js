@@ -38,7 +38,7 @@ vm.runInContext(read('public/field-maps.js'), context);
 
 const i18n = context.window.TatryI18n;
 const englishRoutes = i18n.localizeRoutes(routeData);
-assert.equal(englishRoutes.length, 28);
+assert.equal(englishRoutes.length, 29);
 assert.equal(Object.keys(context.window.TATRY_EN_ROUTE_COPY).length, routeData.length);
 for (const route of englishRoutes) {
   assert.doesNotMatch(JSON.stringify(route), /[А-Яа-яЁё]/, `${route.id}: English route data contains Cyrillic`);
@@ -48,4 +48,4 @@ for (const route of englishRoutes) {
   assert.doesNotMatch(JSON.stringify(fieldMap), /[А-Яа-яЁё]|Apartamenty Polana Pająkówka|FROM HOME/, `${route.id}: English Field Map contains private or untranslated copy`);
 }
 
-console.log('English version: 28 localized routes, clean route shells, no Chill Time, Photo Code or private home UI');
+console.log('English version: 29 localized routes, clean route shells, no Chill Time, Photo Code or private home UI');

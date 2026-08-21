@@ -564,5 +564,37 @@
       "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Przelecz_pod_chlopkiem.jpg"
     }
+  ],
+  "kasprowy-gasienicowa-loop": [
+    {
+      "file": "Trail to Kasprowy Wierch.jpg",
+      "title": "Открытый склон Kasprowy",
+      "alt": "Каменистая горная тропа на Kasprowy Wierch выше линии леса",
+      "caption": "Здесь лес заканчивается, а ветер и облачность начинают определять темп группы.",
+      "author": "Iwona Erskine-Kellie",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Trail_to_Kasprowy_Wierch.jpg"
+    },
+    {
+      "file": "Kasprowy Wierch a1.jpg",
+      "title": "Kasprowy Wierch",
+      "alt": "Панорама Kasprowy Wierch и главного хребта Татр",
+      "caption": "Кульминация набора и начало совсем другой половины маршрута — спуска в Dolina Gąsienicowa.",
+      "author": "Jerzy Opioła",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kasprowy_Wierch_a1.jpg"
+    },
+    {
+      "file": "Hala Gąsienicowa - sierpień.jpg",
+      "title": "Hala Gąsienicowa",
+      "alt": "Летняя Hala Gąsienicowa и высокие вершины вокруг долины",
+      "caption": "Второй большой reveal дня и место, где нужно выбрать правильный выход через Boczań.",
+      "author": "Aneta Pawska",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hala_Gąsienicowa_-_sierpień.jpg"
+    }
   ]
 }

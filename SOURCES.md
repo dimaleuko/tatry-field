@@ -101,5 +101,6 @@ Five advanced routes were added with prominent safety gates, verified reference 
 - Kobylarzowy Żleb → Małołączniak, ascending the gully and descending through Mała Łąka: https://mapa-turystyczna.pl/route/yvww and https://mapa-turystyczna.pl/route/6tmq
 - Krzyżne, Kuźnice → Dolina Pańszczycy → Five Lakes → Palenica: https://mapa-turystyczna.pl/route/bcrz
 - Mięguszowiecka Przełęcz pod Chłopkiem out-and-back from Palenica: https://mapa-turystyczna.pl/route/bs8g
+- Kasprowy Wierch → Dolina Gąsienicowa loop via Myślenickie Turnie, Murowaniec and Boczań: https://mapa-turystyczna.pl/route/3gm5z
 
 As of 12 August 2026, the yellow Pusta Dolinka – Kozia Przełęcz section is closed in both directions until further notice while TPN replaces chains: https://tpn.gov.pl/aktualnosci/szlak-na-odcinku-pusta-dolinka-kozia-przelecz-czasowo-zamkniety. The route remains visible for future comparison, carries a prominent closure treatment and is excluded from automatic trip plans and Plan B selection. The status must be rechecked against the official TPN source before any future use.
