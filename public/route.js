@@ -322,32 +322,34 @@ async function loadStays(){
 async function loadTrailPois(){try{const d=await fetch(`/api/trail-pois/${route.id}`).then(r=>r.json());trailPois=d.items||[]}catch{trailPois=[]}}
 
 /* ---------------- Live Trail Mode ---------------- */
-let trailMap=null,trailRouteLayer=null,trailDoneLayer=null,trailUserMarker=null,trailAccuracyCircle=null,trailWatchId=null;
+let trailMap=null,trailRouteLayer=null,trailDoneLayer=null,trailUserMarker=null,trailAccuracyCircle=null,trailWatchId=null,trailGpsStarting=false,trailCompassActive=false,trailSessionActive=false;
 let trailLengths=[],trailTotalM=0,trailHeading=null,trailState={lastProgress:null,reachedObjective:false,returning:false,lastStatus:null,demoIndex:0};
 function bindTrailLaunch(){const button=document.querySelector('#openTrailMode');if(button)button.onclick=openTrailMode}
 function trailOverlayHtml(){
   const obj=route.objective||{name:route.goal||route.end,altitude:route.maxAlt};
   const homeNavigation=!EN&&HOME_BASE?`<div class="trail-nav-group"><span>GET HOME</span><a target="_blank" rel="noopener" href="${googleDirections(HOME_BASE.lat,HOME_BASE.lon,'driving')}">Google ↗</a><a target="_blank" rel="noopener" href="${appleDirections(HOME_BASE.lat,HOME_BASE.lon,'d')}">Apple ↗</a></div>`:'';
-  return `<div class="trail-overlay" id="trailOverlay" aria-hidden="true"><div class="trail-topbar"><button id="closeTrailMode">← EXIT</button><div><small>LIVE TRAIL MODE</small><b>${esc(route.name)}</b></div><div class="trail-top-status"><span id="trailGpsStatus">GPS OFF</span><span id="trailCompassStatus">COMPASS OFF</span></div></div>
-    <div class="trail-alert idle" id="trailAlert"><b>READY</b><span>${tr('Запусти GPS или используй DEMO для проверки интерфейса.','Start GPS or use DEMO to test the interface.')}</span></div>
+  return `<div class="trail-overlay" id="trailOverlay" aria-hidden="true"><div class="trail-topbar"><button type="button" id="closeTrailMode">← EXIT</button><div><small>LIVE TRAIL MODE</small><b>${esc(route.name)}</b></div><div class="trail-top-status"><button type="button" class="trail-sensor-status" id="trailGpsStatus" data-state="idle" aria-pressed="false">START GPS</button><button type="button" class="trail-sensor-status" id="trailCompassStatus" data-state="idle" aria-pressed="false">START COMPASS</button></div></div>
+    <div class="trail-alert idle" id="trailAlert"><b>READY</b><span>${tr('Нажми START GPS сверху. На iPhone открой страницу в Safari и разреши точную геопозицию.','Tap START GPS above. On iPhone, open the page in Safari and allow precise location.')}</span></div>
     <div class="trail-dashboard"><div><small>${tr('Прогресс','Progress')}</small><b id="trailProgress">—</b><span id="trailRemaining">— ${tr('км осталось','km remaining')}</span></div><div><small>${tr('До цели','To objective')}</small><b id="trailObjective">—</b><span>${esc(obj.name)} · ${obj.altitude} ${tr('м','m')}</span></div><div><small>${tr('Ближайший POI','Nearest POI')}</small><b id="trailPoiDistance">—</b><span id="trailPoiName">${tr('загружаю точки…','loading points…')}</span></div><div><small>GPS</small><b id="trailAccuracy">—</b><span id="trailHeading">heading —</span></div></div>
     <div class="trail-map-wrap"><div id="trailMap" class="trail-map"></div><div class="trail-map-key"><span><i class="key-user"></i>${tr('ты','you')}</span><span><i class="key-done"></i>${tr('пройдено','completed')}</span><span><i class="key-route"></i>${tr('трек','track')}</span></div></div>
-    <div class="trail-actions"><button class="trail-action primary" id="startGps">START GPS</button><button class="trail-action" id="startCompass">COMPASS</button><button class="trail-action" id="recenterTrail">RECENTER</button><button class="trail-action demo" id="demoTrail">DEMO +</button></div>
+    <div class="trail-actions"><button type="button" class="trail-action trail-sensor-action primary" id="startGps">START GPS</button><button type="button" class="trail-action trail-sensor-action" id="startCompass">START COMPASS</button><button type="button" class="trail-action" id="recenterTrail">RECENTER</button><button type="button" class="trail-action demo" id="demoTrail">DEMO +</button></div>
     <div class="trail-bottom${EN?' no-home':''}"><div class="trail-nav-group"><span>GET TO START</span><a target="_blank" rel="noopener" href="${googleDirections(route.startLat,route.startLon,'walking')}">Google ↗</a><a target="_blank" rel="noopener" href="${appleDirections(route.startLat,route.startLon,'w')}">Apple ↗</a></div>${homeNavigation}<div class="trail-caveat">${tr('Не turn-by-turn гарантия. Следуй официальной маркировке на местности. GPS в горах может ошибаться; интерфейс всегда показывает reported accuracy.','Not a turn-by-turn guarantee. Follow official trail markings. Mountain GPS can be inaccurate; the interface always shows reported accuracy.')}</div></div>
   </div>`;
 }
 function openTrailMode(){
   if(route.temporarilyClosed)return;
   if(!document.querySelector('#trailOverlay'))document.body.insertAdjacentHTML('beforeend',trailOverlayHtml());
-  const overlay=document.querySelector('#trailOverlay');overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.classList.add('trail-open');
+  trailSessionActive=true;const overlay=document.querySelector('#trailOverlay');overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.classList.add('trail-open');
   document.querySelector('#closeTrailMode').onclick=closeTrailMode;
   document.querySelector('#startGps').onclick=startGps;
+  document.querySelector('#trailGpsStatus').onclick=startGps;
   document.querySelector('#startCompass').onclick=startCompass;
+  document.querySelector('#trailCompassStatus').onclick=startCompass;
   document.querySelector('#recenterTrail').onclick=()=>{if(trailUserMarker)trailMap.setView(trailUserMarker.getLatLng(),17);else if(routeBounds)trailMap.fitBounds(routeBounds.pad(.08),{maxZoom:16})};
   document.querySelector('#demoTrail').onclick=demoTrail;
   requestAnimationFrame(initTrailMap);
 }
-function closeTrailMode(){document.querySelector('#trailOverlay')?.classList.remove('open');document.querySelector('#trailOverlay')?.setAttribute('aria-hidden','true');document.body.classList.remove('trail-open')}
+function closeTrailMode(){trailSessionActive=false;stopTrailSensors();document.querySelector('#trailOverlay')?.classList.remove('open');document.querySelector('#trailOverlay')?.setAttribute('aria-hidden','true');document.body.classList.remove('trail-open')}
 function initTrailMap(){
   if(trailMap){trailMap.invalidateSize();return}
   trailMap=L.map('trailMap',{zoomControl:false,preferCanvas:true}).setView([route.startLat,route.startLon],15);
@@ -410,16 +412,38 @@ function updateTrailLocation(pos,{accuracy=0,demo=false}={}){
   if(!demo&&accuracy>90)setTrailAlert('caution','GPS WEAK',EN?`Reported accuracy is about ±${Math.round(accuracy)} m. Do not judge an off-route position from this fix.`:`Точность около ±${Math.round(accuracy)} м. Не делай вывод об отклонении по такой позиции.`);
   else{const warn=Math.max(40,accuracy*1.35),danger=Math.max(90,accuracy*1.8);if(nearest.dist>danger)setTrailAlert('danger','OFF ROUTE',EN?`About ${Math.round(nearest.dist)} m to the track. Stop and check official markings.`:`До трека примерно ${Math.round(nearest.dist)} м. Остановись и сверяйся с официальной маркировкой.`);else if(nearest.dist>warn)setTrailAlert('caution','CHECK ROUTE',EN?`You are about ${Math.round(nearest.dist)} m from the line. Check the junction and markings.`:`Ты примерно в ${Math.round(nearest.dist)} м от линии. Проверь развилку и маркировку.`);else setTrailAlert('good',demo?'DEMO · ON ROUTE':'ON ROUTE',EN?`About ${Math.round(nearest.dist)} m to the route line${trailState.returning?' · returning':''}.`:`До линии маршрута около ${Math.round(nearest.dist)} м${trailState.returning?' · возвращение':''}.`)}
 }
-function startGps(){
-  const status=document.querySelector('#trailGpsStatus');if(!window.isSecureContext){status.textContent='HTTPS NEEDED';setTrailAlert('caution','GPS LOCKED',tr('На iPhone локальная HTTP-ссылка по Wi‑Fi не является secure context. Для настоящего GPS задеплой сайт на HTTPS; пока используй DEMO.','A local HTTP link over Wi-Fi is not a secure context on iPhone. Real GPS requires an HTTPS deployment; use DEMO for now.'));return}
-  if(!navigator.geolocation){status.textContent='NO GPS';setTrailAlert('danger','GPS UNAVAILABLE',tr('Браузер не предоставляет Geolocation API.','The browser does not provide the Geolocation API.'));return}
-  if(trailWatchId!==null){navigator.geolocation.clearWatch(trailWatchId);trailWatchId=null}
-  status.textContent='GPS STARTING';trailWatchId=navigator.geolocation.watchPosition(p=>{status.textContent='GPS LIVE';const c=p.coords;updateTrailLocation({lat:c.latitude,lon:c.longitude},{accuracy:c.accuracy||0});if(trailUserMarker&&!trailState.didFirstCenter){trailMap.setView(trailUserMarker.getLatLng(),17);trailState.didFirstCenter=true}},e=>{status.textContent='GPS ERROR';setTrailAlert('danger','GPS ERROR',e.message||tr('Не удалось получить геопозицию.','Could not obtain a position.'))},{enableHighAccuracy:true,maximumAge:2000,timeout:15000})
+function setTrailSensorState(kind,label,state='idle'){
+  const ids=kind==='gps'?['#trailGpsStatus','#startGps']:['#trailCompassStatus','#startCompass'];
+  ids.forEach(selector=>{const control=document.querySelector(selector);if(!control)return;control.textContent=label;control.dataset.state=state;control.disabled=state==='starting';control.setAttribute('aria-busy',String(state==='starting'));control.setAttribute('aria-pressed',String(state==='live'))});
 }
-function orientationHandler(e){let h=null;if(Number.isFinite(e.webkitCompassHeading))h=e.webkitCompassHeading;else if(Number.isFinite(e.alpha))h=(360-e.alpha)%360;if(h===null)return;trailHeading=h;const el=document.querySelector('#trailHeading');if(el)el.textContent=`heading ${Math.round(h)}°`;const st=document.querySelector('#trailCompassStatus');if(st)st.textContent=`${Math.round(h)}°`;if(trailUserMarker)trailUserMarker.setIcon(trailUserIcon(h))}
+function gpsErrorCopy(error){
+  if(error?.code===1)return {title:'GPS BLOCKED',text:tr('Доступ к геопозиции закрыт. Открой сайт именно в Safari: меню страницы → Ещё → Геопозиция → Разрешить. Глобальная настройка: Настройки → Приложения → Safari → Геопозиция → Разрешить или Спрашивать. Также проверь Службы геолокации → Safari Websites и включи «Точная геопозиция». Затем нажми RETRY GPS.','Location access is blocked. Open the site in Safari: Page menu → More → Location → Allow. Global setting: Settings → Apps → Safari → Location → Allow or Ask. Also check Location Services → Safari Websites and enable Precise Location. Then tap RETRY GPS.')};
+  if(error?.code===2)return {title:'GPS UNAVAILABLE',text:tr('iPhone пока не может определить позицию. Выйди под открытое небо, проверь, что авиарежим выключен, и попробуй снова.','Your iPhone cannot determine a position yet. Move into open sky, check that Airplane Mode is off, and try again.')};
+  if(error?.code===3)return {title:'GPS TIMEOUT',text:tr('GPS не успел получить точную позицию. Подожди у открытого неба и нажми RETRY GPS.','GPS did not obtain a position in time. Wait under open sky and tap RETRY GPS.')};
+  return {title:'GPS ERROR',text:error?.message||tr('Не удалось получить геопозицию. Открой страницу в Safari и попробуй снова.','Could not obtain a position. Open the page in Safari and try again.')};
+}
+function applyGpsPosition(position){
+  if(!trailSessionActive)return;setTrailSensorState('gps','GPS LIVE','live');const c=position.coords;updateTrailLocation({lat:c.latitude,lon:c.longitude},{accuracy:c.accuracy||0});if(trailUserMarker&&!trailState.didFirstCenter){trailMap.setView(trailUserMarker.getLatLng(),17);trailState.didFirstCenter=true}
+}
+function handleGpsError(error){
+  trailGpsStarting=false;if(!trailSessionActive)return;setTrailSensorState('gps','RETRY GPS','error');const copy=gpsErrorCopy(error);setTrailAlert(error?.code===3?'caution':'danger',copy.title,copy.text)
+}
+function startGps(){
+  if(trailGpsStarting)return;
+  if(!window.isSecureContext){setTrailSensorState('gps','HTTPS NEEDED','error');setTrailAlert('caution','GPS LOCKED',tr('На iPhone локальная HTTP-ссылка по Wi‑Fi не является secure context. Для настоящего GPS открой HTTPS-версию сайта; пока используй DEMO.','A local HTTP link over Wi-Fi is not a secure context on iPhone. Open the HTTPS deployment for real GPS; use DEMO for now.'));return}
+  if(!navigator.geolocation){setTrailSensorState('gps','NO GPS','error');setTrailAlert('danger','GPS UNAVAILABLE',tr('Этот браузер не предоставляет Geolocation API. Открой сайт в Safari.','This browser does not provide the Geolocation API. Open the site in Safari.'));return}
+  if(trailWatchId!==null){navigator.geolocation.clearWatch(trailWatchId);trailWatchId=null}
+  trailGpsStarting=true;trailState.didFirstCenter=false;setTrailSensorState('gps','GPS STARTING…','starting');setTrailAlert('idle','ALLOW LOCATION',tr('Подтверди запрос Safari на точную геопозицию. Первый сигнал может занять до 20 секунд.','Approve Safari’s precise-location prompt. The first fix can take up to 20 seconds.'));
+  const options={enableHighAccuracy:true,maximumAge:5000,timeout:20000};
+  navigator.geolocation.getCurrentPosition(position=>{trailGpsStarting=false;if(!trailSessionActive)return;applyGpsPosition(position);trailWatchId=navigator.geolocation.watchPosition(applyGpsPosition,handleGpsError,{...options,timeout:30000})},handleGpsError,options)
+}
+function orientationHandler(e){let h=null;if(Number.isFinite(e.webkitCompassHeading))h=e.webkitCompassHeading;else if(Number.isFinite(e.alpha))h=(360-e.alpha)%360;if(h===null)return;trailHeading=h;const el=document.querySelector('#trailHeading');if(el)el.textContent=`heading ${Math.round(h)}°`;setTrailSensorState('compass',`COMPASS · ${Math.round(h)}°`,'live');if(trailUserMarker)trailUserMarker.setIcon(trailUserIcon(h))}
 async function startCompass(){
-  const st=document.querySelector('#trailCompassStatus');if(!window.isSecureContext){st.textContent='HTTPS NEEDED';setTrailAlert('caution','COMPASS LOCKED',tr('Датчики ориентации требуют secure context. После HTTPS-публикации кнопка запросит разрешение на iPhone.','Orientation sensors require a secure context. After an HTTPS deployment the button can request permission on iPhone.'));return}
-  try{if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){const r=await DeviceOrientationEvent.requestPermission();if(r!=='granted')throw new Error(tr('Разрешение на компас не выдано.','Compass permission was not granted.'))}window.removeEventListener('deviceorientation',orientationHandler);window.addEventListener('deviceorientation',orientationHandler,true);st.textContent='COMPASS LIVE'}catch(e){st.textContent='COMPASS ERROR';setTrailAlert('caution','COMPASS ERROR',e.message||tr('Не удалось включить компас.','Could not start the compass.'))}
+  if(!window.isSecureContext){setTrailSensorState('compass','HTTPS NEEDED','error');setTrailAlert('caution','COMPASS LOCKED',tr('Датчики ориентации требуют HTTPS. Открой опубликованную версию сайта.','Orientation sensors require HTTPS. Open the deployed site.'));return}
+  try{setTrailSensorState('compass','COMPASS STARTING…','starting');if(typeof DeviceOrientationEvent==='undefined')throw new Error(tr('Этот браузер не предоставляет датчик направления. Открой сайт в Safari.','This browser does not expose orientation data. Open the site in Safari.'));if(typeof DeviceOrientationEvent.requestPermission==='function'){const r=await DeviceOrientationEvent.requestPermission();if(r!=='granted')throw new Error(tr('Разрешение на движение и ориентацию не выдано. В iPhone открой Настройки → Приложения → Safari → Доступ к движению и ориентации, затем попробуй снова.','Motion and orientation permission was not granted. On iPhone open Settings → Apps → Safari → Motion & Orientation Access, then try again.'))}if(!trailSessionActive)return;window.removeEventListener('deviceorientation',orientationHandler);window.addEventListener('deviceorientation',orientationHandler,true);trailCompassActive=true;setTrailSensorState('compass','COMPASS LIVE','live')}catch(e){trailCompassActive=false;setTrailSensorState('compass','RETRY COMPASS','error');setTrailAlert('caution','COMPASS ERROR',e.message||tr('Не удалось включить компас.','Could not start the compass.'))}
+}
+function stopTrailSensors(){
+  if(trailWatchId!==null&&navigator.geolocation){navigator.geolocation.clearWatch(trailWatchId);trailWatchId=null}trailGpsStarting=false;window.removeEventListener('deviceorientation',orientationHandler,true);trailCompassActive=false;setTrailSensorState('gps','START GPS','idle');setTrailSensorState('compass','START COMPASS','idle')
 }
 function demoTrail(){
   if(!geometryData?.geometry)return;const seq=[.05,.22,.44,.52,.68,.88];const frac=seq[trailState.demoIndex%seq.length];trailState.demoIndex++;let p=pointAtProgress(trailTotalM*frac);if(trailState.demoIndex%7===0)p={lat:p.lat+.0011,lon:p.lon};updateTrailLocation(p,{accuracy:8,demo:true});trailMap.setView([p.lat,p.lon],17)
